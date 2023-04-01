@@ -6,18 +6,16 @@ import Online from './Online'
 const Conversation: FunctionComponent = () => {
   return (
     <div className="conversation">
-      <div className="conversation__content">
-        <Search />
-        <Online />
-        <ul className="conversation__list">
-          <li>
-            <Item />
-          </li>
-          <li>
-            <Item />
-          </li>
-        </ul>
-      </div>
+      <Search />
+      <Online />
+      <ul className="conversation__list">
+        <li>
+          <Item />
+        </li>
+        <li>
+          <Item />
+        </li>
+      </ul>
     </div>
   )
 }

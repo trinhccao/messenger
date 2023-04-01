@@ -8,7 +8,11 @@ const App: FunctionComponent = () => {
     <div className="app">
       <Header />
       <Tab />
-      <Conversation />
+      <div className="app-content">
+        <div className="app-content__inner">
+          <Conversation />
+        </div>
+      </div>
     </div>
   )
 }

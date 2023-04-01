@@ -10,7 +10,7 @@ const AvatarLarge: FunctionComponent<AvatarLargeProps> = (props) => {
 
   return (
     <div className="avatar avatar--large">
-      <img className="avatar__img" src={image} width="60" height="60" alt="" />
+      <img className="avatar__img" src={image} width="60" height="60" alt="" loading="lazy" />
       <span className="online-dot online-dot--lg" hidden={!isOnline}>
         <span className="sr-only">Online now</span>
       </span>
