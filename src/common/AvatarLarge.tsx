@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react'
 
-interface AvatarProps {
+interface AvatarLargeProps {
   image: string
   isOnline: boolean
 }
 
-const Avatar: FunctionComponent<AvatarProps> = (props) => {
+const AvatarLarge: FunctionComponent<AvatarLargeProps> = (props) => {
   const { image, isOnline } = props
 
   return (
@@ -18,4 +18,4 @@ const Avatar: FunctionComponent<AvatarProps> = (props) => {
   )
 }
 
-export default Avatar
+export default AvatarLarge
