@@ -1,12 +1,23 @@
 import { FunctionComponent } from 'react'
-import './Conversation.css'
+import Item from './Item'
 
 const Conversation: FunctionComponent = () => {
   return (
     <div className="conversation">
-      <a className="conversation__item" href="#">
-        
-      </a>
+      <ul>
+        <li>
+          <Item />
+        </li>
+        <li>
+          <Item />
+        </li>
+        <li>
+          <Item />
+        </li>
+        <li>
+          <Item />
+        </li>
+      </ul>
     </div>
   )
 }

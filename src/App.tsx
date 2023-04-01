@@ -8,15 +8,11 @@ import Nav from './nav/Nav'
 const App: FunctionComponent = () => {
   return (
     <div className="app">
-      <div className="container">
-        <Header />
-        <Search />
-      </div>
+      <Header />
+      <Search />
       <Online />
-      <div className="container">
-        <Conversation />
-        <Nav />
-      </div>
+      <Conversation />
+      <Nav />
     </div>
   )
 }

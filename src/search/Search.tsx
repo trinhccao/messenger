@@ -3,7 +3,9 @@ import './Search.css'
 
 const Search: FunctionComponent = () => {
   return (
-    <input className="search" type="text" placeholder="Search" />
+    <div className="container">
+      <input className="search" type="text" placeholder="Search" />
+    </div>
   )
 }
 
