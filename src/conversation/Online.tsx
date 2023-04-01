@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react'
-import './Online.css'
 
 const Online: FunctionComponent = () => {
   return (

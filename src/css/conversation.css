@@ -4,7 +4,7 @@
   margin-top: 24px;
 }
 
-.conversation__list {
+.conversation__content {
   position: absolute;
   inset: 0;
   overflow: auto;
