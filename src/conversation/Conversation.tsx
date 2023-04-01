@@ -3,9 +3,13 @@ import Item from './Item'
 import Search from './Search'
 import Online from './Online'
 
-const Conversation: FunctionComponent = () => {
+interface ConversationProps {
+  hidden?: boolean
+}
+
+const Conversation: FunctionComponent<ConversationProps> = ({ hidden }) => {
   return (
-    <div className="conversation">
+    <div className="conversation" hidden={hidden}>
       <Search />
       <Online />
       <ul className="conversation__list">
