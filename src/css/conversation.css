@@ -1,7 +1,6 @@
 .conversation {
   position: relative;
   flex-grow: 1;
-  margin-top: 15px;
 }
 
 .conversation__content {
