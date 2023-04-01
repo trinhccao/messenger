@@ -1,6 +1,7 @@
 @import "./variables.css";
 @import "./resets.css";
 @import "./atomics.css";
+@import "./app.css";
 @import "./header.css";
 @import "./conversation-link.css";
 @import "./avatar.css";
