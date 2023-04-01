@@ -1,8 +1,5 @@
 .tab {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  order: 5;
   background-color: var(--white);
 }
 
