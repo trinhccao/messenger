@@ -3,16 +3,16 @@ import Header from './header/Header'
 import Search from './search/Search'
 import Online from './online/Online'
 import Conversation from './conversation/Conversation'
-import Nav from './nav/Nav'
+import Tab from './tab/Tab'
 
 const App: FunctionComponent = () => {
   return (
     <div className="app">
       <Header />
+      <Tab />
       <Search />
       <Online />
       <Conversation />
-      <Nav />
     </div>
   )
 }

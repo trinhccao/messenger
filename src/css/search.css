@@ -6,5 +6,5 @@
   background-color: var(--cultured);
   border: none;
   border-radius: 10px;
-  font-family: Lato, sans-serif;
+  font-family: var(--font-primary);
 }

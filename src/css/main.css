@@ -8,8 +8,9 @@
 @import "./heading-lv3.css";
 @import "./conversation.css";
 @import "./search.css";
+@import "./tab.css";
 @import "./font-face.css";
 
 body {
-  font-family: Lato, sans-serif;
+  font-family: var(--font-primary);
 }
