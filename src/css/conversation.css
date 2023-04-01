@@ -1,11 +1,15 @@
 .conversation {
   position: relative;
   flex-grow: 1;
-  margin-top: 24px;
+  margin-top: 15px;
 }
 
 .conversation__content {
   position: absolute;
   inset: 0;
   overflow: auto;
+}
+
+.conversation__list {
+  margin-top: 18px;
 }

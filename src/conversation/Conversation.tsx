@@ -9,7 +9,7 @@ const Conversation: FunctionComponent = () => {
       <div className="conversation__content">
         <Search />
         <Online />
-        <ul>
+        <ul className="conversation__list">
           <li>
             <Item />
           </li>

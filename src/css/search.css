@@ -1,3 +1,7 @@
+.search {
+  padding: var(--p-focus-ring) 0;
+}
+
 .search__input {
   display: block;
   padding: 12px;

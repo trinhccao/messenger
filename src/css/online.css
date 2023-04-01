@@ -1,4 +1,34 @@
 .online {
-  display: flex;
-  margin-top: 26px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.online__list {
+  display: inline-block;
+  padding: var(--p-focus-ring) 0;
+  white-space: nowrap;
+}
+
+.online__item {
+  display: inline-flex;
+}
+
+.online__link {
+  display: inline-flex;
+  flex-direction: column;
+  width: 60px;
+  white-space: normal;
+  text-decoration: none;
+}
+
+.online__item:not(:first-child) {
+  margin-left: 20px;
+}
+
+.online__name {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--black);
 }
