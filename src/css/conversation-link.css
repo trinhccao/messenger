@@ -6,6 +6,7 @@
 }
 
 .conversation-link__content {
+  flex-grow: 1;
   align-self: center;
   margin-left: 13px;
 }
