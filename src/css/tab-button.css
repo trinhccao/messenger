@@ -10,7 +10,3 @@
   background: none;
   font-family: var(--font-primary);
 }
-
-.button-text--active {
-  color: var(--ultramarine-blue);
-}
