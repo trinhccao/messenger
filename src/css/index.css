@@ -1,6 +1,6 @@
 @import "./variables.css";
 @import "./resets.css";
-@import "./atomics.css";
+@import "./base.css";
 @import "./app.css";
 @import "./header.css";
 @import "./conversation-link.css";
