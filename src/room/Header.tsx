@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import Avatar from '../header/Avatar'
+import AvatarHeader from './AvatarHeader'
 import ButtonBack from './ButtonBack'
 
 interface HeaderProps {
@@ -12,7 +12,7 @@ const Header: FunctionComponent<HeaderProps> = ({ hidden }) => {
       <div className="container">
         <div className="header__inner">
           <ButtonBack />
-          <Avatar image="/images/dummy-1.jpg" />
+          <AvatarHeader image="/images/dummy-1.jpg" />
           <h3 className="header__title header__title--room">Phuong Anh</h3>
         </div>
       </div>

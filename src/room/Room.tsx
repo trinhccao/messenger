@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import Avatar from './Avatar'
+import AvatarMessage from './AvatarMessage'
 import Header from './Header'
 import Tab from '../main/Tab'
 
@@ -17,7 +17,7 @@ const Room: FunctionComponent<RoomProps> = ({ hidden }) => {
           <div className="container">
             {/* message in */}
             <div className="message-row">
-              <Avatar image="/images/dummy-1.jpg" />
+              <AvatarMessage image="/images/dummy-1.jpg" />
               <div className="message-group">
                 <div className="message message--in">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.

@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react'
 
-interface AvatarProps {
+interface AvatarHeaderProps {
   image: string
 }
 
-const Avatar: FunctionComponent<AvatarProps> = ({ image }) => {
+const AvatarHeader: FunctionComponent<AvatarHeaderProps> = ({ image }) => {
   return (
     <div className="avatar avatar--xs avatar--header">
       <img className="avatar__img" src={image} width="28" height="28" alt="" loading="lazy" />
@@ -12,4 +12,4 @@ const Avatar: FunctionComponent<AvatarProps> = ({ image }) => {
   )
 }
 
-export default Avatar
+export default AvatarHeader
