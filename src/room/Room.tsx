@@ -2,15 +2,20 @@ import { FunctionComponent } from 'react'
 import AvatarMessage from './AvatarMessage'
 import Header from './Header'
 import FeatureBar from './FeatureBar'
+import { Scenes } from '../settings/app-config'
 
 interface RoomProps {
-  hidden?: boolean
+  activeScene: Scenes
+  setActiveScene: React.Dispatch<React.SetStateAction<Scenes>>
 }
 
-const Room: FunctionComponent<RoomProps> = ({ hidden }) => {
+const Room: FunctionComponent<RoomProps> = (props) => {
+  const { activeScene, setActiveScene } = props
+  const forScene = Scenes.Room
+
   return (
-    <div className="app-viewport" id="room" hidden={hidden}>
-      <Header />
+    <div className="app-viewport" id="room" hidden={activeScene !== forScene}>
+      <Header setActiveScene={setActiveScene} />
       <FeatureBar />
       <div className="app-content">
         <div className="room">

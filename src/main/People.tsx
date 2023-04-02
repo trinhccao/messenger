@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import PeopleItem from './PeopleItem'
-import { TabIds } from '../configs/tab-config'
+import { TabIds } from '../settings/tab-config'
 
 interface PeopleProps {
   activeTab: TabIds

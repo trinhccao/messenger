@@ -3,22 +3,26 @@ import Header from './Header'
 import Tab from './Tab'
 import Conversation from './Conversation'
 import People from './People'
-import { TabIds } from '../configs/tab-config'
+import { TabIds } from '../settings/tab-config'
+import { Scenes } from '../settings/app-config'
 
 interface MainProps {
-  hidden?: boolean
+  activeScene: Scenes
+  setActiveScene: React.Dispatch<React.SetStateAction<Scenes>>
 }
 
-const Main: FunctionComponent<MainProps> = ({ hidden }) => {
+const Main: FunctionComponent<MainProps> = (props) => {
+  const { activeScene, setActiveScene } = props
   const [activeTab, setActiveTab] = useState(TabIds.Chat)
+  const forScene = Scenes.Main
 
   return (
-    <div className="app-viewport" id="main" hidden={hidden}>
+    <div className="app-viewport" hidden={activeScene !== forScene}>
       <Header activeTab={activeTab} />
       <Tab activeTab={activeTab} onClick={(tab) => setActiveTab(tab)} />
       <div className="app-content">
         <div className="app-content__inner">
-          <Conversation activeTab={activeTab} />
+          <Conversation activeTab={activeTab} setActiveScene={setActiveScene} />
           <People activeTab={activeTab} />
         </div>
       </div>

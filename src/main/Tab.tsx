@@ -4,7 +4,7 @@ import {
   textActiveClasses,
   tabs,
   TabIds,
-} from '../configs/tab-config'
+} from '../settings/tab-config'
 
 interface TabProps {
   onClick: (tab: TabIds) => void
