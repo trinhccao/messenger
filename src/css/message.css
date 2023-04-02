@@ -13,7 +13,17 @@
 
 .message--out {
   align-self: flex-end;
-  margin-left: 30px;
+  margin-left: 70px;
   color: var(--white);
   background-color: var(--ultramarine-blue);
+}
+
+@media (min-width: 375px) {
+  .message--in {
+    margin-right: 55px;
+  }
+  
+  .message--out {
+    margin-left: 95px;
+  }
 }
