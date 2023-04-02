@@ -10,18 +10,3 @@
 .tab__item {
   flex-grow: 1;
 }
-
-.tab__button {
-  display: block;
-  padding: 15px 5px;
-  width: 100%;
-  font-size: 1rem;
-  color: var(--metallic-silver);
-  border: none;
-  background: none;
-  font-family: var(--font-primary);
-}
-
-.tab__button--active {
-  color: var(--ultramarine-blue);
-}

@@ -1,0 +1,20 @@
+.tab-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px var(--px-container);
+  width: 100%;
+  font-size: 1rem;
+  color: var(--metallic-silver);
+  border: none;
+  background: none;
+  font-family: var(--font-primary);
+}
+
+.tab-button__text {
+  margin-top: 5px;
+}
+
+.tab-button__text--active {
+  color: var(--ultramarine-blue);
+}
