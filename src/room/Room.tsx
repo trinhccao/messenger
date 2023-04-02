@@ -9,8 +9,6 @@ const Room: FunctionComponent<RoomProps> = ({ hidden }) => {
   return (
     <div className="room" hidden={hidden}>
       <div className="container">
-        <div className="room__content">
-
           {/* message in */}
           <div className="message-row">
             <Avatar image="/images/dummy-1.jpg" />
@@ -29,8 +27,6 @@ const Room: FunctionComponent<RoomProps> = ({ hidden }) => {
               </div>
             </div>
           </div>
-
-        </div>
       </div>
     </div>
   )
