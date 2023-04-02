@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import AvatarMessage from './AvatarMessage'
 import Header from './Header'
-import Tab from '../main/Tab'
+import FeatureBar from './FeatureBar'
 
 interface RoomProps {
   hidden?: boolean
@@ -11,7 +11,7 @@ const Room: FunctionComponent<RoomProps> = ({ hidden }) => {
   return (
     <div className="app-viewport" id="room" hidden={hidden}>
       <Header />
-      <Tab />
+      <FeatureBar />
       <div className="app-content">
         <div className="room">
           <div className="container">

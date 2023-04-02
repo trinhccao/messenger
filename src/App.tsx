@@ -5,8 +5,8 @@ import Room from './room/Room'
 const App: FunctionComponent = () => {
   return (
     <div className="app">
-      <Main />
-      <Room hidden />
+      <Main hidden />
+      <Room  />
     </div>
   )
 }
