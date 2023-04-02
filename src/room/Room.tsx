@@ -1,9 +1,13 @@
 import { FunctionComponent } from 'react'
 import Avatar from './Avatar'
 
-const Room: FunctionComponent = () => {
+interface RoomProps {
+  hidden?: boolean
+}
+
+const Room: FunctionComponent<RoomProps> = ({ hidden }) => {
   return (
-    <div className="room">
+    <div className="room" hidden={hidden}>
       <div className="container">
         <div className="room__content">
 
@@ -20,9 +24,9 @@ const Room: FunctionComponent = () => {
           {/* message out */}
           <div className="message-row">
             <div className="message-group">
-            <div className="message message--out">
-              Lorem ipsum dolor sit amet consectetur.
-            </div>
+              <div className="message message--out">
+                Lorem ipsum dolor sit amet consectetur.
+              </div>
             </div>
           </div>
 
