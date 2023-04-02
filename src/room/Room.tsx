@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import AvatarMessage from './AvatarMessage'
 import Header from './Header'
-import FeatureBar from './FeatureBar'
+import Compose from './Compose'
 import { Scenes } from '../settings/app-config'
 
 interface RoomProps {
@@ -16,7 +16,7 @@ const Room: FunctionComponent<RoomProps> = (props) => {
   return (
     <div className="app-viewport" hidden={activeScene !== forScene}>
       <Header setActiveScene={setActiveScene} />
-      <FeatureBar />
+      <Compose />
       <div className="app-content">
         <div className="room">
           <div className="container">

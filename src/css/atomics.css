@@ -45,6 +45,23 @@
   color: var(--ultramarine-blue);
 }
 
+.button-send {
+  display: inline-flex;
+  padding: 8px;
+  border: none;
+  background: none;
+  border-radius: 50%;
+}
+
+.button-send--compose {
+  align-self: center;
+  margin-left: 5px;
+}
+
+.button-send__icon {
+  transform: translateX(2px);
+}
+
 [hidden] {
   display: none;
 }
