@@ -11,8 +11,8 @@ const App: FunctionComponent = () => {
       <Tab />
       <div className="app-content">
         <div className="app-content__inner">
-          <Conversation hidden />
-          <People />
+          <Conversation />
+          <People hidden />
         </div>
       </div>
     </div>

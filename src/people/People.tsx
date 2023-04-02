@@ -1,9 +1,13 @@
 import { FunctionComponent } from 'react'
 import Item from './Item'
 
-const People: FunctionComponent = () => {
+interface PeopleProps {
+  hidden?: boolean
+}
+
+const People: FunctionComponent<PeopleProps> = ({ hidden }) => {
   return (
-    <div className="people">
+    <div className="people" hidden={hidden}>
       <ul>
         <li>
           <Item />
