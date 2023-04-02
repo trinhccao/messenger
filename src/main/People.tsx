@@ -1,13 +1,16 @@
 import { FunctionComponent } from 'react'
 import PeopleItem from './PeopleItem'
+import { TabIds } from '../configs/tab-config'
 
 interface PeopleProps {
-  hidden?: boolean
+  activeTab: TabIds
 }
 
-const People: FunctionComponent<PeopleProps> = ({ hidden }) => {
+const People: FunctionComponent<PeopleProps> = ({ activeTab }) => {
+  const forTab = TabIds.People
+
   return (
-    <div className="people" hidden={hidden}>
+    <div className="people" hidden={activeTab !== forTab}>
       <ul>
         <li>
           <PeopleItem />

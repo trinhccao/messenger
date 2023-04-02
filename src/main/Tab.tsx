@@ -1,27 +1,29 @@
 import { FunctionComponent } from 'react'
-import iconChat from '../assets/icons/icon-chat.png'
-import iconChatActive from '../assets/icons/icon-chat-active.png'
-import iconPeople from '../assets/icons/icon-people.png'
-import iconPeopleActive from '../assets/icons/icon-people-active.png'
+import {
+  textClasses,
+  textActiveClasses,
+  tabs,
+  TabIds,
+} from '../configs/tab-config'
 
-const Tab: FunctionComponent = () => {
+interface TabProps {
+  onClick: (tab: TabIds) => void
+  activeTab: TabIds
+}
+
+const Tab: FunctionComponent<TabProps> = ({ onClick, activeTab }) => {
   return (
     <div className="tab">
       <ul className="tab__list">
-        <li className="tab__item">
-          <button className="tab-button" type="button">
-            <img src={iconChat} height="30" alt="" hidden />
-            <img src={iconChatActive} height="30" alt="" />
-            <span className="tab-button__text tab-button__text--active">Chat</span>
-          </button>
-        </li>
-        <li className="tab__item">
-          <button className="tab-button" type="button">
-            <img src={iconPeople} height="30" alt="" />
-            <img src={iconPeopleActive} height="30" alt="" hidden />
-            <span className="tab-button__text">People</span>
-          </button>
-        </li>
+        {tabs.map(({ id, icon, iconActive }) => (
+          <li className="tab__item">
+            <button className="tab-button" type="button" onClick={() => onClick(id)}>
+              <img src={icon} height="30" alt="" hidden={id === activeTab} />
+              <img src={iconActive} height="30" alt="" hidden={id !== activeTab} />
+              <span className={id === activeTab ? textActiveClasses : textClasses}>{id}</span>
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   )

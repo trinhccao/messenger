@@ -35,6 +35,11 @@
   flex-grow: 1;
 }
 
+.button-text {
+  display: block;
+  margin-top: 5px;
+}
+
 [hidden] {
   display: none;
 }

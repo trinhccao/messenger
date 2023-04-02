@@ -11,10 +11,6 @@
   font-family: var(--font-primary);
 }
 
-.tab-button__text {
-  margin-top: 5px;
-}
-
-.tab-button__text--active {
+.button-text--active {
   color: var(--ultramarine-blue);
 }
