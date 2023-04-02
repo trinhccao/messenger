@@ -1,0 +1,19 @@
+.message {
+  display: flex;
+  padding: 10px 13px;
+  border-radius: 20px;
+  white-space: pre-line;
+}
+
+.message--in {
+  align-self: flex-start;
+  margin-right: 30px;
+  background-color: var(--anti-flash-white);
+}
+
+.message--out {
+  align-self: flex-end;
+  margin-left: 30px;
+  color: var(--white);
+  background-color: var(--ultramarine-blue);
+}

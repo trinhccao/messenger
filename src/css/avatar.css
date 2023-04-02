@@ -1,5 +1,6 @@
 .avatar {
   display: inline-flex;
+  flex-shrink: 0;
   position: relative;
   border-radius: 50%;
 }
@@ -21,6 +22,11 @@
 
 .avatar--header {
   margin-left: 12px;
+}
+
+.avatar--message {
+  align-self: flex-end;
+  margin-right: 12px;
 }
 
 .avatar__img {

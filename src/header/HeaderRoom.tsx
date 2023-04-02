@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import Avatar from '../room/Avatar'
+import Avatar from './Avatar'
 import ButtonBack from '../room/ButtonBack'
 
 const HeaderRoom: FunctionComponent = () => {

@@ -13,3 +13,17 @@
   white-space: nowrap;
   border-width: 0;
 }
+
+.message-row {
+  display: flex;
+}
+
+.message-row:not(:first-child) {
+  margin-top: 12px;
+}
+
+.message-group {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
