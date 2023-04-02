@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react'
-import Avatar from './Avatar'
-import ButtonBack from '../room/ButtonBack'
+import Avatar from '../header/Avatar'
+import ButtonBack from './ButtonBack'
 
-interface HeaderRoomProps {
+interface HeaderProps {
   hidden?: boolean
 }
 
-const HeaderRoom: FunctionComponent<HeaderRoomProps> = ({ hidden }) => {
+const Header: FunctionComponent<HeaderProps> = ({ hidden }) => {
   return (
     <div className="header" hidden={hidden}>
       <div className="container">
@@ -20,4 +20,4 @@ const HeaderRoom: FunctionComponent<HeaderRoomProps> = ({ hidden }) => {
   )
 }
 
-export default HeaderRoom
+export default Header

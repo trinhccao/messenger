@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
-import Item from './Item'
+import ConversationItem from './ConversationItem'
 import Search from './Search'
-import Online from './Online'
+import OnlineBar from './OnlineBar'
 
 interface ConversationProps {
   hidden?: boolean
@@ -11,13 +11,13 @@ const Conversation: FunctionComponent<ConversationProps> = ({ hidden }) => {
   return (
     <div className="conversation" hidden={hidden}>
       <Search />
-      <Online />
+      <OnlineBar />
       <ul className="conversation__list">
         <li>
-          <Item />
+          <ConversationItem />
         </li>
         <li>
-          <Item />
+          <ConversationItem />
         </li>
       </ul>
     </div>

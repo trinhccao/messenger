@@ -1,0 +1,22 @@
+@import "./variables.css";
+@import "./resets.css";
+@import "./atomics.css";
+@import "./app.css";
+@import "./header.css";
+@import "./conversation-link.css";
+@import "./avatar.css";
+@import "./online-dot.css";
+@import "./heading-lv3.css";
+@import "./conversation.css";
+@import "./search.css";
+@import "./tab.css";
+@import "./online.css";
+@import "./app-content.css";
+@import "./button-back.css";
+@import "./message.css";
+@import "./main.css";
+@import "./font-face.css";
+
+body {
+  font-family: var(--font-primary);
+}

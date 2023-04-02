@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
-import AvatarLarge from '../common/AvatarLarge'
+import AvatarLarge from './AvatarLarge'
 
-const Online: FunctionComponent = () => {
+const OnlineBar: FunctionComponent = () => {
   return (
     <div className="online">
       <div className="container">
@@ -24,4 +24,4 @@ const Online: FunctionComponent = () => {
   )
 }
 
-export default Online
+export default OnlineBar

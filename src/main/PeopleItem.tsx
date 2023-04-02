@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import AvatarSmall from '../common/AvatarSmall'
+import AvatarSmall from './AvatarSmall'
 
 const Item: FunctionComponent = () => {
   return (

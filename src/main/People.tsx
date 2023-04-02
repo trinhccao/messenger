@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import Item from './Item'
+import PeopleItem from './PeopleItem'
 
 interface PeopleProps {
   hidden?: boolean
@@ -10,7 +10,7 @@ const People: FunctionComponent<PeopleProps> = ({ hidden }) => {
     <div className="people" hidden={hidden}>
       <ul>
         <li>
-          <Item />
+          <PeopleItem />
         </li>
       </ul>
     </div>

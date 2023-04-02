@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 
-const Nav: FunctionComponent = () => {
+const Tab: FunctionComponent = () => {
   return (
     <div className="tab">
       <div className="container">
@@ -17,4 +17,4 @@ const Nav: FunctionComponent = () => {
   )
 }
 
-export default Nav
+export default Tab
