@@ -9,9 +9,18 @@
   height: 60px;
 }
 
+.avatar--xs {
+  width: 28px;
+  height: 28px;
+}
+
 .avatar--sm {
   width: 40px;
   height: 40px;
+}
+
+.avatar--header {
+  margin-left: 12px;
 }
 
 .avatar__img {

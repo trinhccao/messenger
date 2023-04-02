@@ -1,0 +1,7 @@
+.button-back {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px;
+  background: none;
+  border: none;
+}

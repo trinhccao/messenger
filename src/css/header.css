@@ -2,8 +2,18 @@
   padding: 23px 0;
 }
 
+.header__inner {
+  display: flex;
+  align-items: center;
+}
+
 .header__title {
   font-size: 1.3rem;
   text-align: center;
   font-weight: 900;
+}
+
+.header__title--room {
+  margin-left: 11px;
+  font-size: 1rem;
 }
