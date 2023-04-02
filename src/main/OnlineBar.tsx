@@ -1,22 +1,26 @@
-import { FunctionComponent } from 'react'
-import AvatarLarge from './AvatarLarge'
+import { FunctionComponent, MouseEvent } from 'react'
+import OnlineBarLink from './OnlineBarLink'
+import { Scenes } from '../settings/app-config'
 
-const OnlineBar: FunctionComponent = () => {
+interface OnlineBarProps {
+  setActiveScene: React.Dispatch<React.SetStateAction<Scenes>>
+}
+
+const OnlineBar: FunctionComponent<OnlineBarProps> = ({ setActiveScene }) => {
+  const onClick = (e: MouseEvent) => {
+    e.preventDefault()
+    setActiveScene(Scenes.Room)
+  }
+
   return (
     <div className="online">
       <div className="container">
         <ul className="online__list">
           <li className="online__item">
-            <a className="online__link" href="#none">
-              <AvatarLarge image="/images/dummy-1.jpg" isOnline={true} />
-              <span className="online__name">John Doeeeee</span>
-            </a>
+            <OnlineBarLink onClick={onClick} />
           </li>
           <li className="online__item">
-            <a className="online__link" href="#none">
-              <AvatarLarge image="/images/dummy-1.jpg" isOnline={true} />
-              <span className="online__name">John Doe</span>
-            </a>
+            <OnlineBarLink onClick={onClick} />
           </li>
         </ul>
       </div>

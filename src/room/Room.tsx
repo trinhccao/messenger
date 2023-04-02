@@ -14,7 +14,7 @@ const Room: FunctionComponent<RoomProps> = (props) => {
   const forScene = Scenes.Room
 
   return (
-    <div className="app-viewport" id="room" hidden={activeScene !== forScene}>
+    <div className="app-viewport" hidden={activeScene !== forScene}>
       <Header setActiveScene={setActiveScene} />
       <FeatureBar />
       <div className="app-content">

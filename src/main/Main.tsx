@@ -23,7 +23,7 @@ const Main: FunctionComponent<MainProps> = (props) => {
       <div className="app-content">
         <div className="app-content__inner">
           <Conversation activeTab={activeTab} setActiveScene={setActiveScene} />
-          <People activeTab={activeTab} />
+          <People activeTab={activeTab} setActiveScene={setActiveScene} />
         </div>
       </div>
     </div>

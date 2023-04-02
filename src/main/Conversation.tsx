@@ -22,7 +22,7 @@ const Conversation: FunctionComponent<ConversationProps> = (props) => {
   return (
     <div className="conversation" hidden={activeTab !== forTab}>
       <Search />
-      <OnlineBar />
+      <OnlineBar setActiveScene={setActiveScene} />
       <ul className="conversation__list">
         <li>
           <ConversationItem onClick={onClick} />
