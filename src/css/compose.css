@@ -1,0 +1,14 @@
+.compose {
+  display: flex;
+  padding: 0 12px 10px var(--px-container);
+}
+
+.compose__input {
+  flex-grow: 1;
+  padding: 14px;
+  font-size: 1rem;
+  background-color: var(--bright-gray);
+  border: none;
+  border-radius: 25px;
+  font-family: var(--font-primary);
+}

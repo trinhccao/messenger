@@ -1,6 +1,6 @@
 @import "./variables.css";
 @import "./resets.css";
-@import "./atomics.css";
+@import "./base.css";
 @import "./app.css";
 @import "./header.css";
 @import "./conversation-link.css";
@@ -15,6 +15,7 @@
 @import "./button-back.css";
 @import "./message.css";
 @import "./tab-button.css";
+@import "./compose.css";
 @import "./font-face.css";
 
 body {
