@@ -1,0 +1,8 @@
+.logo {
+  display: inline-flex;
+  width: 141px;
+  height: 141px;
+  background-image: url("../assets/icons/logo-messenger.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}

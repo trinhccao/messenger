@@ -16,6 +16,8 @@
 @import "./message.css";
 @import "./tab-button.css";
 @import "./compose.css";
+@import "./logo.css";
+@import "./login.css";
 @import "./font-face.css";
 
 body {
