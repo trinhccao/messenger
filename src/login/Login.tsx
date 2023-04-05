@@ -1,12 +1,12 @@
-import { FunctionComponent, useState, FormEvent } from 'react'
+import { FunctionComponent, useState, FormEvent, useContext } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import { TokenResponse } from '../interfaces/TokenResponse'
+import { AuthContext } from '../contexts/AuthContext'
 
 const Login: FunctionComponent = () => {
+  const { setAuthInfo } = useContext(AuthContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate()
   const emptyReg = /^\s*$/
   const disabled = emptyReg.test(username) || emptyReg.test(password)
 
@@ -22,10 +22,7 @@ const Login: FunctionComponent = () => {
       username,
       password,
     })
-    window.localStorage.setItem('token', JSON.stringify(data))
-    axios.defaults.headers.common['Authorization'] =
-      `${data.tokenType} ${data.token}`
-    navigate('/')
+    setAuthInfo?.(data)
   }
 
   return (

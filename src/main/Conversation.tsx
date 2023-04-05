@@ -1,11 +1,11 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import ConversationItem from './ConversationItem'
 import Search from './Search'
 import OnlineBar from './OnlineBar'
 import { IConversation } from '../interfaces/IConversation'
 import axios from 'axios'
-import { TokenResponse } from '../interfaces/TokenResponse'
 import { TabIds } from './Tab'
+import { AuthContext } from '../contexts/AuthContext'
 
 interface ConversationProps {
   activeTab: TabIds
@@ -13,9 +13,8 @@ interface ConversationProps {
 
 const Conversation: FunctionComponent<ConversationProps> = (props) => {
   const { activeTab } = props
-  const token = window.localStorage.getItem('token') || ''
-  const currentUser = (JSON.parse(token) as TokenResponse).user
   const [userIds, setUserIds] = useState<string[]>([])
+  const { authInfo } = useContext(AuthContext)
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -24,15 +23,14 @@ const Conversation: FunctionComponent<ConversationProps> = (props) => {
         signal: abortController.signal
       })
       .then((res) => {
-        const conversations = res.data
-        const ids = conversations.map((item) => {
-          const userId = item.members.find((id) => id !== currentUser._id)
+        const ids = res.data.map((item) => {
+          const userId = item.members.find((id) => id !== authInfo?.user._id)
           return userId || ''
         })
         setUserIds(ids)
       })
     return () => abortController.abort()
-  }, [currentUser._id])
+  }, [authInfo?.user._id])
 
   return (
     <div className="conversation" hidden={activeTab !== TabIds.Chat}>
