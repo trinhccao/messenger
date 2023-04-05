@@ -22,9 +22,9 @@ const Login: FunctionComponent = () => {
       username,
       password,
     })
-    const token = `${data.tokenType} ${data.token}`
-    window.localStorage.setItem('token', token)
-    axios.defaults.headers.common['Authorization'] = token
+    window.localStorage.setItem('token', JSON.stringify(data))
+    axios.defaults.headers.common['Authorization'] =
+      `${data.tokenType} ${data.token}`
     navigate('/')
   }
 
