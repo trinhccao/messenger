@@ -1,8 +1,11 @@
 import { FunctionComponent, useState, FormEvent } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Login: FunctionComponent = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
   const emptyReg = /^\s*$/
   const disabled = emptyReg.test(username) || emptyReg.test(password)
 
@@ -12,8 +15,11 @@ const Login: FunctionComponent = () => {
     return disabled ? `${block} ${modifier}` : block
   }
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    const res = await axios.post('/login', { username, password })
+    window.localStorage.setItem('token', JSON.stringify(res.data))
+    navigate('/')
   }
 
   return (
