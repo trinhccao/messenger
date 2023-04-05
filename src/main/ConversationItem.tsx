@@ -24,9 +24,7 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
     axios
       .get<IUser>(`/users/${userId}`, { signal: abortController.signal })
       .then(({ data }) => setUser(data))
-    return () => {
-      abortController.abort()
-    }
+    return () => abortController.abort()
   }, [userId])
 
   if (!user) {

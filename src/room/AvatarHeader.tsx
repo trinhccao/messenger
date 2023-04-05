@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 
 interface AvatarHeaderProps {
-  image: string
+  image?: string
 }
 
 const AvatarHeader: FunctionComponent<AvatarHeaderProps> = ({ image }) => {

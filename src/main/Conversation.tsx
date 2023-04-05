@@ -31,9 +31,7 @@ const Conversation: FunctionComponent<ConversationProps> = (props) => {
         })
         setUserIds(ids)
       })
-    return () => {
-      abortController.abort()
-    }
+    return () => abortController.abort()
   }, [currentUser._id])
 
   return (
