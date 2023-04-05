@@ -23,10 +23,12 @@ const Conversation: FunctionComponent<ConversationProps> = (props) => {
       .get<IConversation[]>('/conversations', {
         signal: abortController.signal
       })
-      .then(({ data }) => {
-        const ids = data.map((conversation) => (
-          conversation.members.find((id) => id !== currentUser._id) || ''
-        ))
+      .then((res) => {
+        const conversations = res.data
+        const ids = conversations.map((item) => {
+          const userId = item.members.find((id) => id !== currentUser._id)
+          return userId || ''
+        })
         setUserIds(ids)
       })
     return () => {
@@ -40,8 +42,8 @@ const Conversation: FunctionComponent<ConversationProps> = (props) => {
       <OnlineBar />
       <ul className="conversation__list">
         {userIds.map((userId) => (
-          <li>
-            <ConversationItem userId={userId} key={userId} />
+          <li key={userId}>
+            <ConversationItem userId={userId} />
           </li>
         ))}
       </ul>
