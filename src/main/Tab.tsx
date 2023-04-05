@@ -16,7 +16,7 @@ const Tab: FunctionComponent<TabProps> = ({ onClick, activeTab }) => {
     <div className="tab">
       <ul className="tab__list">
         {tabs.map(({ id, icon, iconActive }) => (
-          <li className="tab__item">
+          <li className="tab__item" key={id}>
             <button className="tab-button" type="button" onClick={() => onClick(id)}>
               <img src={icon} height="20" alt="" hidden={id === activeTab} />
               <img src={iconActive} height="20" alt="" hidden={id !== activeTab} />
