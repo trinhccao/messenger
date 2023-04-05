@@ -1,14 +1,15 @@
 import { FunctionComponent, MouseEvent } from 'react'
 import AvatarLarge from './AvatarLarge'
 import { useNavigate } from 'react-router-dom'
+import { IUser } from '../interfaces/IUser'
 
 interface OnlineBarLinkProps {
-  userId: string
+  user: IUser
 }
 
-const OnlineBarLink: FunctionComponent<OnlineBarLinkProps> = ({ userId }) => {
+const OnlineBarLink: FunctionComponent<OnlineBarLinkProps> = ({ user }) => {
   const navigate = useNavigate()
-  const path = `/chat/${userId}`
+  const path = `/chat/${user._id}`
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()
@@ -17,8 +18,8 @@ const OnlineBarLink: FunctionComponent<OnlineBarLinkProps> = ({ userId }) => {
 
   return (
     <a className="online__link" href={path} onClick={onClick}>
-      <AvatarLarge image="/images/dummy-1.jpg" isOnline={true} />
-      <span className="online__name">John Doeeeee</span>
+      <AvatarLarge image={user.avatar || ''} isOnline={true} />
+      <span className="online__name">{user.firstName} {user.lastName}</span>
     </a>
   )
 }
