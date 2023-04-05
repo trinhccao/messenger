@@ -14,7 +14,8 @@ const Room: FunctionComponent = () => {
   const currentUser = (JSON.parse(token) as TokenResponse).user
 
   const renderMessage = (message: IMessage) => {
-    const messageClassNames = currentUser._id === message.userId
+    const messageClassNames =
+      currentUser._id === message.userId
       ? 'message message--out'
       : 'message message--in'
     return (
