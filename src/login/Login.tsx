@@ -1,6 +1,7 @@
 import { FunctionComponent, useState, FormEvent } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { TokenResponse } from '../interfaces/TokenResponse'
 
 const Login: FunctionComponent = () => {
   const [username, setUsername] = useState('')
@@ -17,8 +18,13 @@ const Login: FunctionComponent = () => {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const res = await axios.post('/login', { username, password })
-    window.localStorage.setItem('token', JSON.stringify(res.data))
+    const { data } = await axios.post<TokenResponse>('/login', {
+      username,
+      password,
+    })
+    const token = `${data.tokenType} ${data.token}`
+    window.localStorage.setItem('token', token)
+    axios.defaults.headers.common['Authorization'] = token
     navigate('/')
   }
 
