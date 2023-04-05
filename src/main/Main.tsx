@@ -1,9 +1,8 @@
 import { FunctionComponent, useState } from 'react'
 import Header from './Header'
-import Tab from './Tab'
+import Tab, { TabIds } from './Tab'
 import Conversation from './Conversation'
 import People from './People'
-import { TabIds } from '../settings/tab-config'
 
 const Main: FunctionComponent = () => {
   const [activeTab, setActiveTab] = useState(TabIds.Chat)

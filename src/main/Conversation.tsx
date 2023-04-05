@@ -2,10 +2,10 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import ConversationItem from './ConversationItem'
 import Search from './Search'
 import OnlineBar from './OnlineBar'
-import { TabIds } from '../settings/tab-config'
 import { IConversation } from '../interfaces/IConversation'
 import axios from 'axios'
 import { TokenResponse } from '../interfaces/TokenResponse'
+import { TabIds } from './Tab'
 
 interface ConversationProps {
   activeTab: TabIds

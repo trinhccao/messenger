@@ -1,8 +1,8 @@
 import { FunctionComponent, useEffect, useState } from 'react'
 import PeopleItem from './PeopleItem'
-import { TabIds } from '../settings/tab-config'
 import { IUser } from '../interfaces/IUser'
 import axios from 'axios'
+import { TabIds } from './Tab'
 
 interface PeopleProps {
   activeTab: TabIds
