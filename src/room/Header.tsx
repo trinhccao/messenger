@@ -1,18 +1,20 @@
 import { FunctionComponent } from 'react'
 import AvatarHeader from './AvatarHeader'
 import ButtonBack from './ButtonBack'
-import { Scenes } from '../settings/app-config'
+import { useNavigate } from 'react-router-dom'
 
-interface HeaderProps {
-  setActiveScene: React.Dispatch<React.SetStateAction<Scenes>>
-}
+const Header: FunctionComponent = () => {
+  const navigate = useNavigate()
 
-const Header: FunctionComponent<HeaderProps> = ({setActiveScene}) => {
+  const onBack = () => {
+    navigate('/')
+  }
+
   return (
     <div className="header">
       <div className="container">
         <div className="header__inner">
-          <ButtonBack onBack={() => setActiveScene(Scenes.Main)} />
+          <ButtonBack onBack={onBack} />
           <AvatarHeader image="/images/dummy-1.jpg" />
           <h3 className="header__title header__title--room">Phuong Anh</h3>
         </div>

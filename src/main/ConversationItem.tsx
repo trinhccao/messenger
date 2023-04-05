@@ -1,15 +1,23 @@
 import { FunctionComponent, MouseEvent } from 'react'
 import AvatarLarge from './AvatarLarge'
+import { useNavigate } from 'react-router-dom'
 
 interface ConversationItemProps {
-  onClick: (e: MouseEvent) => void
+  userId: string
 }
 
 const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
-  const { onClick } = props
+  const navigate = useNavigate()
+  const { userId } = props
+  const path = `/chat/${userId}`
+
+  const onClick = (e: MouseEvent) => {
+    e.preventDefault()
+    navigate(path)
+  }
 
   return (
-    <a className="conversation-link" href="#none" onClick={(e) => onClick(e)}>
+    <a className="conversation-link" href={path} onClick={onClick}>
       <AvatarLarge image="/images/dummy-1.jpg" isOnline={true} />
       <div className="conversation-link__content">
         <h3 className="heading-lv3">Phuong Anh</h3>

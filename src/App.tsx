@@ -1,15 +1,11 @@
-import { FunctionComponent, useState } from 'react'
-import Main from './main/Main'
-import Room from './room/Room'
-import { Scenes } from './settings/app-config'
+import { FunctionComponent } from 'react'
+import { RouterProvider } from 'react-router-dom'
+import root from './router/root'
 
 const App: FunctionComponent = () => {
-  const [activeScene, setActiveScene] = useState(Scenes.Main)
-
   return (
     <div className="app">
-      <Main activeScene={activeScene} setActiveScene={setActiveScene} />
-      <Room activeScene={activeScene} setActiveScene={setActiveScene} />
+      <RouterProvider router={root} />
     </div>
   )
 }

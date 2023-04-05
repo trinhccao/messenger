@@ -1,27 +1,20 @@
-import { FunctionComponent, MouseEvent } from 'react'
+import { FunctionComponent } from 'react'
 import PeopleItem from './PeopleItem'
 import { TabIds } from '../settings/tab-config'
-import { Scenes } from '../settings/app-config'
 
 interface PeopleProps {
   activeTab: TabIds
-  setActiveScene: React.Dispatch<React.SetStateAction<Scenes>>
 }
 
 const People: FunctionComponent<PeopleProps> = (props) => {
-  const { activeTab, setActiveScene } = props
-  const forTab = TabIds.People
-
-  const onClick = (e: MouseEvent) => {
-    e.preventDefault()
-    setActiveScene(Scenes.Room)
-  }
+  const { activeTab } = props
 
   return (
-    <div className="people" hidden={activeTab !== forTab}>
+    <div className="people" hidden={activeTab !== TabIds.People}>
       <ul>
         <li>
-          <PeopleItem onClick={onClick} />
+          <PeopleItem userId="642b13db811f22572e02a4ab" />
+          <PeopleItem userId="642b156ef6e3a725d0f0d1dd" />
         </li>
       </ul>
     </div>
