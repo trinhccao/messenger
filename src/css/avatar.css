@@ -36,3 +36,7 @@
   object-fit: cover;
   border-radius: inherit;
 }
+
+.avatar__img--null {
+  filter: opacity(0.2);
+}
