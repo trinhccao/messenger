@@ -1,11 +1,11 @@
 import { FunctionComponent, ReactNode, createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
-import { TokenResponse } from '../interfaces/TokenResponse'
+import { IAuthInfo } from '../interfaces/IAuthInfo'
 
 interface AuthContextProps {
-  authInfo?: TokenResponse
-  setAuthInfo?: React.Dispatch<React.SetStateAction<TokenResponse | undefined>>
+  authInfo?: IAuthInfo
+  setAuthInfo?: React.Dispatch<React.SetStateAction<IAuthInfo | undefined>>
 }
 
 interface AuthProviderProps {
@@ -14,7 +14,7 @@ interface AuthProviderProps {
 
 const AuthContext = createContext<AuthContextProps>({})
 const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
-  const [authInfo, setAuthInfo] = useState<TokenResponse>()
+  const [authInfo, setAuthInfo] = useState<IAuthInfo>()
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 

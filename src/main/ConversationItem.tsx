@@ -10,6 +10,7 @@ import { Thread, ThreadTypes } from './Conversation'
 import { AuthContext } from '../contexts/AuthContext'
 import { IUser } from '../interfaces/IUser'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 interface ConversationItemProps {
   thread: Thread
@@ -21,9 +22,12 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
   const { authInfo } = useContext(AuthContext)
   const isDirect = thread.type === ThreadTypes.Direct
   const currentUserId = authInfo?.user._id
+  const path = `/chat/${user?._id || thread._id}`
+  const navigate = useNavigate()
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()
+    navigate(path)
   }
 
   useEffect(() => {
@@ -38,7 +42,7 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
   }, [currentUserId, isDirect, thread.members])
 
   return (
-    <a className="conversation-link" href="/" onClick={onClick}>
+    <a className="conversation-link" href={path} onClick={onClick}>
       <AvatarLarge image={thread.avatar || user?.avatar} isOnline={true} />
       <div className="conversation-link__content">
         <h3 className="heading-lv3">

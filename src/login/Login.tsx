@@ -1,6 +1,6 @@
 import { FunctionComponent, useState, FormEvent, useContext } from 'react'
 import axios from 'axios'
-import { TokenResponse } from '../interfaces/TokenResponse'
+import { IAuthInfo } from '../interfaces/IAuthInfo'
 import { AuthContext } from '../contexts/AuthContext'
 
 const Login: FunctionComponent = () => {
@@ -18,7 +18,7 @@ const Login: FunctionComponent = () => {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const { data } = await axios.post<TokenResponse>('/login', {
+    const { data } = await axios.post<IAuthInfo>('/login', {
       username,
       password,
     })
