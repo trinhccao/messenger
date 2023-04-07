@@ -10,7 +10,7 @@ import { AuthContext } from '../contexts/AuthContext'
 import { IUser } from '../interfaces/IUser'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { Thread, ThreadTypes } from '../contexts/ThreadContext'
+import { Thread, ThreadContext, ThreadTypes } from '../contexts/ThreadContext'
 
 interface ConversationItemProps {
   thread: Thread
@@ -20,6 +20,7 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
   const { thread } = props
   const [user, setUser] = useState<IUser>()
   const { authInfo } = useContext(AuthContext)
+  const { setThreads } = useContext(ThreadContext)
   const isDirect = thread.type === ThreadTypes.Direct
   const currentUserId = authInfo?.user._id
   const path = `/chat/${user?._id || thread._id}`
@@ -27,6 +28,17 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()
+    setThreads?.((threads) => {
+      const newThreads = threads.map((item) => {
+        if (item === thread) {
+          item.isActive = true
+        } else {
+          item.isActive = false
+        }
+        return item
+      })
+      return newThreads
+    })
     navigate(path)
   }
 

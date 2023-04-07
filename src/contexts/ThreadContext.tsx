@@ -22,6 +22,7 @@ export interface Thread {
   updatedAt: number
   avatar?: string
   type: ThreadTypes
+  isActive?: boolean
 }
 
 interface ThreadContextProps {
