@@ -12,20 +12,18 @@ interface HeaderProps {
 }
 
 const Header: FunctionComponent<HeaderProps> = ({ thread }) => {
-  const [user, setUser] = useState<IUser>()
   const navigate = useNavigate()
   const { authInfo } = useContext(AuthContext)
-  const [loading, setLoading] = useState(true)
-  const avatar = thread?.avatar || user?.avatar
-  const threadName = thread?.name || `${user?.firstName} ${user?.lastName}`
+  const [user, setUser] = useState<IUser>()
+  const userFullName = user ? `${user.firstName} ${user.firstName}` : ''
+  const isDirect = thread?.type === ThreadTypes.Direct
 
   const onBack = () => {
     navigate('/')
   }
 
   useEffect(() => {
-    if (!thread || thread.type !== ThreadTypes.Direct) {
-      setLoading(false)
+    if (!isDirect || !thread) {
       return
     }
     const controller = new AbortController()
@@ -33,20 +31,19 @@ const Header: FunctionComponent<HeaderProps> = ({ thread }) => {
     axios
       .get<IUser>(`/users/${userId}`, { signal: controller.signal })
       .then(({ data }) => {
-        setLoading(false)
         setUser(data)
       })
     return () => controller.abort()
-  }, [thread, authInfo?.user._id])
+  }, [thread, authInfo?.user._id, isDirect])
 
   return (
     <div className="header">
       <div className="container">
         <div className="header__inner">
           <ButtonBack onBack={onBack} />
-          <AvatarHeader image={avatar} />
+          <AvatarHeader image={isDirect ? user?.avatar : thread?.avatar} />
           <h3 className="header__title header__title--room">
-            {loading ? '' : threadName}
+            {isDirect ? userFullName : thread?.name}
           </h3>
         </div>
       </div>

@@ -18,12 +18,13 @@ interface ConversationItemProps {
 
 const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
   const { thread } = props
+  const navigate = useNavigate()
   const { authInfo } = useContext(AuthContext)
   const { setThreads } = useContext(ThreadContext)
   const [user, setUser] = useState<IUser>()
-  const isUser = thread.type === ThreadTypes.Direct
-  const path = `/chat/${user?._id || thread._id}`
-  const navigate = useNavigate()
+  const isDirect = thread.type === ThreadTypes.Direct
+  const path = `/chat/${isDirect ? user?._id : thread._id}`
+  const userFullName = user ? `${user.firstName} ${user.firstName}` : ''
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()
@@ -42,7 +43,7 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
   }
 
   useEffect(() => {
-    if (!isUser) {
+    if (!isDirect) {
       return
     }
     const controller = new AbortController()
@@ -50,15 +51,16 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
     axios
       .get<IUser>(`/users/${userId}`, { signal: controller.signal })
       .then(({ data }) => setUser(data))
-  }, [authInfo?.user, isUser, thread.members])
+  }, [authInfo?.user, isDirect, thread.members])
 
   return (
     <a className="conversation-link" href={path} onClick={onClick}>
-      <AvatarLarge image={thread.avatar || user?.avatar} isOnline={true} />
+      <AvatarLarge
+        image={isDirect ? user?.avatar : thread.avatar}
+        isOnline={true}
+      />
       <div className="conversation-link__content">
-        <h3 className="heading-lv3">
-          {thread.name || `${user?.firstName} ${user?.lastName}`}
-        </h3>
+        <h3 className="heading-lv3">{isDirect ? userFullName : thread.name}</h3>
         <p className="conversation-link__message">This chat has ended.</p>
       </div>
     </a>

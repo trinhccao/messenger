@@ -49,7 +49,9 @@ const Room: FunctionComponent = () => {
       <div className="app-content">
         <div className="room">
           <div className="container">
-            {messages.map((message) => <Message key={message._id} />)}
+            {messages.map((message) => (
+              <Message message={message} key={message._id} />
+            ))}
           </div>
         </div>
       </div>
