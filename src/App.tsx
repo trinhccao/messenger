@@ -14,7 +14,7 @@ const App: FunctionComponent = () => {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/directs/to/:id" element={<Room />} />
+            <Route path="/chat/:id" element={<Room />} />
           </Routes>
         </AuthProvider>
       </Router>

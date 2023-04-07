@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import ConversationItem from './ConversationItem'
 import Search from './Search'
 import OnlineBar from './OnlineBar'
@@ -6,14 +6,19 @@ import axios from 'axios'
 import { TabIds } from './Tab'
 import { AuthContext } from '../contexts/AuthContext'
 
+export enum ThreadTypes {
+  Direct = 'direct',
+  Group = 'group',
+}
+
 export interface Thread {
   _id: string
-  name?: string
+  name: string
   members: string[]
   createdAt: number
   updatedAt: number
   avatar?: string
-  type: string
+  type: ThreadTypes
 }
 
 interface ConversationProps {
@@ -27,23 +32,11 @@ const Conversation: FunctionComponent<ConversationProps> = (props) => {
 
   useEffect(() => {
     const controller = new AbortController()
-    const { signal } = controller;
-    (async () => {
-      const directsRes = await axios.get<Thread[]>('/directs', { signal })
-      const threadsRes = await axios.get<Thread[]>('/threads', { signal })
-
-      const d = directsRes.data.map((item) => ({ ...item, type: 'direct' }))
-      const t = threadsRes.data.map((item) => ({ ...item, type: 'thread' }))
-
-      setThreads([...d, ...t])
-    })()
+    axios
+      .get<Thread[]>('/threads', { signal: controller.signal })
+      .then(({ data }) => setThreads(data))
     return () => controller.abort()
   }, [authInfo?.user._id])
-
-  useLayoutEffect(() => {
-    const sort = threads.sort((a, b) => b.updatedAt - a.updatedAt)
-    setThreads(sort)
-  }, [threads])
 
   return (
     <div className="conversation" hidden={activeTab !== TabIds.Chat}>
