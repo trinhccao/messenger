@@ -5,17 +5,20 @@ import { AuthProvider } from './contexts/AuthContext'
 import Main from './main/Main'
 import Room from './room/Room'
 import Login from './login/Login'
+import { ThreadProvider } from './contexts/ThreadContext'
 
 const App: FunctionComponent = () => {
   return (
     <div className="app">
       <Router>
         <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/chat/:id" element={<Room />} />
-          </Routes>
+          <ThreadProvider>
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/chat/:id" element={<Room />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </ThreadProvider>
         </AuthProvider>
       </Router>
     </div>

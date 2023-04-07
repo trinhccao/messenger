@@ -6,11 +6,11 @@ import {
   useState,
 } from 'react'
 import AvatarLarge from './AvatarLarge'
-import { Thread, ThreadTypes } from './Conversation'
 import { AuthContext } from '../contexts/AuthContext'
 import { IUser } from '../interfaces/IUser'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { Thread, ThreadTypes } from '../contexts/ThreadContext'
 
 interface ConversationItemProps {
   thread: Thread

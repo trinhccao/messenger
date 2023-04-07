@@ -1,25 +1,9 @@
-import { FunctionComponent, useContext, useEffect, useState } from 'react'
+import { FunctionComponent, useContext } from 'react'
 import ConversationItem from './ConversationItem'
 import Search from './Search'
 import OnlineBar from './OnlineBar'
-import axios from 'axios'
 import { TabIds } from './Tab'
-import { AuthContext } from '../contexts/AuthContext'
-
-export enum ThreadTypes {
-  Direct = 'direct',
-  Group = 'group',
-}
-
-export interface Thread {
-  _id: string
-  name: string
-  members: string[]
-  createdAt: number
-  updatedAt: number
-  avatar?: string
-  type: ThreadTypes
-}
+import { ThreadContext } from '../contexts/ThreadContext'
 
 interface ConversationProps {
   activeTab: TabIds
@@ -27,16 +11,7 @@ interface ConversationProps {
 
 const Conversation: FunctionComponent<ConversationProps> = (props) => {
   const { activeTab } = props
-  const [threads, setThreads] = useState<Thread[]>([])
-  const { authInfo } = useContext(AuthContext)
-
-  useEffect(() => {
-    const controller = new AbortController()
-    axios
-      .get<Thread[]>('/threads', { signal: controller.signal })
-      .then(({ data }) => setThreads(data))
-    return () => controller.abort()
-  }, [authInfo?.user._id])
+  const { threads } = useContext(ThreadContext)
 
   return (
     <div className="conversation" hidden={activeTab !== TabIds.Chat}>
