@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactNode, createContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
 import axios from 'axios'
 import { IAuthInfo } from '../interfaces/IAuthInfo'
+import { useNavigate } from 'react-router-dom'
 
 interface AuthContextProps {
   authInfo?: IAuthInfo
@@ -24,7 +24,7 @@ const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
       localStorage.setItem('authInfo', JSON.stringify(authInfo))
       axios.defaults.headers.common['Authorization'] =
         `Bearer ${authInfo.token}`
-      return navigate('/')
+      return
     }
     const savedAuthInfo = localStorage.getItem('authInfo')
     if (!savedAuthInfo) {
