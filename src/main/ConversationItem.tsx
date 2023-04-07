@@ -24,7 +24,7 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
   const [user, setUser] = useState<IUser>()
   const isDirect = thread.type === ThreadTypes.Direct
   const path = `/chat/${isDirect ? user?._id : thread._id}`
-  const userFullName = user ? `${user.firstName} ${user.firstName}` : ''
+  const userFullName = user ? `${user.firstName} ${user.lastName}` : ''
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()

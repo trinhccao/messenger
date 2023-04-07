@@ -45,7 +45,7 @@ const Room: FunctionComponent = () => {
   return (
     <div className="app-viewport">
       <Header thread={thread} />
-      <Compose />
+      <Compose thread={thread} />
       <div className="app-content">
         <div className="room">
           <div className="container">
