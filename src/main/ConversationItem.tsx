@@ -6,11 +6,11 @@ import {
   useState,
 } from 'react'
 import AvatarLarge from './AvatarLarge'
-import { AuthContext } from '../contexts/AuthContext'
-import { IUser } from '../interfaces/IUser'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { Thread, ThreadContext, ThreadTypes } from '../contexts/ThreadContext'
+import axios from 'axios'
+import { IUser } from '../interfaces/IUser'
+import { AuthContext } from '../contexts/AuthContext'
 
 interface ConversationItemProps {
   thread: Thread
@@ -18,11 +18,10 @@ interface ConversationItemProps {
 
 const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
   const { thread } = props
-  const [user, setUser] = useState<IUser>()
   const { authInfo } = useContext(AuthContext)
   const { setThreads } = useContext(ThreadContext)
-  const isDirect = thread.type === ThreadTypes.Direct
-  const currentUserId = authInfo?.user._id
+  const [user, setUser] = useState<IUser>()
+  const isUser = thread.type === ThreadTypes.Direct
   const path = `/chat/${user?._id || thread._id}`
   const navigate = useNavigate()
 
@@ -43,15 +42,15 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
   }
 
   useEffect(() => {
-    if (!isDirect) {
+    if (!isUser) {
       return
     }
     const controller = new AbortController()
-    const targetId = thread.members.find((item) => item !== currentUserId)
+    const userId = thread.members.find((id) => id !== authInfo?.user._id)
     axios
-      .get<IUser>(`/users/${targetId}`, { signal: controller.signal })
+      .get<IUser>(`/users/${userId}`, { signal: controller.signal })
       .then(({ data }) => setUser(data))
-  }, [currentUserId, isDirect, thread.members])
+  }, [authInfo?.user, isUser, thread.members])
 
   return (
     <a className="conversation-link" href={path} onClick={onClick}>
