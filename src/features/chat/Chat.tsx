@@ -1,14 +1,11 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useContext } from 'react'
 import ChatItem from './ChatItem'
 import Search from '../search/Search'
 import OnlineBar from '../onlinebar/OnlineBar'
-import { Conversation } from '../../contexts/ConversationsContext'
+import { ConversationsContext } from '../../contexts/ConversationsContext'
 
-interface ChatProps {
-  conversations: Conversation
-}
-
-const Chat: FunctionComponent<ChatProps> = ({ conversations }) => {
+const Chat: FunctionComponent = () => {
+  const { conversations } = useContext(ConversationsContext)
 
   return (
     <div className="conversation">

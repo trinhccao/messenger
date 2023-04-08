@@ -1,14 +1,14 @@
-import { FunctionComponent, useState, FormEvent } from 'react'
+import { FunctionComponent, useState, FormEvent, useContext } from 'react'
 import axios from 'axios'
 import { DataAuthResponse } from '../models/DataAuthResponse'
+import { AuthContext } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
-interface LoginProps {
-  onLogin: (authInfo: DataAuthResponse) => void
-}
-
-const Login: FunctionComponent<LoginProps> = ({ onLogin }) => {
+const Login: FunctionComponent = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const { setAuthInfo } = useContext(AuthContext)
+  const navigate = useNavigate()
   const emptyReg = /^\s*$/
   const disabled = emptyReg.test(username) || emptyReg.test(password)
 
@@ -24,7 +24,8 @@ const Login: FunctionComponent<LoginProps> = ({ onLogin }) => {
       username,
       password,
     })
-    onLogin(data)
+    setAuthInfo?.(data)
+    navigate('/')
   }
 
   return (

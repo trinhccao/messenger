@@ -25,6 +25,7 @@ const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
   if (authInfo) {
     const token = `${authInfo.tokenType} ${authInfo.token}`
     axios.defaults.headers.common['Authorization'] = token
+    localStorage.setItem('authInfo', JSON.stringify(authInfo))
   } else {
     const savedAuthInfo = localStorage.getItem('authInfo')
     savedAuthInfo && setAuthInfo(JSON.parse(savedAuthInfo))
