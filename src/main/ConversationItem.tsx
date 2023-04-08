@@ -11,6 +11,7 @@ import { Thread, ThreadContext, ThreadTypes } from '../contexts/ThreadContext'
 import axios from 'axios'
 import { IUser } from '../interfaces/IUser'
 import { AuthContext } from '../contexts/AuthContext'
+import { IMessage } from '../interfaces/IMessage'
 
 interface ConversationItemProps {
   thread: Thread
@@ -25,6 +26,7 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
   const isDirect = thread.type === ThreadTypes.Direct
   const path = `/chat/${isDirect ? user?._id : thread._id}`
   const userFullName = user ? `${user.firstName} ${user.lastName}` : ''
+  const [latestMessage, setLatestMessage] = useState<IMessage>()
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()
@@ -53,6 +55,16 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
       .then(({ data }) => setUser(data))
   }, [authInfo?.user, isDirect, thread.members])
 
+  useEffect(() => {
+    const controller = new AbortController()
+    axios
+      .get<IMessage | undefined>(`/threads/${thread._id}/messages/latest`, {
+        signal: controller.signal
+      })
+      .then(({ data }) => data && setLatestMessage(data))
+    return () => controller.abort()
+  }, [thread._id])
+
   return (
     <a className="conversation-link" href={path} onClick={onClick}>
       <AvatarLarge
@@ -61,7 +73,9 @@ const ConversationItem: FunctionComponent<ConversationItemProps> = (props) => {
       />
       <div className="conversation-link__content">
         <h3 className="heading-lv3">{isDirect ? userFullName : thread.name}</h3>
-        <p className="conversation-link__message">This chat has ended.</p>
+        <p className="conversation-link__message">
+          {latestMessage?.content || ''}
+        </p>
       </div>
     </a>
   )
