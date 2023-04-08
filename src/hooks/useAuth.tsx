@@ -15,8 +15,7 @@ function useAuth(): UseAuth {
     axios.defaults.headers.common['Authorization'] = token
   } else {
     const savedAuthInfo = localStorage.getItem('authInfo')
-    if (savedAuthInfo)
-    setAuthInfo(JSON.parse(savedAuthInfo))
+    savedAuthInfo && setAuthInfo(JSON.parse(savedAuthInfo))
   }
 
   return [authInfo, setAuthInfo]

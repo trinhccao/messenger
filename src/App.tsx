@@ -26,10 +26,7 @@ const App: FunctionComponent = () => {
   }
 
   useEffect(() => {
-    if (authInfo) {
-      return
-    }
-    navigate('/login')
+    !authInfo && navigate('/login')
   }, [authInfo, navigate])
 
   const homeProps = {
