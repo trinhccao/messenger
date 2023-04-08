@@ -15,7 +15,7 @@ const Header: FunctionComponent<HeaderProps> = ({ thread }) => {
   const navigate = useNavigate()
   const { authInfo } = useContext(AuthContext)
   const [user, setUser] = useState<IUser>()
-  const userFullName = user ? `${user.firstName} ${user.firstName}` : ''
+  const userFullName = user ? `${user.firstName} ${user.lastName}` : ''
   const isDirect = thread?.type === ThreadTypes.Direct
 
   const onBack = () => {

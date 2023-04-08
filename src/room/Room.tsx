@@ -21,7 +21,7 @@ const Room: FunctionComponent = () => {
           return setThread(data)
         }
         const res = await axios.post<Thread>('/threads',
-          { type: ThreadTypes.Direct },
+          { type: ThreadTypes.Direct, receiverId: paramId },
           { signal: controller.signal }
         )
         setThread(res.data)
