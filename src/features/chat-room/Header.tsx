@@ -2,10 +2,10 @@ import { FunctionComponent, useEffect, useState, useContext } from 'react'
 import AvatarHeader from './AvatarHeader'
 import ButtonBack from './ButtonBack'
 import { useNavigate } from 'react-router-dom'
-import { IUser } from '../interfaces/IUser'
+import { IUser } from '../../interfaces/IUser'
 import axios from 'axios'
-import { Thread, ThreadTypes } from '../contexts/ThreadContext'
-import { AuthContext } from '../contexts/AuthContext'
+import { Thread, ThreadTypes } from '../../contexts/ThreadContext'
+import { AuthContext } from '../../contexts/AuthContext'
 
 interface HeaderProps {
   thread?: Thread

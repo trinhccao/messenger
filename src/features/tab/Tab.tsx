@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react'
-import iconChat from '../assets/icons/icon-chat.png'
-import iconChatActive from '../assets/icons/icon-chat-active.png'
-import iconPeople from '../assets/icons/icon-people.png'
-import iconPeopleActive from '../assets/icons/icon-people-active.png'
+import iconChat from '../../assets/icons/icon-chat.png'
+import iconChatActive from '../../assets/icons/icon-chat-active.png'
+import iconPeople from '../../assets/icons/icon-people.png'
+import iconPeopleActive from '../../assets/icons/icon-people-active.png'
 
 interface TabProps {
   onClick: (tab: TabIds) => void

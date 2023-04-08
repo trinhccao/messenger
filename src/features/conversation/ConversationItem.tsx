@@ -5,13 +5,13 @@ import {
   useEffect,
   useState,
 } from 'react'
-import AvatarLarge from './AvatarLarge'
+import AvatarLarge from '../../common/AvatarLarge'
 import { useNavigate } from 'react-router-dom'
-import { Thread, ThreadContext, ThreadTypes } from '../contexts/ThreadContext'
+import { Thread, ThreadContext, ThreadTypes } from '../../contexts/ThreadContext'
 import axios from 'axios'
-import { IUser } from '../interfaces/IUser'
-import { AuthContext } from '../contexts/AuthContext'
-import { IMessage } from '../interfaces/IMessage'
+import { IUser } from '../../interfaces/IUser'
+import { AuthContext } from '../../contexts/AuthContext'
+import { IMessage } from '../../interfaces/IMessage'
 
 interface ConversationItemProps {
   thread: Thread

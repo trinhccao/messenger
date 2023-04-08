@@ -1,20 +1,14 @@
 import { FunctionComponent, useContext } from 'react'
 import ConversationItem from './ConversationItem'
-import Search from './Search'
-import OnlineBar from './OnlineBar'
-import { TabIds } from './Tab'
-import { ThreadContext } from '../contexts/ThreadContext'
+import Search from '../search/Search'
+import OnlineBar from '../onlinebar/OnlineBar'
+import { ThreadContext } from '../../contexts/ThreadContext'
 
-interface ConversationProps {
-  activeTab: TabIds
-}
-
-const Conversation: FunctionComponent<ConversationProps> = (props) => {
-  const { activeTab } = props
+const Conversation: FunctionComponent = () => {
   const { threads } = useContext(ThreadContext)
 
   return (
-    <div className="conversation" hidden={activeTab !== TabIds.Chat}>
+    <div className="conversation">
       <Search />
       <OnlineBar />
       <ul className="conversation__list">

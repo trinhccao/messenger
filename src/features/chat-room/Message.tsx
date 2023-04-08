@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext } from 'react'
 import AvatarMessage from './AvatarMessage'
-import { IMessage } from '../interfaces/IMessage'
-import { AuthContext } from '../contexts/AuthContext'
+import { IMessage } from '../../interfaces/IMessage'
+import { AuthContext } from '../../contexts/AuthContext'
 
 interface MessageProps {
   message: IMessage

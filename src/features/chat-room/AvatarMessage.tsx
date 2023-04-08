@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from 'react'
-import { IUser } from '../interfaces/IUser'
+import { IUser } from '../../interfaces/IUser'
 import axios from 'axios'
 
 interface AvatarMessageProps {

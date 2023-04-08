@@ -1,15 +1,9 @@
 import { FunctionComponent, useEffect, useState } from 'react'
 import PeopleItem from './PeopleItem'
-import { IUser } from '../interfaces/IUser'
+import { IUser } from '../../interfaces/IUser'
 import axios from 'axios'
-import { TabIds } from './Tab'
 
-interface PeopleProps {
-  activeTab: TabIds
-}
-
-const People: FunctionComponent<PeopleProps> = (props) => {
-  const { activeTab } = props
+const People: FunctionComponent = () => {
   const [users, setUsers] = useState<IUser[]>([])
 
   useEffect(() => {
@@ -22,7 +16,7 @@ const People: FunctionComponent<PeopleProps> = (props) => {
   }, [])
 
   return (
-    <div className="people" hidden={activeTab !== TabIds.People}>
+    <div className="people">
       <ul>
         {users.map((user) => (
           <li key={user._id}>

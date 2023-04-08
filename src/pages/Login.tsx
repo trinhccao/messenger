@@ -1,16 +1,16 @@
-import { FunctionComponent, useState, FormEvent, useContext } from 'react'
+import { FunctionComponent, useState, FormEvent } from 'react'
 import axios from 'axios'
 import { IAuthInfo } from '../interfaces/IAuthInfo'
-import { AuthContext } from '../contexts/AuthContext'
-import { useNavigate } from 'react-router-dom'
 
-const Login: FunctionComponent = () => {
-  const { setAuthInfo } = useContext(AuthContext)
+interface LoginProps {
+  onLogin: (authInfo: IAuthInfo) => void
+}
+
+const Login: FunctionComponent<LoginProps> = ({ onLogin }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const emptyReg = /^\s*$/
   const disabled = emptyReg.test(username) || emptyReg.test(password)
-  const navigate = useNavigate()
 
   const getSubmitClassNames = () => {
     const block = 'login__submit'
@@ -24,8 +24,7 @@ const Login: FunctionComponent = () => {
       username,
       password,
     })
-    setAuthInfo?.(data)
-    navigate('/')
+    onLogin(data)
   }
 
   return (

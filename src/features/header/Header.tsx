@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { TabIds } from './Tab'
+import { TabIds } from '../tab/Tab'
 
 interface HeaderProps {
   activeTab: TabIds

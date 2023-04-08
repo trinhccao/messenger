@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useState } from 'react'
 import OnlineBarLink from './OnlineBarLink'
-import { IUser } from '../interfaces/IUser'
+import { IUser } from '../../interfaces/IUser'
 import axios from 'axios'
 
 const OnlineBar: FunctionComponent = () => {

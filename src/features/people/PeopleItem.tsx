@@ -1,7 +1,7 @@
 import { FunctionComponent, MouseEvent } from 'react'
-import AvatarSmall from './AvatarSmall'
+import AvatarSmall from '../../common/AvatarSmall'
 import { useNavigate } from 'react-router-dom'
-import { IUser } from '../interfaces/IUser'
+import { IUser } from '../../interfaces/IUser'
 
 interface PeopleItemProps {
   user: IUser

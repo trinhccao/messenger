@@ -1,29 +1,38 @@
-import { FunctionComponent } from 'react'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { FunctionComponent, useState } from 'react'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import './configs/axios'
-import { AuthProvider } from './contexts/AuthContext'
-import Main from './main/Main'
-import Room from './room/Room'
-import Login from './login/Login'
-import { ThreadProvider } from './contexts/ThreadContext'
-import { SocketProvider } from './contexts/SocketContext'
+import Login from './pages/Login'
+import { IAuthInfo } from './interfaces/IAuthInfo'
+import Home from './pages/Home'
+import { TabIds } from './features/tab/Tab'
 
 const App: FunctionComponent = () => {
+  const [authInfo, setAuthInfo] = useState<IAuthInfo>()
+  const navigate = useNavigate()
+  const [activeTab, setActiveTab] = useState<TabIds>(TabIds.Chat)
+
+  const onLogin = (authInfo: IAuthInfo) => {
+    localStorage.setItem('authInfo', JSON.stringify(authInfo))
+    setAuthInfo(authInfo)
+    navigate('/')
+  }
+
+  const onTabClick = (tab: TabIds) => {
+    setActiveTab(tab)
+  }
+
   return (
     <div className="app">
-      <Router>
-        <AuthProvider>
-          <SocketProvider>
-            <ThreadProvider>
-              <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/chat/:id" element={<Room />} />
-                <Route path="/login" element={<Login />} />
-              </Routes>
-            </ThreadProvider>
-          </SocketProvider>
-        </AuthProvider>
-      </Router>
+      <Routes>
+        <Route path="/" element={
+          <Home
+            authInfo={authInfo}
+            activeTab={activeTab}
+            onTabClick={onTabClick}
+          />
+        } />
+        <Route path="/login" element={<Login onLogin={onLogin} />} />
+      </Routes>
     </div>
   )
 }

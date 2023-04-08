@@ -1,12 +1,12 @@
 import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import Header from './Header'
-import Compose from './Compose'
-import { IMessage } from '../interfaces/IMessage'
+import Compose from '../compose/Compose'
+import { IMessage } from '../../interfaces/IMessage'
 import Message from './Message'
-import { Thread, ThreadTypes } from '../contexts/ThreadContext'
+import { Thread, ThreadTypes } from '../../contexts/ThreadContext'
 import axios from 'axios'
 import { useMatch } from 'react-router-dom'
-import { SocketContext } from '../contexts/SocketContext'
+import { SocketContext } from '../../contexts/SocketContext'
 
 const Room: FunctionComponent = () => {
   const [thread, setThread] = useState<Thread>()

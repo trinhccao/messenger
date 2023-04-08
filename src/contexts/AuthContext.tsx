@@ -18,19 +18,18 @@ const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
+  if (authInfo) {
+    localStorage.setItem('authInfo', JSON.stringify(authInfo))
+    axios.defaults.headers.common['Authorization'] =
+      `Bearer ${authInfo.token}`
+  } else {
+    const savedAuthInfo = localStorage.getItem('authInfo')
+    savedAuthInfo && setAuthInfo(JSON.parse(savedAuthInfo))
+  }
+
   useEffect(() => {
     setLoading(false)
-    if (authInfo) {
-      localStorage.setItem('authInfo', JSON.stringify(authInfo))
-      axios.defaults.headers.common['Authorization'] =
-        `Bearer ${authInfo.token}`
-      return
-    }
-    const savedAuthInfo = localStorage.getItem('authInfo')
-    if (!savedAuthInfo) {
-      return navigate('/login')
-    }
-    setAuthInfo(JSON.parse(savedAuthInfo))
+    !authInfo && navigate('/login')
   }, [navigate, authInfo])
 
   if (loading) {
