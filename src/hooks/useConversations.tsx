@@ -15,7 +15,7 @@ function useConversations(): UseConversations {
   const [conversations, setConversations] = useState<Conversation>({})
 
   useEffect(() => {
-    if (loading) {
+    if (loading || !authInfo) {
       return
     }
 
