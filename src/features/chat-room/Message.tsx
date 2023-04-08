@@ -8,7 +8,7 @@ interface MessageProps {
 }
 
 const Message: FunctionComponent<MessageProps> = ({ message }) => {
-  const [loading, authInfo] = useAuth()
+  const [authInfo] = useAuth()
   const own = authInfo?.user._id === message.userId
   const messageClassNames =
     authInfo?.user._id === message.userId

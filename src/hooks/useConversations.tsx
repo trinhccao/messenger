@@ -11,11 +11,11 @@ type UseConversations = [
 ]
 
 function useConversations(): UseConversations {
-  const [loading, authInfo] = useAuth()
+  const [authInfo] = useAuth()
   const [conversations, setConversations] = useState<Conversation>({})
 
   useEffect(() => {
-    if (loading || !authInfo) {
+    if (!authInfo) {
       return
     }
 
@@ -35,7 +35,7 @@ function useConversations(): UseConversations {
       })
 
     return () => controller.abort()
-  }, [authInfo, loading])
+  }, [authInfo])
 
   return [conversations, setConversations]
 }

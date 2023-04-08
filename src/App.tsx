@@ -10,7 +10,7 @@ import Room from './features/chat-room/Room'
 import useConversations from './hooks/useConversations'
 
 const App: FunctionComponent = () => {
-  const [loading, authInfo, setAuthInfo] = useAuth()
+  const [authInfo, setAuthInfo] = useAuth()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<TabIds>(TabIds.Chat)
   const [conversations, setConversations] = useConversations()
@@ -26,15 +26,11 @@ const App: FunctionComponent = () => {
   }
 
   useEffect(() => {
-    if (loading || authInfo) {
+    if (authInfo) {
       return
     }
     navigate('/login')
-  }, [loading, authInfo, navigate])
-
-  if (loading) {
-    return null
-  }
+  }, [authInfo, navigate])
 
   const homeProps = {
     authInfo,
