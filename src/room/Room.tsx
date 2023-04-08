@@ -62,11 +62,13 @@ const Room: FunctionComponent = () => {
       <Header thread={thread} />
       <Compose thread={thread} />
       <div className="app-content">
-        <div className="room">
-          <div className="container">
-            {messages.map((message) => (
-              <Message message={message} key={message._id} />
-            ))}
+        <div className="app-content__inner">
+          <div className="room">
+            <div className="container">
+              {messages.map((message) => (
+                <Message message={message} key={message._id} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

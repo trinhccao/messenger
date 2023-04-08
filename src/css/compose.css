@@ -1,6 +1,6 @@
 .compose {
   display: flex;
-  padding: 0 12px 10px var(--px-container);
+  padding: 5px 12px 10px var(--px-container);
 }
 
 .compose__input {
