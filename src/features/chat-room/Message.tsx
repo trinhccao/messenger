@@ -1,14 +1,14 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useContext } from 'react'
 import AvatarMessage from './AvatarMessage'
 import { DataMessage } from '../../models/DataMessage'
-import useAuth from '../../hooks/useAuth'
+import { AuthContext } from '../../contexts/AuthContext'
 
 interface MessageProps {
   message: DataMessage
 }
 
 const Message: FunctionComponent<MessageProps> = ({ message }) => {
-  const [authInfo] = useAuth()
+  const { authInfo } = useContext(AuthContext)
   const own = authInfo?.user._id === message.userId
   const messageClassNames =
     authInfo?.user._id === message.userId

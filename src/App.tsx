@@ -1,23 +1,23 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import './configs/axios'
 import Login from './pages/Login'
 import { DataAuthResponse } from './models/DataAuthResponse'
 import Home from './pages/Home'
 import { TabIds } from './features/tab/Tab'
-import useAuth from './hooks/useAuth'
 import Room from './features/chat-room/Room'
-import useConversations from './hooks/useConversations'
+import { AuthContext } from './contexts/AuthContext'
+import { ConversationsContext } from './contexts/ConversationsContext'
 
 const App: FunctionComponent = () => {
-  const [authInfo, setAuthInfo] = useAuth()
+  const { authInfo, setAuthInfo } = useContext(AuthContext)
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<TabIds>(TabIds.Chat)
-  const [conversations, setConversations] = useConversations()
+  const { conversations, setConversations } = useContext(ConversationsContext)
 
   const onLogin = (authInfo: DataAuthResponse) => {
     localStorage.setItem('authInfo', JSON.stringify(authInfo))
-    setAuthInfo(authInfo)
+    setAuthInfo?.(authInfo)
     navigate('/')
   }
 

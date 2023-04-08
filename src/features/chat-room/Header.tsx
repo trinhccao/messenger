@@ -1,10 +1,10 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useContext, useState } from 'react'
 import AvatarHeader from './AvatarHeader'
 import ButtonBack from './ButtonBack'
 import { useNavigate } from 'react-router-dom'
 import { DataUser } from '../../models/DataUser'
 import { DataThread, ThreadTypes } from '../../models/DataThread'
-import useAuth from '../../hooks/useAuth'
+import { AuthContext } from '../../contexts/AuthContext'
 
 interface HeaderProps {
   thread?: DataThread
@@ -12,7 +12,7 @@ interface HeaderProps {
 
 const Header: FunctionComponent<HeaderProps> = ({ thread }) => {
   const navigate = useNavigate()
-  const [authInfo] = useAuth()
+  const { authInfo } = useContext(AuthContext)
   const [user, setUser] = useState<DataUser>()
   const userFullName = user ? `${user.firstName} ${user.lastName}` : ''
   const isDirect = thread?.type === ThreadTypes.Direct

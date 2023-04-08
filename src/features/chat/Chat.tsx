@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import ChatItem from './ChatItem'
 import Search from '../search/Search'
 import OnlineBar from '../onlinebar/OnlineBar'
-import { Conversation } from '../../hooks/useConversations'
+import { Conversation } from '../../contexts/ConversationsContext'
 
 interface ChatProps {
   conversations: Conversation

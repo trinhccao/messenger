@@ -4,7 +4,7 @@ import Tab, { TabIds } from '../features/tab/Tab'
 import Header from '../features/header/Header'
 import Chat from '../features/chat/Chat'
 import People from '../features/people/People'
-import { Conversation } from '../hooks/useConversations'
+import { Conversation } from '../contexts/ConversationsContext'
 
 interface HomeProps {
   authInfo?: DataAuthResponse
