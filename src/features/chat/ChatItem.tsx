@@ -6,9 +6,9 @@ import {
 } from 'react'
 import AvatarLarge from '../../common/AvatarLarge'
 import { useNavigate } from 'react-router-dom'
-import { DataThread } from '../../contexts/ThreadContext'
 import { DataMessage } from '../../models/DataMessage'
 import axios from 'axios'
+import { DataThread } from '../../models/DataThread'
 
 interface ChatItemProps {
   threadId: string

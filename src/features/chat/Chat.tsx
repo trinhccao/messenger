@@ -9,7 +9,7 @@ interface ChatProps {
 }
 
 const Chat: FunctionComponent<ChatProps> = ({ conversations }) => {
-  console.log(conversations)
+
   return (
     <div className="conversation">
       <Search />

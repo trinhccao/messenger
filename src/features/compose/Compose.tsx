@@ -1,7 +1,7 @@
 import { FunctionComponent, useState, FormEvent } from 'react'
 import iconSend from '../../assets/icons/icon-send.png'
-import { DataThread } from '../../contexts/ThreadContext'
 import axios from 'axios'
+import { DataThread } from '../../models/DataThread'
 
 interface ComposeProps {
   thread?: DataThread
