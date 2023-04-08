@@ -3,4 +3,5 @@ export interface IMessage {
 	userId: string
 	content: string
 	createdAt: Date
+	threadId: string
 }
