@@ -1,10 +1,10 @@
 import { FunctionComponent, MouseEvent } from 'react'
 import AvatarLarge from '../../common/AvatarLarge'
 import { useNavigate } from 'react-router-dom'
-import { IUser } from '../../interfaces/IUser'
+import { DataUser } from '../../models/DataUser'
 
 interface OnlineBarLinkProps {
-  user: IUser
+  user: DataUser
 }
 
 const OnlineBarLink: FunctionComponent<OnlineBarLinkProps> = ({ user }) => {

@@ -1,9 +1,9 @@
 import { FunctionComponent, useState, FormEvent } from 'react'
 import axios from 'axios'
-import { IAuthInfo } from '../interfaces/IAuthInfo'
+import { DataAuthResponse } from '../models/DataAuthResponse'
 
 interface LoginProps {
-  onLogin: (authInfo: IAuthInfo) => void
+  onLogin: (authInfo: DataAuthResponse) => void
 }
 
 const Login: FunctionComponent<LoginProps> = ({ onLogin }) => {
@@ -20,7 +20,7 @@ const Login: FunctionComponent<LoginProps> = ({ onLogin }) => {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const { data } = await axios.post<IAuthInfo>('/login', {
+    const { data } = await axios.post<DataAuthResponse>('/login', {
       username,
       password,
     })

@@ -1,28 +1,28 @@
 import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import Header from './Header'
 import Compose from '../compose/Compose'
-import { IMessage } from '../../interfaces/IMessage'
+import { DataMessage } from '../../models/DataMessage'
 import Message from './Message'
-import { Thread, ThreadTypes } from '../../contexts/ThreadContext'
+import { DataThread, ThreadTypes } from '../../contexts/ThreadContext'
 import axios from 'axios'
 import { useMatch } from 'react-router-dom'
 import { SocketContext } from '../../contexts/SocketContext'
 
 const Room: FunctionComponent = () => {
-  const [thread, setThread] = useState<Thread>()
-  const [messages, setMessages] = useState<IMessage[]>([])
+  const [thread, setThread] = useState<DataThread>()
+  const [messages, setMessages] = useState<DataMessage[]>([])
   const paramId = useMatch('/chat/:id')?.params.id
   const { socketio } = useContext(SocketContext)
 
   useEffect(() => {
     const controller = new AbortController()
     axios
-      .get<Thread | null>(`/chat/${paramId}`, { signal: controller.signal })
+      .get<DataThread | null>(`/chat/${paramId}`, { signal: controller.signal })
       .then(async ({ data }) => {
         if (data) {
           return setThread(data)
         }
-        const res = await axios.post<Thread>('/threads',
+        const res = await axios.post<DataThread>('/threads',
           { type: ThreadTypes.Direct, receiverId: paramId },
           { signal: controller.signal }
         )
@@ -37,7 +37,7 @@ const Room: FunctionComponent = () => {
     }
     const controller = new AbortController()
     axios
-      .get<IMessage[]>(`/threads/${thread._id}/messages`, {
+      .get<DataMessage[]>(`/threads/${thread._id}/messages`, {
         signal: controller.signal
       })
       .then(({ data }) => setMessages(data))
@@ -49,7 +49,7 @@ const Room: FunctionComponent = () => {
     if (!socketio) {
       return
     }
-    socketio.on('message', (message: IMessage) => {
+    socketio.on('message', (message: DataMessage) => {
       if (message.threadId !== thread?._id) {
         return
       }

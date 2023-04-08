@@ -1,10 +1,10 @@
 import { FunctionComponent, useContext } from 'react'
 import AvatarMessage from './AvatarMessage'
-import { IMessage } from '../../interfaces/IMessage'
+import { DataMessage } from '../../models/DataMessage'
 import { AuthContext } from '../../contexts/AuthContext'
 
 interface MessageProps {
-  message: IMessage
+  message: DataMessage
 }
 
 const Message: FunctionComponent<MessageProps> = ({ message }) => {

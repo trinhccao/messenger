@@ -8,14 +8,14 @@ import {
   useContext
 } from 'react'
 import { AuthContext } from './AuthContext'
-import { IUser } from '../interfaces/IUser'
+import { DataUser } from '../models/DataUser'
 
 export enum ThreadTypes {
   Direct = 'direct',
   Group = 'group',
 }
 
-export interface Thread {
+export interface DataThread {
   _id: string
   name: string
   members: string[]
@@ -27,11 +27,11 @@ export interface Thread {
 }
 
 interface ThreadContextProps {
-  threads: Thread[]
-  setThreads?: React.Dispatch<React.SetStateAction<Thread[]>>
-  threadUser?: IUser
+  threads: DataThread[]
+  setThreads?: React.Dispatch<React.SetStateAction<DataThread[]>>
+  threadUser?: DataUser
   isDirect?: boolean
-  activeThread?: Thread
+  activeThread?: DataThread
 }
 
 interface ThreadProviderProps {
@@ -44,16 +44,16 @@ const init = {
 
 const ThreadContext = createContext<ThreadContextProps>(init)
 const ThreadProvider: FunctionComponent<ThreadProviderProps> = (props) => {
-  const [threads, setThreads] = useState<Thread[]>([])
+  const [threads, setThreads] = useState<DataThread[]>([])
   const activeThread = threads.find((item) => item.isActive)
   const isDirect = activeThread?.type === ThreadTypes.Direct
   const { authInfo } = useContext(AuthContext)
-  const [threadUser, setThreadUser] = useState<IUser>()
+  const [threadUser, setThreadUser] = useState<DataUser>()
 
   useEffect(() => {
     const controller = new AbortController()
     axios
-      .get<Thread[]>('/threads', { signal: controller.signal })
+      .get<DataThread[]>('/threads', { signal: controller.signal })
       .then(({ data }) => setThreads(data))
     return () => controller.abort()
   }, [authInfo?.user._id])
@@ -66,7 +66,7 @@ const ThreadProvider: FunctionComponent<ThreadProviderProps> = (props) => {
     const userId = activeThread.members.find((user) => user !== currentUserId)
     const controller = new AbortController()
     axios
-      .get<IUser>(`/users/${userId}`, { signal: controller.signal })
+      .get<DataUser>(`/users/${userId}`, { signal: controller.signal })
       .then(({ data }) => setThreadUser(data))
     return () => controller.abort(0)
   }, [activeThread?._id, activeThread?.members, authInfo?.user._id, isDirect])

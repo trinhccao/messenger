@@ -1,10 +1,10 @@
 import { FunctionComponent, MouseEvent } from 'react'
 import AvatarSmall from '../../common/AvatarSmall'
 import { useNavigate } from 'react-router-dom'
-import { IUser } from '../../interfaces/IUser'
+import { DataUser } from '../../models/DataUser'
 
 interface PeopleItemProps {
-  user: IUser
+  user: DataUser
 }
 
 const PeopleItem: FunctionComponent<PeopleItemProps> = ({ user }) => {

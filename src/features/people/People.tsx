@@ -1,15 +1,15 @@
 import { FunctionComponent, useEffect, useState } from 'react'
 import PeopleItem from './PeopleItem'
-import { IUser } from '../../interfaces/IUser'
+import { DataUser } from '../../models/DataUser'
 import axios from 'axios'
 
 const People: FunctionComponent = () => {
-  const [users, setUsers] = useState<IUser[]>([])
+  const [users, setUsers] = useState<DataUser[]>([])
 
   useEffect(() => {
     const abortController = new AbortController()
     axios
-      .get<IUser[]>('/users', {
+      .get<DataUser[]>('/users', {
         signal: abortController.signal
       }).then((res) => setUsers(res.data))
     return () => abortController.abort()

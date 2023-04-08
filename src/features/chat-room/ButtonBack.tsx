@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import back from '../assets/icons/icon-back.png'
+import back from '../../assets/icons/icon-back.png'
 
 interface ButtonBackProps {
   onBack: () => void

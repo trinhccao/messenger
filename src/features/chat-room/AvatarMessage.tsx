@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from 'react'
-import { IUser } from '../../interfaces/IUser'
+import { DataUser } from '../../models/DataUser'
 import axios from 'axios'
 
 interface AvatarMessageProps {
@@ -7,12 +7,12 @@ interface AvatarMessageProps {
 }
 
 const AvatarMessage: FunctionComponent<AvatarMessageProps> = ({ userId }) => {
-  const [user, setUser] = useState<IUser>()
+  const [user, setUser] = useState<DataUser>()
 
   useEffect(() => {
     const controller = new AbortController()
     axios
-      .get<IUser>(`/users/${userId}`, { signal: controller.signal })
+      .get<DataUser>(`/users/${userId}`, { signal: controller.signal })
       .then((res) => setUser(res.data))
     return () => controller.abort()
   }, [userId])

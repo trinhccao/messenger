@@ -2,19 +2,19 @@ import { FunctionComponent, useEffect, useState, useContext } from 'react'
 import AvatarHeader from './AvatarHeader'
 import ButtonBack from './ButtonBack'
 import { useNavigate } from 'react-router-dom'
-import { IUser } from '../../interfaces/IUser'
+import { DataUser } from '../../models/DataUser'
 import axios from 'axios'
-import { Thread, ThreadTypes } from '../../contexts/ThreadContext'
+import { DataThread, ThreadTypes } from '../../contexts/ThreadContext'
 import { AuthContext } from '../../contexts/AuthContext'
 
 interface HeaderProps {
-  thread?: Thread
+  thread?: DataThread
 }
 
 const Header: FunctionComponent<HeaderProps> = ({ thread }) => {
   const navigate = useNavigate()
   const { authInfo } = useContext(AuthContext)
-  const [user, setUser] = useState<IUser>()
+  const [user, setUser] = useState<DataUser>()
   const userFullName = user ? `${user.firstName} ${user.lastName}` : ''
   const isDirect = thread?.type === ThreadTypes.Direct
 
@@ -29,7 +29,7 @@ const Header: FunctionComponent<HeaderProps> = ({ thread }) => {
     const controller = new AbortController()
     const userId = thread.members.find((id) => id !== authInfo?.user._id)
     axios
-      .get<IUser>(`/users/${userId}`, { signal: controller.signal })
+      .get<DataUser>(`/users/${userId}`, { signal: controller.signal })
       .then(({ data }) => {
         setUser(data)
       })

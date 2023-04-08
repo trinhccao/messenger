@@ -1,18 +1,20 @@
 import { FunctionComponent } from 'react'
-import { IAuthInfo } from '../interfaces/IAuthInfo'
+import { DataAuthResponse } from '../models/DataAuthResponse'
 import Tab, { TabIds } from '../features/tab/Tab'
 import Header from '../features/header/Header'
-import Conversation from '../features/conversation/Conversation'
+import Chat from '../features/chat/Chat'
 import People from '../features/people/People'
+import { Conversation } from '../hooks/useConversations'
 
 interface HomeProps {
-  authInfo?: IAuthInfo
+  authInfo?: DataAuthResponse
   activeTab: TabIds
   onTabClick: (tab: TabIds) => void
+  conversations: Conversation
 }
 
 const Home: FunctionComponent<HomeProps> = (props) => {
-  const { authInfo, activeTab, onTabClick } = props
+  const { authInfo, activeTab, onTabClick, conversations } = props
 
   return (
     <div className="app-viewport">
@@ -20,7 +22,7 @@ const Home: FunctionComponent<HomeProps> = (props) => {
       <Tab activeTab={activeTab} onClick={(tab) => onTabClick(tab)} />
       <div className="app-content">
         <div className="app-content__inner">
-          {activeTab === TabIds.Chat ? <Conversation /> : <People />}
+          {activeTab === TabIds.Chat ? <Chat conversations={conversations} /> : <People />}
         </div>
       </div>
     </div>
