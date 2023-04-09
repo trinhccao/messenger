@@ -3,7 +3,6 @@ import Tab, { TabIds } from '../features/tab/Tab'
 import Header from '../features/header/Header'
 import Chat from '../features/chat/Chat'
 import People from '../features/people/People'
-import { ConversationsProvider } from '../contexts/ConversationsContext'
 
 interface HomeProps {
   activeTab: TabIds
@@ -15,11 +14,7 @@ const Home: FunctionComponent<HomeProps> = (props) => {
 
   const renderHomeContent = () => {
     return (
-      activeTab === TabIds.Chat ?
-        <ConversationsProvider>
-          <Chat />
-        </ConversationsProvider>
-        : <People />
+      activeTab === TabIds.Chat ? <Chat /> : <People />
     )
   }
 

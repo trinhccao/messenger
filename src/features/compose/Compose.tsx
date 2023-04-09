@@ -1,7 +1,9 @@
-import { FunctionComponent, useState, FormEvent } from 'react'
+import { FunctionComponent, useState, FormEvent, useContext } from 'react'
 import iconSend from '../../assets/icons/icon-send.png'
 import axios from 'axios'
 import { DataThread } from '../../models/DataThread'
+import { ConversationsContext } from '../../contexts/ConversationsContext'
+import { DataMessage } from '../../models/DataMessage'
 
 interface ComposeProps {
   thread?: DataThread
@@ -10,10 +12,23 @@ interface ComposeProps {
 const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
   const [content, setContent] = useState('')
   const buttonDisabled = !thread || !!content.match(/^\s*$/)
+  const { conversations, setConversations } = useContext(ConversationsContext)
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    await axios.post(`/chat/${thread?._id}`, { message: content })
+    if (!thread) {
+      return
+    }
+    const threadId = thread._id
+    const { data } = await axios.post<DataMessage>(`/chat/${threadId}`, {
+      message: content
+    })
+    if (conversations[threadId]) {
+      conversations[threadId].push(data)
+    } else {
+      conversations[threadId] = [data]
+    }
+    setConversations?.({ ...conversations })
     setContent('')
   }
 

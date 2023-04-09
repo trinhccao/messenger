@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import { TabIds } from './features/tab/Tab'
 import Room from './features/chat-room/Room'
 import { AuthContext } from './contexts/AuthContext'
+import { ConversationsProvider } from './contexts/ConversationsContext'
 
 const App: FunctionComponent = () => {
   const { authInfo } = useContext(AuthContext)
@@ -23,11 +24,13 @@ const App: FunctionComponent = () => {
 
   return (
     <div className="app">
-      <Routes>
-        <Route path="/" element={<Home {...homeProps} />} />
-        <Route path="/chat/:id" element={<Room />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <ConversationsProvider>
+        <Routes>
+          <Route path="/" element={<Home {...homeProps} />} />
+          <Route path="/chat/:id" element={<Room />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </ConversationsProvider>
     </div>
   )
 }

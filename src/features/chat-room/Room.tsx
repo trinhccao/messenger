@@ -4,19 +4,20 @@ import Compose from '../compose/Compose'
 import Message from './Message'
 import { useMatch } from 'react-router-dom'
 import useThread from '../../hooks/useThread'
-import useThreadMessages from '../../hooks/useThreadMessages'
 import { AuthContext } from '../../contexts/AuthContext'
 import { DataUser } from '../../models/DataUser'
 import axios from 'axios'
 import AvatarMessage from './AvatarMessage'
 import { DataMessage } from '../../models/DataMessage'
+import { ConversationsContext } from '../../contexts/ConversationsContext'
 
 const Room: FunctionComponent = () => {
+  const { conversations } = useContext(ConversationsContext)
   const paramId = useMatch('/chat/:id')?.params.id
   const { thread } = useThread(paramId as string)
-  const { messages } = useThreadMessages(thread?._id as string)
   const { authInfo } = useContext(AuthContext)
   const [directUser, setDirectUser] = useState<DataUser>()
+  const messages = conversations[thread?._id || ''] || []
 
   const renderMessage = (message: DataMessage) => {
     const own = message.userId === authInfo?.user._id
