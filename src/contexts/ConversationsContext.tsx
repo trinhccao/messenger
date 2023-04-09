@@ -7,10 +7,12 @@ import {
   SetStateAction,
   useContext,
   useEffect,
+  useMemo,
 } from 'react'
 import axios from 'axios'
 import { AuthContext } from './AuthContext'
 import { DataMessage } from '../models/DataMessage'
+import { sort } from '../logic/conversations'
 
 export type Conversation = Record<string, DataMessage[]>
 
@@ -28,9 +30,13 @@ const initial = {
 }
 
 const ConversationsContext = createContext<ConversationsContextProps>(initial)
-const ConversationsProvider: FunctionComponent<ConversationsProviderProps> = ({ children }) => {
+const ConversationsProvider: FunctionComponent<ConversationsProviderProps> = ({
+  children
+}) => {
   const { authInfo } = useContext(AuthContext)
   const [conversations, setConversations] = useState<Conversation>({})
+
+  const sorted = useMemo(() => sort(conversations), [conversations])
 
   useEffect(() => {
     if (!authInfo) {
@@ -57,7 +63,7 @@ const ConversationsProvider: FunctionComponent<ConversationsProviderProps> = ({ 
 
   return (
     <ConversationsContext.Provider value={{
-      conversations,
+      conversations: sorted,
       setConversations,
     }}>
       {children}
