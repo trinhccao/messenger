@@ -10,6 +10,7 @@ import io, { Socket } from 'socket.io-client'
 import { AuthContext } from './AuthContext'
 import { DataMessage } from '../models/DataMessage'
 import { ConversationsContext } from './ConversationsContext'
+import { DataUser } from '../models/DataUser'
 
 interface SocketProviderProps {
   children: ReactNode
@@ -18,10 +19,12 @@ interface SocketProviderProps {
 interface SocketContextProps {
   socket?: Socket
   connected: boolean
+  onlines: DataUser[]
 }
 
 const SocketContext = createContext<SocketContextProps>({
-  connected: false
+  connected: false,
+  onlines: [],
 })
 
 const SocketProvider: FunctionComponent<SocketProviderProps> = ({
@@ -31,6 +34,7 @@ const SocketProvider: FunctionComponent<SocketProviderProps> = ({
   const [socket, setSocket] = useState<Socket>()
   const [connected, setConnected] = useState(false)
   const { dispatch } = useContext(ConversationsContext)
+  const [onlines, setOnlines] = useState<DataUser[]>([])
 
   useEffect(() => {
     if (!authInfo) {
@@ -38,7 +42,7 @@ const SocketProvider: FunctionComponent<SocketProviderProps> = ({
     }
     const socket = io(process.env.REACT_APP_API_HOST as string, {
       extraHeaders: {
-        userid: authInfo.user._id
+        user: JSON.stringify(authInfo.user)
       }
     })
     setSocket(socket)
@@ -51,6 +55,13 @@ const SocketProvider: FunctionComponent<SocketProviderProps> = ({
         payload: [message]
       })
     })
+    socket.on('onlines', (users: DataUser[]) => setOnlines(users))
+    socket.on('online', (online: DataUser) => setOnlines((user) => (
+      [...user, online]
+    )))
+    socket.on('offline', (offline: DataUser) => setOnlines((users) => {
+      return users.filter((user) => user._id !== offline._id)
+    }))
 
     return () => {
       socket.offAny()
@@ -62,6 +73,7 @@ const SocketProvider: FunctionComponent<SocketProviderProps> = ({
     <SocketContext.Provider value={{
       socket,
       connected,
+      onlines,
     }}>
       {children}
     </SocketContext.Provider>
