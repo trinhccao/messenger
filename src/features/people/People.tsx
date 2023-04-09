@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from 'react'
-import PeopleItem from './PeopleItem'
+import PeopleItem from '../../common/PeopleItem'
 import { DataUser } from '../../models/DataUser'
 import axios from 'axios'
 

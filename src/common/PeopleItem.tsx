@@ -1,8 +1,8 @@
 import { FunctionComponent, MouseEvent, useContext } from 'react'
-import AvatarSmall from '../../common/AvatarSmall'
+import AvatarSmall from './AvatarSmall'
 import { useNavigate } from 'react-router-dom'
-import { DataUser } from '../../models/DataUser'
-import { SocketContext } from '../../contexts/SocketContext'
+import { DataUser } from '../models/DataUser'
+import { SocketContext } from '../contexts/SocketContext'
 
 interface PeopleItemProps {
   user: DataUser

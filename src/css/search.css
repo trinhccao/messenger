@@ -11,4 +11,20 @@
   border: none;
   border-radius: 10px;
   font-family: var(--font-primary);
+} 
+
+.search__inner {
+  position: relative;
+}
+
+.search__result {
+  overflow: hidden;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  z-index: 100;
+  border-radius: 15px;
+  box-shadow: 0 0 10px var(--dark-gray);
 }

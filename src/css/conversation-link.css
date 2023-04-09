@@ -5,6 +5,10 @@
   text-decoration: none;
 }
 
+.conversation-link:hover {
+  background-color: var(--cultured);
+}
+
 .conversation-link__content {
   flex-grow: 1;
   align-self: center;
