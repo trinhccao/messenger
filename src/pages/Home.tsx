@@ -3,7 +3,6 @@ import Tab, { TabIds } from '../features/tab/Tab'
 import Header from '../features/header/Header'
 import Chat from '../features/chat/Chat'
 import People from '../features/people/People'
-
 interface HomeProps {
   activeTab: TabIds
   setActiveTab: Dispatch<SetStateAction<TabIds>>

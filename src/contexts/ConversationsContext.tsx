@@ -2,23 +2,23 @@ import {
   FunctionComponent,
   createContext,
   ReactNode,
-  useState,
   Dispatch,
-  SetStateAction,
   useContext,
   useEffect,
   useMemo,
+  useReducer,
 } from 'react'
 import axios from 'axios'
 import { AuthContext } from './AuthContext'
 import { DataMessage } from '../models/DataMessage'
 import { sort } from '../logic/conversations'
+import conversationReducer, { ConversationAction } from '../reducers/conversation-reducer'
 
 export type Conversation = Record<string, DataMessage[]>
 
 interface ConversationsContextProps {
   conversations: Conversation
-  setConversations?: Dispatch<SetStateAction<Conversation>>
+  dispatch?: Dispatch<ConversationAction>
 }
 
 interface ConversationsProviderProps {
@@ -34,7 +34,7 @@ const ConversationsProvider: FunctionComponent<ConversationsProviderProps> = ({
   children
 }) => {
   const { authInfo } = useContext(AuthContext)
-  const [conversations, setConversations] = useState<Conversation>({})
+  const [conversations, dispatch] = useReducer(conversationReducer, {})
 
   const sorted = useMemo(() => sort(conversations), [conversations])
 
@@ -46,17 +46,7 @@ const ConversationsProvider: FunctionComponent<ConversationsProviderProps> = ({
     const controller = new AbortController()
     axios
       .get<DataMessage[]>('/messages', { signal: controller.signal })
-      .then(({ data }) => {
-        const conversations = data.reduce((previous: Conversation, message) => {
-          if (previous[message.threadId]) {
-            previous[message.threadId].push(message)
-          } else {
-            previous[message.threadId] = [message]
-          }
-          return previous
-        }, {})
-        setConversations(conversations as Conversation)
-      })
+      .then(({ data }) => dispatch({ type: 'init', payload: data }))
 
     return () => controller.abort()
   }, [authInfo])
@@ -64,7 +54,7 @@ const ConversationsProvider: FunctionComponent<ConversationsProviderProps> = ({
   return (
     <ConversationsContext.Provider value={{
       conversations: sorted,
-      setConversations,
+      dispatch,
     }}>
       {children}
     </ConversationsContext.Provider>
