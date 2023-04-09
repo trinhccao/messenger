@@ -18,7 +18,7 @@ const PeopleItem: FunctionComponent<PeopleItemProps> = ({ user }) => {
 
   return (
     <a className="conversation-link" href={path} onClick={onClick}>
-      <AvatarSmall image={user.avatar || ''} isOnline={true} />
+      <AvatarSmall image={user.avatar} isOnline={true} />
       <div className="conversation-link__content">
         <span className="heading-lv3">{user.firstName} {user.lastName}</span>
       </div>

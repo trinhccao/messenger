@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 
 interface AvatarSmallProps {
-  image: string
+  image?: string
   isOnline: boolean
 }
 
