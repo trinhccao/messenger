@@ -12,17 +12,13 @@ const App: FunctionComponent = () => {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<TabIds>(TabIds.Chat)
 
-  const onTabClick = (tab: TabIds) => {
-    setActiveTab(tab)
-  }
-
   useEffect(() => {
     !authInfo && navigate('/login')
   }, [authInfo, navigate])
 
   const homeProps = {
     activeTab,
-    onTabClick,
+    setActiveTab,
   }
 
   return (

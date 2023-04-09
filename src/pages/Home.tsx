@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { Dispatch, FunctionComponent, SetStateAction } from 'react'
 import Tab, { TabIds } from '../features/tab/Tab'
 import Header from '../features/header/Header'
 import Chat from '../features/chat/Chat'
@@ -7,11 +7,11 @@ import { ConversationsProvider } from '../contexts/ConversationsContext'
 
 interface HomeProps {
   activeTab: TabIds
-  onTabClick: (tab: TabIds) => void
+  setActiveTab: Dispatch<SetStateAction<TabIds>>
 }
 
 const Home: FunctionComponent<HomeProps> = (props) => {
-  const { activeTab, onTabClick } = props
+  const { activeTab, setActiveTab } = props
 
   const renderHomeContent = () => {
     return (
@@ -26,7 +26,7 @@ const Home: FunctionComponent<HomeProps> = (props) => {
   return (
     <div className="app-viewport">
       <Header activeTab={activeTab} />
-      <Tab activeTab={activeTab} onClick={(tab) => onTabClick(tab)} />
+      <Tab activeTab={activeTab} onClick={(tab) => setActiveTab(tab)} />
       <div className="app-content">
         <div className="app-content__inner">
           {renderHomeContent()}
