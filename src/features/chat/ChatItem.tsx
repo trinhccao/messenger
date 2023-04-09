@@ -12,6 +12,7 @@ import axios from 'axios'
 import { DataThread, ThreadTypes } from '../../models/DataThread'
 import { DataUser } from '../../models/DataUser'
 import { AuthContext } from '../../contexts/AuthContext'
+import { SocketContext } from '../../contexts/SocketContext'
 
 interface ChatItemProps {
   threadId: string
@@ -27,6 +28,8 @@ const ChatItem: FunctionComponent<ChatItemProps> = (props) => {
   const { authInfo } = useContext(AuthContext)
   const isDirect = thread?.type === ThreadTypes.Direct
   const path = `/chat/${isDirect ? user?._id : thread?._id}`
+  const { onlines } = useContext(SocketContext)
+  const isOnline = !!onlines.find(({ _id }) => _id === user?._id)
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()
@@ -57,7 +60,7 @@ const ChatItem: FunctionComponent<ChatItemProps> = (props) => {
     <a className="conversation-link" href={path} onClick={onClick}>
       <AvatarLarge
         image={isDirect ? user?.avatar : thread?.avatar}
-        isOnline={true}
+        isOnline={isOnline}
       />
       <div className="conversation-link__content">
         <h3 className="heading-lv3">
