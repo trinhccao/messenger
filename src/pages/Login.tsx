@@ -9,16 +9,16 @@ const Login: FunctionComponent = () => {
   const [password, setPassword] = useState('')
   const { setAuthInfo } = useContext(AuthContext)
   const navigate = useNavigate()
-  const emptyReg = /^\s*$/
-  const disabled = emptyReg.test(username) || emptyReg.test(password)
 
   const getSubmitClassNames = () => {
     const block = 'login__submit'
     const modifier = 'login__submit--disabled'
+    const emptyReg = /^\s*$/
+    const disabled = emptyReg.test(username) || emptyReg.test(password)
     return disabled ? `${block} ${modifier}` : block
   }
 
-  const onSubmit = async (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const { data } = await axios.post<DataAuthResponse>('/login', {
       username,
@@ -56,7 +56,6 @@ const Login: FunctionComponent = () => {
             <button
               className={getSubmitClassNames()}
               type="submit"
-              disabled={disabled}
             >
               Login
             </button>
