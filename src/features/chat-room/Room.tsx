@@ -23,7 +23,7 @@ const Room: FunctionComponent = () => {
     const own = message.userId === authInfo?.user._id
     return (
       <Message message={message} own={own} key={message._id}>
-        {(!own && directUser) && <AvatarMessage user={directUser} />}
+        {!own && <AvatarMessage userId={message.userId} />}
       </Message>
     )
   }

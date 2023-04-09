@@ -1,11 +1,22 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { DataUser } from '../../models/DataUser'
+import axios from 'axios'
 
 interface AvatarMessageProps {
-  user: DataUser
+  userId: string
 }
 
-const AvatarMessage: FunctionComponent<AvatarMessageProps> = ({ user }) => {
+const AvatarMessage: FunctionComponent<AvatarMessageProps> = ({ userId }) => {
+  const [user, setUser] = useState<DataUser>()
+
+  useEffect(() => {
+    const controller = new AbortController()
+    axios
+      .get(`/users/${userId}`, { signal: controller.signal })
+      .then(({ data }) => setUser(data))
+    return () => controller.abort()
+  }, [userId])
+
   return (
     <div className="avatar avatar--xs avatar--message">
       <img
