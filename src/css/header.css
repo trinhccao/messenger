@@ -17,3 +17,13 @@
   margin-left: 11px;
   font-size: 1rem;
 }
+
+.header__button-logout {
+  display: inline-flex;
+  padding: 5px;
+  background: none;
+  border: 1px solid var(--metallic-silver);
+  border-radius: 5px;
+  cursor: pointer;
+  transform: scaleX(-1);
+}

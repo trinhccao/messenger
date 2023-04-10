@@ -1,6 +1,7 @@
 import { FunctionComponent, useContext } from 'react'
 import { TabIds } from '../tab/Tab'
 import { AuthContext } from '../../contexts/AuthContext'
+import iconLogout from '../../assets/icons/icon-logout.png'
 
 interface HeaderProps {
   activeTab: TabIds
@@ -23,7 +24,7 @@ const Header: FunctionComponent<HeaderProps> = ({ activeTab }) => {
           type="button"
           onClick={onLogout}
         >
-          Logout
+          <img src={iconLogout} width="16" height="16" alt="" />
         </button>
       </div>
     </div>
