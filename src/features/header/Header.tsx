@@ -19,13 +19,15 @@ const Header: FunctionComponent<HeaderProps> = ({ activeTab }) => {
     <div className="header">
       <div className="container">
         <h1 className="header__title">{activeTab}</h1>
-        <button
-          className="header__button-logout"
-          type="button"
-          onClick={onLogout}
-        >
-          <img src={iconLogout} width="16" height="16" alt="" />
-        </button>
+        {activeTab === TabIds.Chat ? (
+          <button
+            className="header__button-logout"
+            type="button"
+            onClick={onLogout}
+          >
+            <img src={iconLogout} width="16" height="16" alt="" />
+          </button>
+        ) : null}
       </div>
     </div>
   )
