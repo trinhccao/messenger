@@ -7,9 +7,9 @@ import OnlineBar from './OnlineBar'
 const Home: FunctionComponent = () => {
   return (
     <>
-      <HomeHeader />
       <div className="app-content">
         <div className="app-content__inner">
+          <HomeHeader />
           <Search />
           <OnlineBar />
           <Conversations />
