@@ -35,7 +35,6 @@ const ConversationsProvider: FunctionComponent<ConversationsProviderProps> = ({
 }) => {
   const { authInfo } = useContext(AuthContext)
   const [conversations, dispatch] = useReducer(conversationReducer, {})
-
   const sorted = useMemo(() => sort(conversations), [conversations])
 
   useEffect(() => {
