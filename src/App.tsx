@@ -2,12 +2,11 @@ import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import './configs/axios'
 import Login from './pages/Login'
-import Home from './pages/Home'
-import { TabIds } from './features/tab/Tab'
+import Home from './home/Home'
+import Tab, { TabIds } from './features/tab/Tab'
 import Room from './features/chat-room/Room'
 import { AuthContext } from './contexts/AuthContext'
 import { ConversationsProvider } from './contexts/ConversationsContext'
-import { SocketProvider } from './contexts/SocketContext'
 
 const App: FunctionComponent = () => {
   const { authInfo } = useContext(AuthContext)
@@ -18,22 +17,18 @@ const App: FunctionComponent = () => {
     !authInfo && navigate('/login')
   }, [authInfo, navigate])
 
-  const homeProps = {
-    activeTab,
-    setActiveTab,
-  }
-
   return (
     <div className="app">
-      <ConversationsProvider>
-        <SocketProvider>
+      <div className="app__content">
+        <Tab activeTab={activeTab} onClick={(tab) => setActiveTab(tab)} />
+        <ConversationsProvider>
           <Routes>
-            <Route path="/" element={<Home {...homeProps} />} />
+            <Route path="/" element={<Home />} />
             <Route path="/chat/:id" element={<Room />} />
             <Route path="/login" element={<Login />} />
           </Routes>
-        </SocketProvider>
-      </ConversationsProvider>
+        </ConversationsProvider>
+      </div>
     </div>
   )
 }

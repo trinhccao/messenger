@@ -5,21 +5,20 @@ import {
   useEffect,
   useState,
 } from 'react'
-import AvatarLarge from '../../common/AvatarLarge'
+import AvatarLarge from '../common/AvatarLarge'
 import { useNavigate } from 'react-router-dom'
-import { DataMessage } from '../../models/DataMessage'
+import { DataMessage } from '../models/DataMessage'
 import axios from 'axios'
-import { DataThread, ThreadTypes } from '../../models/DataThread'
-import { DataUser } from '../../models/DataUser'
-import { AuthContext } from '../../contexts/AuthContext'
-import { SocketContext } from '../../contexts/SocketContext'
+import { DataThread, ThreadTypes } from '../models/DataThread'
+import { DataUser } from '../models/DataUser'
+import { AuthContext } from '../contexts/AuthContext'
 
-interface ChatItemProps {
+interface ConversationsItemProps {
   threadId: string
   messages: DataMessage[]
 }
 
-const ChatItem: FunctionComponent<ChatItemProps> = (props) => {
+const ConversationsItem: FunctionComponent<ConversationsItemProps> = (props) => {
   const { threadId, messages } = props
   const navigate = useNavigate()
   const [thread, setThread] = useState<DataThread>()
@@ -28,8 +27,6 @@ const ChatItem: FunctionComponent<ChatItemProps> = (props) => {
   const { authInfo } = useContext(AuthContext)
   const isDirect = thread?.type === ThreadTypes.Direct
   const path = `/chat/${isDirect ? user?._id : thread?._id}`
-  const { onlines } = useContext(SocketContext)
-  const isOnline = !!onlines.find(({ _id }) => _id === user?._id)
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()
@@ -57,21 +54,23 @@ const ChatItem: FunctionComponent<ChatItemProps> = (props) => {
   }, [threadId, authInfo?.user._id, thread?.members, isDirect])
 
   return (
-    <a className="conversation-link" href={path} onClick={onClick}>
-      <AvatarLarge
-        image={isDirect ? user?.avatar : thread?.avatar}
-        isOnline={isOnline}
-      />
-      <div className="conversation-link__content">
-        <h3 className="heading-lv3">
-          {isDirect ? userFullName : thread?.name || ''}
-        </h3>
-        <p className="conversation-link__message">
-          {messages.slice(-1)[0]?.content || ''}
-        </p>
-      </div>
-    </a>
+    <li>
+      <a className="conversations__item" href={path} onClick={onClick}>
+        <AvatarLarge
+          image={isDirect ? user?.avatar : thread?.avatar}
+          isOnline={true}
+        />
+        <div className="conversations__item-content">
+          <h3 className="heading-lv3">
+            {isDirect ? userFullName : thread?.name || ''}
+          </h3>
+          <p className="conversations__item-message">
+            {messages.slice(-1)[0]?.content || ''}
+          </p>
+        </div>
+      </a>
+    </li>
   )
 }
 
-export default ChatItem
+export default ConversationsItem

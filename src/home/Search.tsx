@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from 'react'
-import PeopleItem from '../../common/PeopleItem'
+import PeopleItem from '../common/PeopleItem'
 import axios from 'axios'
-import { DataUser } from '../../models/DataUser'
+import { DataUser } from '../models/DataUser'
 
 const Search: FunctionComponent = () => {
   const [users, setUsers] = useState<DataUser[]>([])

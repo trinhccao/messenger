@@ -2,3 +2,10 @@
   position: fixed;
   inset: 0;
 }
+
+.app__content {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  flex-direction: column;
+}

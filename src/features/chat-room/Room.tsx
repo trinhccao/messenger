@@ -40,7 +40,7 @@ const Room: FunctionComponent = () => {
   }, [thread, authInfo])
 
   return (
-    <div className="app-viewport">
+    <div className="app__content">
       <Header thread={thread} directUser={directUser} />
       <Compose thread={thread} />
       <div className="app-content">

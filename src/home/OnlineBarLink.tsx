@@ -1,7 +1,7 @@
 import { FunctionComponent, MouseEvent } from 'react'
-import AvatarLarge from '../../common/AvatarLarge'
+import AvatarLarge from '../common/AvatarLarge'
 import { useNavigate } from 'react-router-dom'
-import { DataUser } from '../../models/DataUser'
+import { DataUser } from '../models/DataUser'
 
 interface OnlineBarLinkProps {
   user: DataUser
@@ -17,7 +17,7 @@ const OnlineBarLink: FunctionComponent<OnlineBarLinkProps> = ({ user }) => {
   }
 
   return (
-    <a className="online__link" href={path} onClick={onClick}>
+    <a className="online-bar__link" href={path} onClick={onClick}>
       <AvatarLarge image={user.avatar || ''} isOnline={true} />
       <span className="online__name">{user.firstName} {user.lastName}</span>
     </a>

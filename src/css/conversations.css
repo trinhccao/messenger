@@ -1,21 +1,25 @@
-.conversation-link {
+.conversations {
+  margin-top: 18px;
+}
+
+.conversations__item {
   display: flex;
   padding: 8px var(--px-container);
   color: inherit;
   text-decoration: none;
 }
 
-.conversation-link:hover {
+.conversations__item:hover {
   background-color: var(--cultured);
 }
 
-.conversation-link__content {
+.conversations__item-content {
   flex-grow: 1;
   align-self: center;
   margin-left: 13px;
 }
 
-.conversation-link__message {
+.conversations__item-message {
   margin-top: 3px;
   color: var(--gray);
 }

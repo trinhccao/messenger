@@ -2,15 +2,10 @@
 @import "./resets.css";
 @import "./base.css";
 @import "./app.css";
-@import "./header.css";
-@import "./conversation-link.css";
 @import "./avatar.css";
 @import "./online-dot.css";
 @import "./heading-lv3.css";
-@import "./conversation.css";
-@import "./search.css";
 @import "./tab.css";
-@import "./online.css";
 @import "./app-content.css";
 @import "./button-back.css";
 @import "./message.css";
@@ -19,6 +14,10 @@
 @import "./logo.css";
 @import "./login.css";
 @import "./room.css";
+@import "./header.css";
+@import "./search.css";
+@import "./online-bar.css";
+@import "./conversations.css";
 @import "./font-face.css";
 
 body {

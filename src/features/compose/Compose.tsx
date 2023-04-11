@@ -4,7 +4,6 @@ import axios from 'axios'
 import { DataThread } from '../../models/DataThread'
 import { ConversationsContext } from '../../contexts/ConversationsContext'
 import { DataMessage } from '../../models/DataMessage'
-import { SocketContext } from '../../contexts/SocketContext'
 
 interface ComposeProps {
   thread?: DataThread
@@ -14,7 +13,6 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
   const [content, setContent] = useState('')
   const buttonDisabled = !thread || !!content.match(/^\s*$/)
   const { dispatch } = useContext(ConversationsContext)
-  const { socket } = useContext(SocketContext)
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -25,7 +23,6 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
     const { data } = await axios.post<DataMessage>(`/chat/${threadId}`, {
       message: content
     })
-    socket?.send(data)
     dispatch?.({ type: 'append', payload: [data] })
     setContent('')
   }
