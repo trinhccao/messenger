@@ -1,13 +1,13 @@
 import { FunctionComponent, MouseEvent } from 'react'
-import AvatarSmall from './AvatarSmall'
+import AvatarSmall from '../common/AvatarSmall'
 import { useNavigate } from 'react-router-dom'
 import { DataUser } from '../models/DataUser'
 
-interface PeopleItemProps {
+interface SearchItemProps {
   user: DataUser
 }
 
-const PeopleItem: FunctionComponent<PeopleItemProps> = ({ user }) => {
+const SearchItem: FunctionComponent<SearchItemProps> = ({ user }) => {
   const navigate = useNavigate()
   const path = `/chat/${user._id}`
 
@@ -26,4 +26,4 @@ const PeopleItem: FunctionComponent<PeopleItemProps> = ({ user }) => {
   )
 }
 
-export default PeopleItem
+export default SearchItem

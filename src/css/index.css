@@ -18,7 +18,6 @@
 @import "./search.css";
 @import "./online-bar.css";
 @import "./conversations.css";
-@import "./font-face.css";
 
 body {
   font-family: var(--font-primary);

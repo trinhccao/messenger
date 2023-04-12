@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import './configs/axios'
-import Login from './pages/Login'
+import Login from './login/Login'
 import Home from './home/Home'
 import Tab, { TabIds } from './features/tab/Tab'
 import Room from './features/chat-room/Room'

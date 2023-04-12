@@ -1,20 +1,14 @@
 import { FunctionComponent, useState } from 'react'
-import PeopleItem from '../common/PeopleItem'
+import SearchItem from './SearchItem'
 import axios from 'axios'
 import { DataUser } from '../models/DataUser'
 
 const Search: FunctionComponent = () => {
   const [users, setUsers] = useState<DataUser[]>([])
 
-  const onChange = (query: string) => {
-    const controller = new AbortController()
-    axios
-      .get<DataUser[]>(`/users?name=${query}`, { signal: controller.signal })
-      .then(({ data }) => setUsers(data))
-      .catch((err) => {
-        setUsers([])
-      })
-    return () => controller.abort()
+  const onChange = async (query: string) => {
+    const res = await axios.get<DataUser[]>(`/users?name=${query}`)
+    setUsers(res.data)
   }
 
   return (
@@ -29,7 +23,7 @@ const Search: FunctionComponent = () => {
           />
           <div className="search__result">
             {users.map((user) => (
-              <PeopleItem user={user} key={user._id} />
+              <SearchItem user={user} key={user._id} />
             ))}
           </div>
         </div>
