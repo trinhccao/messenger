@@ -5,9 +5,11 @@ import {
   useState,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from 'react'
 import { DataAuthResponse } from '../models/DataAuthResponse'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 interface AuthContextProps {
   authInfo?: DataAuthResponse | undefined
@@ -21,6 +23,7 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthContextProps>({})
 const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
   const [authInfo, setAuthInfo] = useState<DataAuthResponse>()
+  const navigate = useNavigate()
 
   if (authInfo) {
     const token = `${authInfo.tokenType} ${authInfo.token}`
@@ -30,6 +33,10 @@ const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
     const savedAuthInfo = localStorage.getItem('authInfo')
     savedAuthInfo && setAuthInfo(JSON.parse(savedAuthInfo))
   }
+
+  useEffect(() => {
+    !authInfo && navigate('/login')
+  }, [authInfo, navigate])
 
   return (
     <AuthContext.Provider value={{
