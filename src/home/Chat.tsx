@@ -4,14 +4,18 @@ import Search from './Search'
 import OnlineBar from './OnlineBar'
 import Conversations from './Conversations'
 
-const Chat: FunctionComponent = () => {
+interface ChatProps {
+  hidden: boolean
+}
+
+const Chat: FunctionComponent<ChatProps> = ({ hidden }) => {
   return (
-    <>
+    <div className="chat" hidden={hidden}>
       <Header />
       <Search />
       <OnlineBar />
       <Conversations />
-    </>
+    </div>
   )
 }
 

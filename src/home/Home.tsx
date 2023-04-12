@@ -11,7 +11,8 @@ const Home: FunctionComponent<HomeProps> = ({ tab }) => {
   return (
     <div className="app-content">
       <div className="app-content__inner">
-        {tab === Tabs.Chat ? <Chat /> : <People />}
+        <Chat hidden={tab !== Tabs.Chat} />
+        <People hidden={tab !== Tabs.People} />
       </div>
     </div>
   )

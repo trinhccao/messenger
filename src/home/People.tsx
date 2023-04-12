@@ -2,11 +2,15 @@ import { FunctionComponent, useState } from 'react'
 import PeopleItem from './PeopleItem'
 import { DataUser } from '../models/DataUser'
 
-const People: FunctionComponent = () => {
+interface PeopleProps {
+  hidden: boolean
+}
+
+const People: FunctionComponent<PeopleProps> = ({ hidden }) => {
   const [users, setUsers] = useState<DataUser[]>([])
 
   return (
-    <div className="people">
+    <div className="people" hidden={hidden}>
       <ul>
         {users.map((user) => (
           <li key={user._id}>
