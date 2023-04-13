@@ -1,5 +1,5 @@
 import { FunctionComponent, MouseEvent } from 'react'
-import AvatarSmall from '../common/AvatarSmall'
+import AvatarSmall from './AvatarSmall'
 import { useNavigate } from 'react-router-dom'
 import { DataUser } from '../models/DataUser'
 
@@ -10,6 +10,7 @@ interface SearchItemProps {
 const SearchItem: FunctionComponent<SearchItemProps> = ({ user }) => {
   const navigate = useNavigate()
   const path = `/chat/${user._id}`
+  const fullName = `${user.firstName} ${user.lastName}`
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()
@@ -17,10 +18,10 @@ const SearchItem: FunctionComponent<SearchItemProps> = ({ user }) => {
   }
 
   return (
-    <a className="conversation-link" href={path} onClick={onClick}>
+    <a className="conversations__item" href={path} onClick={onClick}>
       <AvatarSmall image={user.avatar} isOnline={true} />
-      <div className="conversation-link__content">
-        <span className="heading-lv3">{user.firstName} {user.lastName}</span>
+      <div className="conversations__item-content">
+        <span className="heading-lv3">{fullName}</span>
       </div>
     </a>
   )

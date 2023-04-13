@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from 'react'
-import AvatarLarge from '../common/AvatarLarge'
+import AvatarLarge from './AvatarLarge'
 import { useNavigate } from 'react-router-dom'
 import { DataMessage } from '../models/DataMessage'
 import axios from 'axios'

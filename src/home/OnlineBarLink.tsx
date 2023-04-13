@@ -1,5 +1,5 @@
 import { FunctionComponent, MouseEvent } from 'react'
-import AvatarLarge from '../common/AvatarLarge'
+import AvatarLarge from './AvatarLarge'
 import { useNavigate } from 'react-router-dom'
 import { DataUser } from '../models/DataUser'
 

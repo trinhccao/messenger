@@ -3,16 +3,18 @@ import Header from './Header'
 import Search from './Search'
 import OnlineBar from './OnlineBar'
 import Conversations from './Conversations'
+import { DataUser } from '../models/DataUser'
 
 interface ChatProps {
   hidden: boolean
+  users: DataUser[]
 }
 
-const Chat: FunctionComponent<ChatProps> = ({ hidden }) => {
+const Chat: FunctionComponent<ChatProps> = ({ hidden, users }) => {
   return (
     <div className="chat" hidden={hidden}>
       <Header />
-      <Search />
+      <Search users={users} />
       <OnlineBar />
       <Conversations />
     </div>
