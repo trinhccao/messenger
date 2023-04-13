@@ -6,7 +6,6 @@
 @import "./online-dot.css";
 @import "./heading-lv3.css";
 @import "./tab.css";
-@import "./app-content.css";
 @import "./button-back.css";
 @import "./message.css";
 @import "./tab-button.css";
@@ -18,7 +17,4 @@
 @import "./search.css";
 @import "./online-bar.css";
 @import "./conversations.css";
-
-body {
-  font-family: var(--font-primary);
-}
+@import "./home.css";

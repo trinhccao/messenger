@@ -1,16 +1,15 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useState } from 'react'
 import People from './People'
-import { Tabs } from '../tab/Tab'
+import Tab, { Tabs } from './Tab'
 import Chat from './Chat'
 
-interface HomeProps {
-  tab: Tabs
-}
+const Home: FunctionComponent = () => {
+  const [tab, setTab] = useState<Tabs>(Tabs.Chat)
 
-const Home: FunctionComponent<HomeProps> = ({ tab }) => {
   return (
-    <div className="app-content">
-      <div className="app-content__inner">
+    <div className="home">
+      <Tab tab={tab} onClick={(tab) => setTab(tab)} />
+      <div className="home__content">
         <Chat hidden={tab !== Tabs.Chat} />
         <People hidden={tab !== Tabs.People} />
       </div>
