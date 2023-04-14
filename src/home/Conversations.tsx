@@ -7,10 +7,11 @@ interface ConversationsProps {
 }
 
 const Conversations: FunctionComponent<ConversationsProps> = ({ threads }) => {
-  console.log('threads', threads)
   return (
     <ul className="conversations">
-      
+      {threads.map((thread) => (
+        <ConversationsItem thread={thread} key={thread._id} />
+      ))}
     </ul>
   )
 }

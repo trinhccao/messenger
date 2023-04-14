@@ -7,18 +7,18 @@ interface SearchProps {
 }
 
 const Search: FunctionComponent<SearchProps> = ({ users }) => {
-  const [result, setResult] = useState<DataUser[]>([])
+  const [filteredUsers, setFilteredUsers] = useState<DataUser[]>([])
 
   const onChange = async (search: string) => {
     if (!search) {
-      return setResult([])
+      return setFilteredUsers([])
     }
     const regex = new RegExp(search, 'i')
     const filtered = users.filter((user) => {
       const { firstName, lastName } = user
       return firstName.match(regex) || lastName.match(regex)
     })
-    setResult(filtered)
+    setFilteredUsers(filtered)
   }
 
   return (
@@ -32,7 +32,7 @@ const Search: FunctionComponent<SearchProps> = ({ users }) => {
             onChange={(e) => onChange(e.target.value)}
           />
           <div className="search__result">
-            {result.map((user) => (
+            {filteredUsers.map((user) => (
               <SearchItem user={user} key={user._id} />
             ))}
           </div>

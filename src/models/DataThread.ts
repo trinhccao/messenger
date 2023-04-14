@@ -10,6 +10,7 @@ export enum ThreadScopes {
 
 export interface DataThread {
   _id: string
+  slug: string
   name: string
   members: string[]
   createdAt: number
