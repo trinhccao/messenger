@@ -1,16 +1,16 @@
-import { FunctionComponent, useContext } from 'react'
+import { FunctionComponent } from 'react'
 import ConversationsItem from './ConversationsItem'
-import { ConversationsContext } from '../contexts/ConversationsContext'
+import { DataThread } from '../models/DataThread'
 
-const Conversations: FunctionComponent = () => {
-  const { conversations } = useContext(ConversationsContext)
-  const conversationsArr = Object.entries(conversations)
+interface ConversationsProps {
+  threads: DataThread[]
+}
 
+const Conversations: FunctionComponent<ConversationsProps> = ({ threads }) => {
+  console.log('threads', threads)
   return (
     <ul className="conversations">
-      {conversationsArr.map(([id, messages]) => (
-        <ConversationsItem threadId={id} messages={messages} key={id} />
-      ))}
+      
     </ul>
   )
 }

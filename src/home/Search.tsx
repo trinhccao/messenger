@@ -10,12 +10,13 @@ const Search: FunctionComponent<SearchProps> = ({ users }) => {
   const [result, setResult] = useState<DataUser[]>([])
 
   const onChange = async (search: string) => {
+    if (!search) {
+      return setResult([])
+    }
+    const regex = new RegExp(search, 'i')
     const filtered = users.filter((user) => {
-      if (!search) {
-        return false
-      }
       const { firstName, lastName } = user
-      return firstName.match(search) || lastName.match(search)
+      return firstName.match(regex) || lastName.match(regex)
     })
     setResult(filtered)
   }
