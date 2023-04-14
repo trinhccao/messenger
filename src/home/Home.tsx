@@ -1,7 +1,6 @@
 import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import Tab, { Tabs } from './Tab'
 import { DataUser } from '../models/DataUser'
-import axios from 'axios'
 import { DataThread } from '../models/DataThread'
 import { AuthContext } from '../contexts/AuthContext'
 import Header from './Header'
@@ -9,6 +8,7 @@ import Search from './Search'
 import OnlineBar from './OnlineBar'
 import Conversations from './Conversations'
 import PeopleItem from './PeopleItem'
+import api from '../api/api'
 
 const Home: FunctionComponent = () => {
   const [tab, setTab] = useState<Tabs>(Tabs.Chat)
@@ -18,17 +18,13 @@ const Home: FunctionComponent = () => {
 
   useEffect(() => {
     const controller = new AbortController()
-    axios
-      .get<DataUser[]>('/users', { signal: controller.signal })
-      .then(({ data }) => setUsers(data))
+    api.users.findAll(controller).then((users) => setUsers(users))
     return () => controller.abort()
   }, [])
 
   useEffect(() => {
     const controller = new AbortController()
-    axios
-      .get<DataThread[]>('/threads', { signal: controller.signal })
-      .then(({ data }) => setThreads(data))
+    api.threads.findAll(controller).then((threads) => setThreads(threads))
     return () => controller.abort()
   }, [authInfo?.user._id])
 

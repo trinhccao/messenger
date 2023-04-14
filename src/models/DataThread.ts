@@ -1,8 +1,11 @@
-import { DataMessage } from "./DataMessage"
-
 export enum ThreadTypes {
   Direct = 'direct',
   Group = 'group',
+}
+
+export enum ThreadScopes {
+  Any = 'any',
+  Member = 'member'
 }
 
 export interface DataThread {
@@ -13,5 +16,5 @@ export interface DataThread {
   updatedAt: number
   avatar: string
   type: ThreadTypes
-  messages: DataMessage[]
+  scopes: ThreadScopes[]
 }
