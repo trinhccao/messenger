@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react'
-import { DataMessage } from '../../models/DataMessage'
+import { DataMessage } from '../models/DataMessage'
 
 interface MessageProps {
   message: DataMessage

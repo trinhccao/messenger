@@ -1,5 +1,19 @@
 .room {
   display: flex;
+  flex-direction: column;
+  position: absolute;
+  inset: 0;
+}
+
+.room__content {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
+  flex-grow: 1;
+}
+
+.room__messages {
+  display: flex;
   flex-direction: column-reverse;
   position: absolute;
   inset: 0;

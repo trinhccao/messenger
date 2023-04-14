@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import './configs/axios'
 import Login from './login/Login'
 import Home from './home/Home'
-import Room from './features/chat-room/Room'
+import Room from './room/Room'
 import { MessagesProvider } from './contexts/MessagesContext'
 
 const App: FunctionComponent = () => {

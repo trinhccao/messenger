@@ -5,10 +5,10 @@ import {
   useContext,
   ChangeEvent,
 } from 'react'
-import iconSend from '../../assets/icons/icon-send.png'
-import { DataThread } from '../../models/DataThread'
-import { MessagesContext } from '../../contexts/MessagesContext'
-import api from '../../api/api'
+import iconSend from '../assets/icons/icon-send.png'
+import { DataThread } from '../models/DataThread'
+import { MessagesContext } from '../contexts/MessagesContext'
+import api from '../api/api'
 
 interface ComposeProps {
   thread: DataThread
