@@ -9,18 +9,22 @@ import { DataThread } from '../../models/DataThread'
 import { AuthContext } from '../../contexts/AuthContext'
 import api from '../../api/api'
 import { MessagesContext } from '../../contexts/MessagesContext'
+import { DataUser } from '../../models/DataUser'
 
 const Room: FunctionComponent = () => {
   const paramId = useMatch('/chat/:id')?.params.id
   const [thread, setThread] = useState<DataThread>()
   const messages = useContext(MessagesContext).messages[thread?._id || ''] || []
   const { authInfo } = useContext(AuthContext)
+  const [users, setUsers] = useState<DataUser[]>([])
 
   const renderMessage = (message: DataMessage) => {
     const own = message.userId === authInfo?.user._id
+    const user = users.find((user) => user._id === message.userId)
+    const src = user?.avatar || ''
     return (
       <Message message={message} own={own} key={message._id}>
-        {!own && <AvatarMessage userId={message.userId} />}
+        {!own && <AvatarMessage src={src} />}
       </Message>
     )
   }
@@ -31,6 +35,12 @@ const Room: FunctionComponent = () => {
     api.chat.findById(paramId, controller).then((thread) => setThread(thread))
     return () => controller.abort()
   }, [paramId])
+
+  useEffect(() => {
+    const controller = new AbortController()
+    api.users.findAll(controller).then((users) => setUsers(users))
+    return () => controller.abort()
+  }, [])
 
   if (!thread) {
     return null
