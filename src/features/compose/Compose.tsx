@@ -1,29 +1,39 @@
-import { FunctionComponent, useState, FormEvent, useContext } from 'react'
+import {
+  FunctionComponent,
+  useState,
+  FormEvent,
+  useContext,
+  ChangeEvent,
+} from 'react'
 import iconSend from '../../assets/icons/icon-send.png'
-import axios from 'axios'
 import { DataThread } from '../../models/DataThread'
-import { ConversationsContext } from '../../contexts/ConversationsContext'
-import { DataMessage } from '../../models/DataMessage'
+import { MessagesContext } from '../../contexts/MessagesContext'
+import api from '../../api/api'
 
 interface ComposeProps {
-  thread?: DataThread
+  thread: DataThread
 }
 
 const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
   const [content, setContent] = useState('')
-  const buttonDisabled = !thread || !!content.match(/^\s*$/)
-  const { dispatch } = useContext(ConversationsContext)
+  const [disabled, setDisabled] = useState(true)
+  const { dispatchMessages } = useContext(MessagesContext)
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setContent(e.target.value)
+    setDisabled(!thread || !!content.match(/^\s*$/))
+  }
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!thread) {
-      return
-    }
-    const threadId = thread._id
-    const { data } = await axios.post<DataMessage>(`/chat/${threadId}`, {
-      message: content
+    api.chat.postMessage({
+      threadId: thread._id,
+      message: content,
+    }).then((message) => {
+      dispatchMessages?.({ payload: [message] })
+      setDisabled(false)
     })
-    dispatch?.({ type: 'append', payload: [data] })
+    setDisabled(true)
     setContent('')
   }
 
@@ -35,12 +45,12 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
           type="text"
           placeholder="Aa"
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={onChange}
         />
         <button
           className="button-send button-send--compose"
           type="submit"
-          disabled={buttonDisabled}
+          disabled={disabled}
         >
           <img
             className="button-send__icon"

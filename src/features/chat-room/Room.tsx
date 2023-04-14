@@ -3,21 +3,18 @@ import Header from './Header'
 import Compose from '../compose/Compose'
 import Message from './Message'
 import { useMatch } from 'react-router-dom'
-import useThread from '../../hooks/useThread'
-import { AuthContext } from '../../contexts/AuthContext'
-import { DataUser } from '../../models/DataUser'
-import axios from 'axios'
 import AvatarMessage from './AvatarMessage'
 import { DataMessage } from '../../models/DataMessage'
-import { ConversationsContext } from '../../contexts/ConversationsContext'
+import { DataThread } from '../../models/DataThread'
+import { AuthContext } from '../../contexts/AuthContext'
+import api from '../../api/api'
+import { MessagesContext } from '../../contexts/MessagesContext'
 
 const Room: FunctionComponent = () => {
-  const { conversations } = useContext(ConversationsContext)
   const paramId = useMatch('/chat/:id')?.params.id
-  const { thread } = useThread(paramId as string)
+  const [thread, setThread] = useState<DataThread>()
+  const messages = useContext(MessagesContext).messages[thread?._id || ''] || []
   const { authInfo } = useContext(AuthContext)
-  const [directUser, setDirectUser] = useState<DataUser>()
-  const messages = conversations[thread?._id || ''] || []
 
   const renderMessage = (message: DataMessage) => {
     const own = message.userId === authInfo?.user._id
@@ -29,19 +26,19 @@ const Room: FunctionComponent = () => {
   }
 
   useEffect(() => {
-    if (!thread?._id || !authInfo) {
-      return
-    }
+    if (!paramId) { return }
     const controller = new AbortController()
-    const receiverId = thread.members.find((id) => id !== authInfo.user._id)
-    axios
-      .get<DataUser>(`/users/${receiverId}`, { signal: controller.signal })
-      .then(({ data }) => setDirectUser(data))
-  }, [thread, authInfo])
+    api.chat.findById(paramId, controller).then((thread) => setThread(thread))
+    return () => controller.abort()
+  }, [paramId])
+
+  if (!thread) {
+    return null
+  }
 
   return (
     <div className="app__content">
-      <Header thread={thread} directUser={directUser} />
+      <Header thread={thread} />
       <Compose thread={thread} />
       <div className="app-content">
         <div className="app-content__inner">

@@ -1,25 +1,49 @@
 import axios from 'axios'
 import { DataUser } from '../models/DataUser'
 import { DataThread } from '../models/DataThread'
+import { DataMessage } from '../models/DataMessage'
+
+export interface PostMessageDetails {
+  threadId: string
+  message: string
+}
 
 const api = {
   users: {
     findAll: async (controller: AbortController) => {
       const url = '/users'
-      const res = await axios.get<DataUser[]>(url, {
-        signal: controller.signal
-      })
+      const { signal } = controller
+      const res = await axios.get<DataUser[]>(url, { signal })
       return res.data
     }
   },
   threads: {
     findAll: async (controller: AbortController) => {
       const url = '/threads'
-      const res = await axios.get<DataThread[]>(url, {
-        signal: controller.signal
-      })
+      const { signal } = controller
+      const res = await axios.get<DataThread[]>(url, { signal })
       return res.data
     }
+  },
+  chat: {
+    postMessage: async (details: PostMessageDetails) => {
+      const { threadId, message } = details
+      const url = `/chat/${threadId}`
+      const res = await axios.post<DataMessage>(url, { message })
+      return res.data
+    },
+    findById: async (id: string, controller: AbortController) => {
+      const url = `/chat/${id}`
+      const { signal } = controller
+      const res = await axios.get<DataThread>(url, { signal })
+      return res.data
+    },
+    messages: async (controller: AbortController) => {
+      const url = `/chat/messages`
+      const { signal } = controller
+      const res = await axios.get<DataMessage[]>(url, { signal })
+      return res.data
+    },
   }
 }
 
