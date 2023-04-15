@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { DataThread } from '../../models/DataThread'
 
 interface HeaderProps {
-  thread?: DataThread
+  thread: DataThread
 }
 
 const Header: FunctionComponent<HeaderProps> = ({ thread }) => {
@@ -16,9 +16,9 @@ const Header: FunctionComponent<HeaderProps> = ({ thread }) => {
       <div className="container">
         <div className="header__inner">
           <ButtonBack onBack={() => navigate('/')} />
-          <AvatarHeader image={thread?.avatar} />
+          <AvatarHeader image={thread.avatar} />
           <h3 className="header__title header__title--room">
-            {thread?.name}
+            {thread.name}
           </h3>
         </div>
       </div>
