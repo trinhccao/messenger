@@ -4,7 +4,6 @@ import Compose from './Compose'
 import Message from './Message'
 import { useMatch } from 'react-router-dom'
 import AvatarMessage from './AvatarMessage'
-import { DataMessage } from '../../models/DataMessage'
 import api from '../../api/api'
 import { useAppSelector } from '../../redux/hooks'
 import { selectAuth } from '../../redux-slices/auth-slice'
@@ -21,16 +20,6 @@ const Room: FunctionComponent = () => {
   const conversations = useAppSelector(selectConversations)
   const conv = conversations.find((item) => item.thread._id === threadId)
   const dispatch = useAppDispatch()
-
-  const renderMessage = (message: DataMessage) => {
-    const own = message.userId === auth?.user._id
-    const user = users.find(({ _id }) => _id === message.userId)
-    return (
-      <Message message={message} own={own} key={message._id}>
-        {!own && <AvatarMessage src={user?.avatar || ''} />}
-      </Message>
-    )
-  }
 
   useEffect(() => {
     if (!paramId) { return }
@@ -54,7 +43,15 @@ const Room: FunctionComponent = () => {
       <Compose thread={conv.thread} />
       <div className="room__content">
         <div className="container">
-          {conv.messages.map((message) => renderMessage(message))}
+          {conv.messages.map((message) => {
+            const own = message.userId === auth?.user._id
+            const user = users.find(({ _id }) => _id === message.userId)
+            return (
+              <Message message={message} own={own} key={message._id}>
+                {!own && <AvatarMessage src={user?.avatar || ''} />}
+              </Message>
+            )
+          })}
         </div>
       </div>
     </div>
