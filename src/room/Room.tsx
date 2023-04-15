@@ -9,8 +9,8 @@ import { DataThread } from '../models/DataThread'
 import api from '../api/api'
 import { MessagesContext } from '../contexts/MessagesContext'
 import { DataUser } from '../models/DataUser'
-import { useAppSelector } from '../app/hooks'
-import { selectAuth } from '../slices/auth-slice'
+import { useAppSelector } from '../redux/hooks'
+import { selectAuth } from '../redux-slices/auth-slice'
 
 const Room: FunctionComponent = () => {
   const paramId = useMatch('/chat/:id')?.params.id

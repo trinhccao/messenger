@@ -4,12 +4,12 @@ import './configs/axios'
 import Login from './login/Login'
 import Home from './home/Home'
 import Room from './room/Room'
-import { useAppDispatch, useAppSelector } from './app/hooks'
-import { saveAuth, selectAuth } from './slices/auth-slice'
+import { useAppDispatch, useAppSelector } from './redux/hooks'
+import { saveAuth, selectAuth } from './redux-slices/auth-slice'
 import authLogic from './logic/auth-logic'
 import api from './api/api'
-import { saveUsers } from './slices/users-slice'
-import { saveConversations } from './slices/conversations-slice'
+import { saveUsers } from './redux-slices/users-slice'
+import { saveConversations } from './redux-slices/conversations-slice'
 
 const App: FunctionComponent = () => {
   const [loading, setLoading] = useState(true)

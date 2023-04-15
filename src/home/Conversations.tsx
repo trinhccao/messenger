@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import ConversationsItem from './ConversationsItem'
-import { useAppSelector } from '../app/hooks'
-import { selectConversations } from '../slices/conversations-slice'
+import { useAppSelector } from '../redux/hooks'
+import { selectConversations } from '../redux-slices/conversations-slice'
 
 const Conversations: FunctionComponent = () => {
   const conversations = useAppSelector(selectConversations)

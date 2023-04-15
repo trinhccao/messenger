@@ -9,8 +9,8 @@ import {
 import messagesReducer, { Messages } from '../reducers/messages-reducer'
 import { DataMessage } from '../models/DataMessage'
 import api from '../api/api'
-import { useAppSelector } from '../app/hooks'
-import { selectAuth } from '../slices/auth-slice'
+import { useAppSelector } from '../redux/hooks'
+import { selectAuth } from '../redux-slices/auth-slice'
 
 interface MessagesProviderProps {
   children: ReactNode

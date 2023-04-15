@@ -1,7 +1,7 @@
 import { FunctionComponent, useState, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../app/hooks'
-import { saveAuth } from '../slices/auth-slice'
+import { useAppDispatch } from '../redux/hooks'
+import { saveAuth } from '../redux-slices/auth-slice'
 import api from '../api/api'
 
 const Login: FunctionComponent = () => {

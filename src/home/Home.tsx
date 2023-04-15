@@ -5,8 +5,8 @@ import Search from './Search'
 import OnlineBar from './OnlineBar'
 import Conversations from './Conversations'
 import PeopleItem from './PeopleItem'
-import { useAppSelector } from '../app/hooks'
-import { selectUsers } from '../slices/users-slice'
+import { useAppSelector } from '../redux/hooks'
+import { selectUsers } from '../redux-slices/users-slice'
 
 const Home: FunctionComponent = () => {
   const [tab, setTab] = useState<Tabs>(Tabs.Chat)
