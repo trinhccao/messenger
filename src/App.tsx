@@ -9,6 +9,7 @@ import { saveAuth, selectAuth } from './slices/auth-slice'
 import authLogic from './logic/auth-logic'
 import api from './api/api'
 import { saveUsers } from './slices/users-slice'
+import { saveConversations } from './slices/conversations-slice'
 
 const App: FunctionComponent = () => {
   const [loading, setLoading] = useState(true)
@@ -35,7 +36,21 @@ const App: FunctionComponent = () => {
       return
     }
     const controller = new AbortController()
-    api.users.findAll(controller).then((users) => dispatch(saveUsers(users)))
+    api.users
+      .findAll(controller)
+      .then((users) => dispatch(saveUsers(users)))
+    return () => controller.abort()
+  }, [auth, dispatch])
+
+  useEffect(() => {
+    if (!auth) {
+      return
+    }
+    const controller = new AbortController()
+    api.threads
+      .findAll(controller)
+      .then((threads) => dispatch(saveConversations(threads)))
+    return () => controller.abort()
   }, [auth, dispatch])
 
   if (loading) {
