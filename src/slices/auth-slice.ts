@@ -1,24 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { DataUser } from '../models/DataUser'
 import { RootState } from '../app/store'
+import { DataAuth } from '../models/DataAuth'
 
-interface AuthState {
-  token: string | undefined
-  tokenType: string | undefined
-  user: DataUser | null
-}
+type AuthSliceState = DataAuth | null
 
-const initialState: AuthState = {
-  token: undefined,
-  tokenType: undefined,
-  user: null,
-}
+const initialState: AuthSliceState = null
 
 export const authSlice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: initialState as AuthSliceState,
   reducers: {
-    save: (state, action: PayloadAction<AuthState>) => {
+    save: (state, action: PayloadAction<DataAuth>) => {
       return { ...action.payload }
     }
   }

@@ -20,7 +20,7 @@ const Room: FunctionComponent = () => {
   const [users, setUsers] = useState<DataUser[]>([])
 
   const renderMessage = (message: DataMessage) => {
-    const own = message.userId === auth.user?._id
+    const own = message.userId === auth?.user._id
     const user = users.find((user) => user._id === message.userId)
     const src = user?.avatar || ''
     return (

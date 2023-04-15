@@ -6,7 +6,7 @@ import Home from './home/Home'
 import Room from './room/Room'
 import { useAppDispatch, useAppSelector } from './app/hooks'
 import { save, selectAuth } from './slices/auth-slice'
-import axios from 'axios'
+import authLogic from './logic/auth-logic'
 
 const App: FunctionComponent = () => {
   const [loading, setLoading] = useState(true)
@@ -16,17 +16,16 @@ const App: FunctionComponent = () => {
 
   useEffect(() => {
     setLoading(false)
-    if (auth.token) {
-      const token = `${auth.tokenType} ${auth.token}`
-      axios.defaults.headers.common['Authorization'] = token
-      localStorage.setItem('authInfo', JSON.stringify(auth))
+    if (auth) {
+      authLogic.saveAuthToStorage(auth)
       return
     }
-    const savedAuthInfo = localStorage.getItem('authInfo')
-    if (!savedAuthInfo) {
-      return navigate('/login')
+    const savedAuth = authLogic.getSavedToken()
+    if (savedAuth) {
+      dispatch(save(savedAuth))
+      return
     }
-    dispatch(save(JSON.parse(savedAuthInfo)))
+    navigate('/login')
   }, [auth, dispatch, navigate])
 
   if (loading) {

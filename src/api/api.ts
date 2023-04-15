@@ -2,7 +2,7 @@ import axios from 'axios'
 import { DataUser } from '../models/DataUser'
 import { DataThread } from '../models/DataThread'
 import { DataMessage } from '../models/DataMessage'
-import { DataAuthResponse } from '../models/DataAuthResponse'
+import { DataAuth } from '../models/DataAuth'
 
 export interface PostMessageDetails {
   threadId: string
@@ -54,7 +54,7 @@ const api = {
   auth: {
     login: async (body: LoginBody) => {
       const url = '/login'
-      const res = await axios.post<DataAuthResponse>(url, body)
+      const res = await axios.post<DataAuth>(url, body)
       return res.data
     }
   }

@@ -27,7 +27,7 @@ const Home: FunctionComponent = () => {
     const controller = new AbortController()
     api.threads.findAll(controller).then((threads) => setThreads(threads))
     return () => controller.abort()
-  }, [auth.user?._id])
+  }, [auth])
 
   return (
     <div className="home">
