@@ -5,10 +5,11 @@ import { selectConversations } from '../../redux-slices/conversations-slice'
 
 const Conversations: FunctionComponent = () => {
   const conversations = useAppSelector(selectConversations)
+  const visibleConvs = conversations.filter((item) => item.messages.length)
 
   return (
     <ul className="conversations">
-      {conversations.map((conversation) => (
+      {visibleConvs.map((conversation) => (
         <ConversationsItem
           conversation={conversation}
           key={conversation.thread._id}
