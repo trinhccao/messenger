@@ -1,20 +1,22 @@
-import { FunctionComponent, useState } from 'react'
-import Tab, { Tabs } from './Tab'
+import { FunctionComponent } from 'react'
+import TabBar, { Tabs } from './TabBar'
 import Header from './Header'
 import Search from './Search'
 import OnlineBar from './OnlineBar'
 import Conversations from './Conversations'
 import PeopleItem from './PeopleItem'
-import { useAppSelector } from '../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { selectUsers } from '../../redux-slices/users-slice'
+import { selectTabs, setTab } from '../../redux-slices/tabs-slice'
 
 const Home: FunctionComponent = () => {
-  const [tab, setTab] = useState<Tabs>(Tabs.Chat)
+  const tab = useAppSelector(selectTabs)
+  const dispatch = useAppDispatch()
   const users = useAppSelector(selectUsers)
 
   return (
     <div className="home">
-      <Tab tab={tab} onClick={(tab) => setTab(tab)} />
+      <TabBar tab={tab} onClick={(tab) => dispatch(setTab(tab))} />
       <div className="home__content">
         <div className="chat" hidden={tab !== Tabs.Chat}>
           <Header />

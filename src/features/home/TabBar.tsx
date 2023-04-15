@@ -4,7 +4,7 @@ import iconChatActive from '../../assets/icons/icon-chat-active.png'
 import iconPeople from '../../assets/icons/icon-people.png'
 import iconPeopleActive from '../../assets/icons/icon-people-active.png'
 
-interface TabProps {
+interface TabBarProps {
   onClick: (tab: Tabs) => void
   tab: Tabs
 }
@@ -27,7 +27,7 @@ const tabs = [
   }
 ]
 
-const Tab: FunctionComponent<TabProps> = ({ onClick, tab }) => {
+const TabBar: FunctionComponent<TabBarProps> = ({ onClick, tab }) => {
   const renderButtonText = (id: Tabs) => {
     const block = 'button-text'
     const modifier = 'button-text button-text--active'
@@ -53,4 +53,4 @@ const Tab: FunctionComponent<TabProps> = ({ onClick, tab }) => {
   )
 }
 
-export default Tab
+export default TabBar
