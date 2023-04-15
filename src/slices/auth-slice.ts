@@ -10,12 +10,12 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: initialState as AuthSliceState,
   reducers: {
-    save: (state, action: PayloadAction<DataAuth>) => {
+    saveAuth: (state, action: PayloadAction<DataAuth>) => {
       return { ...action.payload }
     }
   }
 })
 
-export const { save } = authSlice.actions
+export const { saveAuth } = authSlice.actions
 export const selectAuth = (state: RootState) => state.auth
 export default authSlice.reducer

@@ -5,8 +5,10 @@ import Login from './login/Login'
 import Home from './home/Home'
 import Room from './room/Room'
 import { useAppDispatch, useAppSelector } from './app/hooks'
-import { save, selectAuth } from './slices/auth-slice'
+import { saveAuth, selectAuth } from './slices/auth-slice'
 import authLogic from './logic/auth-logic'
+import api from './api/api'
+import { saveUsers } from './slices/users-slice'
 
 const App: FunctionComponent = () => {
   const [loading, setLoading] = useState(true)
@@ -22,11 +24,19 @@ const App: FunctionComponent = () => {
     }
     const savedAuth = authLogic.getSavedToken()
     if (savedAuth) {
-      dispatch(save(savedAuth))
+      dispatch(saveAuth(savedAuth))
       return
     }
     navigate('/login')
   }, [auth, dispatch, navigate])
+
+  useEffect(() => {
+    if (!auth) {
+      return
+    }
+    const controller = new AbortController()
+    api.users.findAll(controller).then((users) => dispatch(saveUsers(users)))
+  }, [auth, dispatch])
 
   if (loading) {
     return null

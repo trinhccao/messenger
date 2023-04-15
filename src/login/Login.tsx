@@ -1,7 +1,7 @@
 import { FunctionComponent, useState, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../app/hooks'
-import { save } from '../slices/auth-slice'
+import { saveAuth } from '../slices/auth-slice'
 import api from '../api/api'
 
 const Login: FunctionComponent = () => {
@@ -23,7 +23,7 @@ const Login: FunctionComponent = () => {
     api.auth
       .login({ username, password })
       .then((auth) => {
-        dispatch(save(auth))
+        dispatch(saveAuth(auth))
         navigate('/')
       })
   }

@@ -1,12 +1,11 @@
 import { FunctionComponent, useState } from 'react'
 import SearchItem from './SearchItem'
 import { DataUser } from '../models/DataUser'
+import { useAppSelector } from '../app/hooks'
+import { selectUsers } from '../slices/users-slice'
 
-interface SearchProps {
-  users: DataUser[]
-}
-
-const Search: FunctionComponent<SearchProps> = ({ users }) => {
+const Search: FunctionComponent = () => {
+  const users = useAppSelector(selectUsers)
   const [filteredUsers, setFilteredUsers] = useState<DataUser[]>([])
 
   const onChange = async (search: string) => {
