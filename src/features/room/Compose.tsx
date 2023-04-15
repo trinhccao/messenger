@@ -20,19 +20,16 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
   const dispatch = useAppDispatch()
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setContent(e.target.value)
-    setDisabled(!thread || !!content.match(/^\s*$/))
+    const value = e.target.value
+    setContent(value)
+    setDisabled(!thread || !!value.match(/^\s*$/))
   }
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    api.chat.postMessage({
-      threadId: thread._id,
-      message: content,
-    }).then((message) => {
-      dispatch(addMessages([message]))
-      setDisabled(false)
-    })
+    api.chat
+      .postMessage({ threadId: thread._id, message: content })
+      .then((message) => dispatch(addMessages([message])))
     setDisabled(true)
     setContent('')
   }
