@@ -1,20 +1,21 @@
-import { FunctionComponent, useContext, useEffect, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import Tab, { Tabs } from './Tab'
 import { DataUser } from '../models/DataUser'
 import { DataThread } from '../models/DataThread'
-import { AuthContext } from '../contexts/AuthContext'
 import Header from './Header'
 import Search from './Search'
 import OnlineBar from './OnlineBar'
 import Conversations from './Conversations'
 import PeopleItem from './PeopleItem'
 import api from '../api/api'
+import { useAppSelector } from '../app/hooks'
+import { selectAuth } from '../slices/auth-slice'
 
 const Home: FunctionComponent = () => {
   const [tab, setTab] = useState<Tabs>(Tabs.Chat)
   const [users, setUsers] = useState<DataUser[]>([])
   const [threads, setThreads] = useState<DataThread[]>([])
-  const { authInfo } = useContext(AuthContext)
+  const auth = useAppSelector(selectAuth)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -26,7 +27,7 @@ const Home: FunctionComponent = () => {
     const controller = new AbortController()
     api.threads.findAll(controller).then((threads) => setThreads(threads))
     return () => controller.abort()
-  }, [authInfo?.user._id])
+  }, [auth.user?._id])
 
   return (
     <div className="home">

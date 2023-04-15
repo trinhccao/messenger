@@ -2,10 +2,16 @@ import axios from 'axios'
 import { DataUser } from '../models/DataUser'
 import { DataThread } from '../models/DataThread'
 import { DataMessage } from '../models/DataMessage'
+import { DataAuthResponse } from '../models/DataAuthResponse'
 
 export interface PostMessageDetails {
   threadId: string
   message: string
+}
+
+export interface LoginBody {
+  username: string
+  password: string
 }
 
 const api = {
@@ -43,7 +49,14 @@ const api = {
       const { signal } = controller
       const res = await axios.get<DataMessage[]>(url, { signal })
       return res.data
-    },
+    }
+  },
+  auth: {
+    login: async (body: LoginBody) => {
+      const url = '/login'
+      const res = await axios.post<DataAuthResponse>(url, body)
+      return res.data
+    }
   }
 }
 

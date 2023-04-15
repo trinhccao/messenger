@@ -5,12 +5,12 @@ import {
   useReducer,
   Dispatch,
   useEffect,
-  useContext,
 } from 'react'
 import messagesReducer, { Messages } from '../reducers/messages-reducer'
 import { DataMessage } from '../models/DataMessage'
-import { AuthContext } from './AuthContext'
 import api from '../api/api'
+import { useAppSelector } from '../app/hooks'
+import { selectAuth } from '../slices/auth-slice'
 
 interface MessagesProviderProps {
   children: ReactNode
@@ -28,7 +28,7 @@ const initail = {
 const MessagesContext = createContext<MessagesContextProps>(initail)
 const MessagesProvider: FunctionComponent<MessagesProviderProps> = (props) => {
   const { children } = props
-  const { authInfo } = useContext(AuthContext)
+  const auth = useAppSelector(selectAuth)
   const [messages, dispatchMessages] = useReducer(messagesReducer, {})
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const MessagesProvider: FunctionComponent<MessagesProviderProps> = (props) => {
       dispatchMessages({ payload: messages })
     })
     return () => controller.abort()
-  }, [authInfo])
+  }, [auth])
 
   return (
     <MessagesContext.Provider value={{

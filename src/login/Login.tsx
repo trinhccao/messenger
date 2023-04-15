@@ -1,14 +1,14 @@
-import { FunctionComponent, useState, FormEvent, useContext } from 'react'
-import axios from 'axios'
-import { DataAuthResponse } from '../models/DataAuthResponse'
-import { AuthContext } from '../contexts/AuthContext'
+import { FunctionComponent, useState, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../app/hooks'
+import { save } from '../slices/auth-slice'
+import api from '../api/api'
 
 const Login: FunctionComponent = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setAuthInfo } = useContext(AuthContext)
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const getSubmitClassNames = () => {
     const block = 'login__submit'
@@ -20,12 +20,12 @@ const Login: FunctionComponent = () => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const { data } = await axios.post<DataAuthResponse>('/login', {
-      username,
-      password,
-    })
-    setAuthInfo?.(data)
-    navigate('/')
+    api.auth
+      .login({ username, password })
+      .then((auth) => {
+        dispatch(save(auth))
+        navigate('/')
+      })
   }
 
   return (
