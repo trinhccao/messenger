@@ -14,8 +14,7 @@ const Search: FunctionComponent = () => {
     }
     const regex = new RegExp(search, 'i')
     const filtered = users.filter((user) => {
-      const { firstName, lastName } = user
-      return firstName.match(regex) || lastName.match(regex)
+      return `${user.firstName} ${user.lastName}`.match(regex)
     })
     setFilteredUsers(filtered)
   }
