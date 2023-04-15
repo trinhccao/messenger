@@ -2,13 +2,11 @@ import {
   FunctionComponent,
   useState,
   FormEvent,
-  useContext,
   ChangeEvent,
 } from 'react'
-import iconSend from '../assets/icons/icon-send.png'
-import { DataThread } from '../models/DataThread'
-import { MessagesContext } from '../contexts/MessagesContext'
-import api from '../api/api'
+import iconSend from '../../assets/icons/icon-send.png'
+import { DataThread } from '../../models/DataThread'
+import api from '../../api/api'
 
 interface ComposeProps {
   thread: DataThread
@@ -17,7 +15,6 @@ interface ComposeProps {
 const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
   const [content, setContent] = useState('')
   const [disabled, setDisabled] = useState(true)
-  const { dispatchMessages } = useContext(MessagesContext)
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setContent(e.target.value)
@@ -30,7 +27,6 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
       threadId: thread._id,
       message: content,
     }).then((message) => {
-      dispatchMessages?.({ payload: [message] })
       setDisabled(false)
     })
     setDisabled(true)

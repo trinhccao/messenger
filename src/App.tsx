@@ -1,9 +1,9 @@
 import { FunctionComponent, useEffect, useState } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import './configs/axios'
-import Login from './login/Login'
-import Home from './home/Home'
-import Room from './room/Room'
+import Login from './features/login/Login'
+import Home from './features/home/Home'
+import Room from './features/room/Room'
 import { useAppDispatch, useAppSelector } from './redux/hooks'
 import { saveAuth, selectAuth } from './redux-slices/auth-slice'
 import authLogic from './logic/auth-logic'
@@ -47,8 +47,8 @@ const App: FunctionComponent = () => {
       return
     }
     const controller = new AbortController()
-    api.threads
-      .findAll(controller)
+    api.chat
+      .conversations(controller)
       .then((threads) => dispatch(saveConversations(threads)))
     return () => controller.abort()
   }, [auth, dispatch])

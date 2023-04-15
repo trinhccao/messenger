@@ -4,16 +4,17 @@ import {
 } from 'react'
 import AvatarLarge from './AvatarLarge'
 import { useNavigate } from 'react-router-dom'
-import { DataThread } from '../models/DataThread'
+import { DataConversation } from '../../models/DataConversation'
 
 interface ConversationsItemProps {
-  thread: DataThread
+  conversation: DataConversation
 }
 
 const ConversationsItem: FunctionComponent<ConversationsItemProps> = (props) => {
-  const { thread } = props
+  const { conversation } = props
+  const { thread, messages } = conversation
   const navigate = useNavigate()
-  const path = `/chat/${thread.slug}`
+  const path = `/chat/${conversation.thread.slug}`
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()
@@ -27,8 +28,7 @@ const ConversationsItem: FunctionComponent<ConversationsItemProps> = (props) => 
         <div className="conversations__item-content">
           <h3 className="heading-lv3">{thread.name}</h3>
           <p className="conversations__item-message">
-            {/* {messages.slice(-1)[0]?.content || ''} */}
-            message...
+            {messages.slice(-1)[0]?.content}
           </p>
         </div>
       </a>

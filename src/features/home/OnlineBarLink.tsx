@@ -1,7 +1,7 @@
 import { FunctionComponent, MouseEvent } from 'react'
 import AvatarLarge from './AvatarLarge'
 import { useNavigate } from 'react-router-dom'
-import { DataUser } from '../models/DataUser'
+import { DataUser } from '../../models/DataUser'
 
 interface OnlineBarLinkProps {
   user: DataUser

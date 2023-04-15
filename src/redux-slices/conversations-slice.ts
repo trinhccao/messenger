@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../redux/store'
-import { DataThread } from '../models/DataThread'
+import { DataConversation } from '../models/DataConversation'
 
-const initialState: DataThread[] = []
+const initialState: DataConversation[] = []
 
 export const conversationsSlice = createSlice({
   name: 'conversations',
-  initialState: initialState as DataThread[],
+  initialState: initialState as DataConversation[],
   reducers: {
-    saveConversations: (state, action: PayloadAction<DataThread[]>) => {
+    saveConversations: (state, action: PayloadAction<DataConversation[]>) => {
       return [...action.payload]
     }
   }

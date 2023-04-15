@@ -1,8 +1,8 @@
 import { FunctionComponent, useState } from 'react'
 import SearchItem from './SearchItem'
-import { DataUser } from '../models/DataUser'
-import { useAppSelector } from '../redux/hooks'
-import { selectUsers } from '../redux-slices/users-slice'
+import { DataUser } from '../../models/DataUser'
+import { useAppSelector } from '../../redux/hooks'
+import { selectUsers } from '../../redux-slices/users-slice'
 
 const Search: FunctionComponent = () => {
   const users = useAppSelector(selectUsers)

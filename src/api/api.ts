@@ -3,6 +3,7 @@ import { DataUser } from '../models/DataUser'
 import { DataThread } from '../models/DataThread'
 import { DataMessage } from '../models/DataMessage'
 import { DataAuth } from '../models/DataAuth'
+import { DataConversation } from '../models/DataConversation'
 
 export interface PostMessageDetails {
   threadId: string
@@ -48,6 +49,12 @@ const api = {
       const url = `/chat/messages`
       const { signal } = controller
       const res = await axios.get<DataMessage[]>(url, { signal })
+      return res.data
+    },
+    conversations: async (controller: AbortController) => {
+      const url = '/chat/conversations'
+      const { signal } = controller
+      const res = await axios.get<DataConversation[]>(url, { signal })
       return res.data
     }
   },

@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import AvatarHeader from './AvatarHeader'
 import ButtonBack from './ButtonBack'
 import { useNavigate } from 'react-router-dom'
-import { DataThread } from '../models/DataThread'
+import { DataThread } from '../../models/DataThread'
 
 interface HeaderProps {
   thread?: DataThread
