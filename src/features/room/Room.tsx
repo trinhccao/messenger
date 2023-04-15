@@ -10,6 +10,8 @@ import { useAppSelector } from '../../redux/hooks'
 import { selectAuth } from '../../redux-slices/auth-slice'
 import { selectConversations } from '../../redux-slices/conversations-slice'
 import { selectUsers } from '../../redux-slices/users-slice'
+import { useAppDispatch } from '../../redux/hooks'
+import { addConversation } from '../../redux-slices/conversations-slice'
 
 const Room: FunctionComponent = () => {
   const paramId = useMatch('/chat/:id')?.params.id
@@ -18,6 +20,7 @@ const Room: FunctionComponent = () => {
   const users = useAppSelector(selectUsers)
   const conversations = useAppSelector(selectConversations)
   const conv = conversations.find((item) => item.thread._id === threadId)
+  const dispatch = useAppDispatch()
 
   const renderMessage = (message: DataMessage) => {
     const own = message.userId === auth?.user._id
@@ -34,9 +37,12 @@ const Room: FunctionComponent = () => {
     const controller = new AbortController()
     api.chat
       .findById(paramId, controller)
-      .then((thread) => setThreadId(thread._id))
+      .then((thread) => {
+        dispatch(addConversation(thread))
+        setThreadId(thread._id)
+      })
     return () => controller.abort()
-  }, [paramId])
+  }, [dispatch, paramId])
 
   if (!conv) {
     return null

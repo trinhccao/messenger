@@ -7,6 +7,8 @@ import {
 import iconSend from '../../assets/icons/icon-send.png'
 import { DataThread } from '../../models/DataThread'
 import api from '../../api/api'
+import { useAppDispatch } from '../../redux/hooks'
+import { addMessages } from '../../redux-slices/conversations-slice'
 
 interface ComposeProps {
   thread: DataThread
@@ -15,6 +17,7 @@ interface ComposeProps {
 const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
   const [content, setContent] = useState('')
   const [disabled, setDisabled] = useState(true)
+  const dispatch = useAppDispatch()
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setContent(e.target.value)
@@ -27,6 +30,7 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
       threadId: thread._id,
       message: content,
     }).then((message) => {
+      dispatch(addMessages([message]))
       setDisabled(false)
     })
     setDisabled(true)
