@@ -27,10 +27,6 @@ interface TabBarProps {
 const TabBar: FunctionComponent<TabBarProps> = ({ tab }) => {
   const dispatch = useAppDispatch()
 
-  const onClick = (tab: Tabs) => {
-    dispatch(setTab(tab))
-  }
-
   const renderButtonText = (id: Tabs) => {
     const block = 'button-text'
     const modifier = 'button-text button-text--active'
@@ -47,7 +43,7 @@ const TabBar: FunctionComponent<TabBarProps> = ({ tab }) => {
             <button
               className="tab-button"
               type="button"
-              onClick={() => onClick(name)}
+              onClick={() => dispatch(setTab(name))}
             >
               <img src={icon} height="20" alt="" hidden={name === tab} />
               <img src={iconActive} height="20" alt="" hidden={name !== tab} />
