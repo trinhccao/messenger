@@ -13,13 +13,17 @@ export const threadsSlice = createSlice({
       return state
     },
     addThread: (state, action: PayloadAction<DataThread>) => {
-      state.push(action.payload)
+      state.unshift(action.payload)
       return state
     },
     addMessage: (state, action: PayloadAction<ThreadMessage>) => {
       const message = action.payload
       const thread = state.find((item) => item._id === message.threadId)
-      thread?.messages.push(message)
+      if (thread) {
+        thread.messages.push(message)
+        thread.updatedAt = Date.now()
+        state.sort((a, b) => b.updatedAt - a.updatedAt)
+      }
       return state
     }
   }
