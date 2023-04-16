@@ -5,11 +5,11 @@ import { selectThreads } from '../../redux-slices/threads-slice'
 
 const Conversations: FunctionComponent = () => {
   const threads = useAppSelector(selectThreads)
-  const filtered = threads.filter((item) => item.messages.length)
+  // const filtered = threads.filter((item) => item.messages.length)
 
   return (
     <ul className="conversations">
-      {filtered.map((thread) => (
+      {threads.map((thread) => (
         <ConversationsItem thread={thread} key={thread._id} />
       ))}
     </ul>

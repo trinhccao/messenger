@@ -29,8 +29,8 @@ const api = {
       const res = await axios.get<DataThread[]>(url, { signal })
       return res.data
     },
-    addMessage: async (id: string, message: string) => {
-      const url = `/threads/${id}`
+    addMessage: async (threadId: string, message: string) => {
+      const url = `/threads/${threadId}`
       const res = await axios.post<ThreadMessage>(url, { message })
       return res.data
     }
