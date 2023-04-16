@@ -8,7 +8,7 @@ import iconSend from '../../assets/icons/icon-send.png'
 import { DataThread } from '../../models/DataThread'
 import api from '../../api/api'
 import { useAppDispatch } from '../../redux/hooks'
-import { addMessages } from '../../redux-slices/conversations-slice'
+import { addMessage } from '../../redux-slices/threads-slice'
 
 interface ComposeProps {
   thread: DataThread
@@ -27,9 +27,9 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    api.chat
-      .postMessage({ threadId: thread._id, message: content })
-      .then((message) => dispatch(addMessages([message])))
+    api.threads
+      .addMessage(thread._id, content)
+      .then((message) => dispatch(addMessage(message)))
     setDisabled(true)
     setContent('')
   }

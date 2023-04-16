@@ -1,19 +1,16 @@
 import { FunctionComponent } from 'react'
 import ConversationsItem from './ConversationsItem'
 import { useAppSelector } from '../../redux/hooks'
-import { selectConversations } from '../../redux-slices/conversations-slice'
+import { selectThreads } from '../../redux-slices/threads-slice'
 
 const Conversations: FunctionComponent = () => {
-  const conversations = useAppSelector(selectConversations)
-  const visibleConvs = conversations.filter((item) => item.messages.length)
+  const threads = useAppSelector(selectThreads)
+  const filtered = threads.filter((item) => item.messages.length)
 
   return (
     <ul className="conversations">
-      {visibleConvs.map((conversation) => (
-        <ConversationsItem
-          conversation={conversation}
-          key={conversation.thread._id}
-        />
+      {filtered.map((thread) => (
+        <ConversationsItem thread={thread} key={thread._id} />
       ))}
     </ul>
   )

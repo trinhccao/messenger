@@ -9,7 +9,7 @@ import { saveAuth, selectAuth } from './redux-slices/auth-slice'
 import authLogic from './logic/auth-logic'
 import api from './api/api'
 import { saveUsers } from './redux-slices/users-slice'
-import { saveConversations } from './redux-slices/conversations-slice'
+import { saveThreads } from './redux-slices/threads-slice'
 
 const App: FunctionComponent = () => {
   const [loading, setLoading] = useState(true)
@@ -47,9 +47,9 @@ const App: FunctionComponent = () => {
       return
     }
     const controller = new AbortController()
-    api.chat
-      .conversations(controller)
-      .then((threads) => dispatch(saveConversations(threads)))
+    api.threads
+      .findAll(controller)
+      .then((threads) => dispatch(saveThreads(threads)))
     return () => controller.abort()
   }, [auth, dispatch])
 

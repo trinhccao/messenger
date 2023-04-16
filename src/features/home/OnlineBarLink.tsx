@@ -19,7 +19,7 @@ const OnlineBarLink: FunctionComponent<OnlineBarLinkProps> = ({ user }) => {
   return (
     <a className="online-bar__link" href={path} onClick={onClick}>
       <AvatarLarge image={user.avatar || ''} isOnline={true} />
-      <span className="online__name">{user.firstName} {user.lastName}</span>
+      <span className="online-bar__name">{user.firstName} {user.lastName}</span>
     </a>
   )
 }

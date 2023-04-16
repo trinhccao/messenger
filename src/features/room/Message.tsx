@@ -1,8 +1,8 @@
 import { FunctionComponent, ReactNode } from 'react'
-import { DataMessage } from '../../models/DataMessage'
+import { ThreadMessage } from '../../models/DataThread'
 
 interface MessageProps {
-  message: DataMessage
+  message: ThreadMessage
   children: ReactNode
   own: boolean
 }

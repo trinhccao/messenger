@@ -1,9 +1,7 @@
 import axios from 'axios'
 import { DataUser } from '../models/DataUser'
-import { DataThread } from '../models/DataThread'
-import { DataMessage } from '../models/DataMessage'
+import { DataThread, ThreadMessage } from '../models/DataThread'
 import { DataAuth } from '../models/DataAuth'
-import { DataConversation } from '../models/DataConversation'
 
 export interface PostMessageDetails {
   threadId: string
@@ -30,31 +28,10 @@ const api = {
       const { signal } = controller
       const res = await axios.get<DataThread[]>(url, { signal })
       return res.data
-    }
-  },
-  chat: {
-    postMessage: async (details: PostMessageDetails) => {
-      const { threadId, message } = details
-      const url = `/chat/${threadId}`
-      const res = await axios.post<DataMessage>(url, { message })
-      return res.data
     },
-    findById: async (id: string, controller: AbortController) => {
-      const url = `/chat/${id}`
-      const { signal } = controller
-      const res = await axios.get<DataThread>(url, { signal })
-      return res.data
-    },
-    messages: async (controller: AbortController) => {
-      const url = `/chat/messages`
-      const { signal } = controller
-      const res = await axios.get<DataMessage[]>(url, { signal })
-      return res.data
-    },
-    conversations: async (controller: AbortController) => {
-      const url = '/chat/conversations'
-      const { signal } = controller
-      const res = await axios.get<DataConversation[]>(url, { signal })
+    addMessage: async (id: string, message: string) => {
+      const url = `/threads/${id}`
+      const res = await axios.post<ThreadMessage>(url, { message })
       return res.data
     }
   },
@@ -62,6 +39,14 @@ const api = {
     login: async (body: LoginBody) => {
       const url = '/login'
       const res = await axios.post<DataAuth>(url, body)
+      return res.data
+    }
+  },
+  chat: {
+    findThreadId: async (slug: string, controller: AbortController) => {
+      const url = `/chat/${slug}`
+      const { signal } = controller
+      const res = await axios.get<string>(url, { signal })
       return res.data
     }
   }

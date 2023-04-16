@@ -8,6 +8,14 @@ export enum ThreadScopes {
   Member = 'member'
 }
 
+export interface ThreadMessage {
+  _id: string
+  threadId: string
+  userId: string
+  content: string
+  createdAt: number
+}
+
 export interface DataThread {
   _id: string
   slug: string
@@ -18,4 +26,5 @@ export interface DataThread {
   avatar: string
   type: ThreadTypes
   scopes: ThreadScopes[]
+  messages: ThreadMessage[]
 }
