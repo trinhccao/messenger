@@ -46,7 +46,7 @@ const api = {
     findThreadId: async (slug: string, controller: AbortController) => {
       const url = `/chat/${slug}`
       const { signal } = controller
-      const res = await axios.get<string>(url, { signal })
+      const res = await axios.get<string | DataThread>(url, { signal })
       return res.data
     }
   }

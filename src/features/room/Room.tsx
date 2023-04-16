@@ -4,7 +4,7 @@ import Compose from './Compose'
 import { useMatch } from 'react-router-dom'
 import api from '../../api/api'
 import { useAppSelector } from '../../redux/hooks'
-import { selectThreads } from '../../redux-slices/threads-slice'
+import { addThread, selectThreads } from '../../redux-slices/threads-slice'
 import { useAppDispatch } from '../../redux/hooks'
 import RoomMessage from './RoomMessage'
 
@@ -19,7 +19,16 @@ const Room: FunctionComponent = () => {
   useEffect(() => {
     if (!slug) { return }
     const controller = new AbortController()
-    api.chat.findThreadId(slug, controller).then((id) => setThreadId(id))
+    api.chat
+      .findThreadId(slug, controller)
+      .then((data) => {
+        if (typeof data === 'string') {
+          setThreadId(data)
+        } else {
+          dispatch(addThread(data))
+          setThreadId(data._id)
+        }
+      })
     return () => controller.abort()
   }, [dispatch, slug])
 
