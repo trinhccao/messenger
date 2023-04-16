@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../redux/store'
-import { DataAuth } from '../models/DataAuth'
+import { DataAuth } from '../types/DataAuth'
 
 type AuthSliceState = DataAuth | null
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { DataUser } from '../models/DataUser'
-import { DataThread, ThreadMessage } from '../models/DataThread'
-import { DataAuth } from '../models/DataAuth'
+import { DataUser } from '../types/DataUser'
+import { DataThread, ThreadMessage } from '../types/DataThread'
+import { DataAuth } from '../types/DataAuth'
 
 export interface PostMessageDetails {
   threadId: string

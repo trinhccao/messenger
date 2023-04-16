@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { ThreadMessage } from '../../models/DataThread'
+import { ThreadMessage } from '../../types/DataThread'
 import { useAppSelector } from '../../redux/hooks'
 import { selectAuth } from '../../redux-slices/auth-slice'
 import { selectUsers } from '../../redux-slices/users-slice'

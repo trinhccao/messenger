@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../redux/store'
-import { DataUser } from '../models/DataUser'
+import { DataUser } from '../types/DataUser'
 
 const initialState: DataUser[] = []
 

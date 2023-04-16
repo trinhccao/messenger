@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { DataAuth } from '../models/DataAuth'
+import { DataAuth } from '../types/DataAuth'
 
 const authLogic = {
   saveAuthToStorage: (auth: DataAuth) => {

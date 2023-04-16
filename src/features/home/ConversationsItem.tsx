@@ -4,7 +4,7 @@ import {
 } from 'react'
 import AvatarLarge from './AvatarLarge'
 import { useNavigate } from 'react-router-dom'
-import { DataThread } from '../../models/DataThread'
+import { DataThread } from '../../types/DataThread'
 
 interface ConversationsItemProps {
   thread: DataThread

@@ -3,31 +3,34 @@ import iconChat from '../../assets/icons/icon-chat.png'
 import iconChatActive from '../../assets/icons/icon-chat-active.png'
 import iconPeople from '../../assets/icons/icon-people.png'
 import iconPeopleActive from '../../assets/icons/icon-people-active.png'
-
-interface TabBarProps {
-  onClick: (tab: Tabs) => void
-  tab: Tabs
-}
-
-export enum Tabs {
-  Chat = 'Chat',
-  People = 'People'
-}
+import { useAppDispatch } from '../../redux/hooks'
+import { setTab } from '../../redux-slices/tabs-slice'
+import { Tabs } from '../../types/EnumTabs'
 
 const tabs = [
   {
-    id: Tabs.Chat,
+    name: Tabs.Chat,
     icon: iconChat,
     iconActive: iconChatActive,
   },
   {
-    id: Tabs.People,
+    name: Tabs.People,
     icon: iconPeople,
     iconActive: iconPeopleActive,
   }
 ]
 
-const TabBar: FunctionComponent<TabBarProps> = ({ onClick, tab }) => {
+interface TabBarProps {
+  tab: Tabs
+}
+
+const TabBar: FunctionComponent<TabBarProps> = ({ tab }) => {
+  const dispatch = useAppDispatch()
+
+  const onClick = (tab: Tabs) => {
+    dispatch(setTab(tab))
+  }
+
   const renderButtonText = (id: Tabs) => {
     const block = 'button-text'
     const modifier = 'button-text button-text--active'
@@ -39,12 +42,16 @@ const TabBar: FunctionComponent<TabBarProps> = ({ onClick, tab }) => {
   return (
     <div className="tab">
       <ul className="tab__list">
-        {tabs.map(({ id, icon, iconActive }) => (
-          <li className="tab__item" key={id}>
-            <button className="tab-button" type="button" onClick={() => onClick(id)}>
-              <img src={icon} height="20" alt="" hidden={id === tab} />
-              <img src={iconActive} height="20" alt="" hidden={id !== tab} />
-              {renderButtonText(id)}
+        {tabs.map(({ name, icon, iconActive }) => (
+          <li className="tab__item" key={name}>
+            <button
+              className="tab-button"
+              type="button"
+              onClick={() => onClick(name)}
+            >
+              <img src={icon} height="20" alt="" hidden={name === tab} />
+              <img src={iconActive} height="20" alt="" hidden={name !== tab} />
+              {renderButtonText(name)}
             </button>
           </li>
         ))}

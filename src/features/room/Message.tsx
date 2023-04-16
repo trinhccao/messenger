@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react'
-import { ThreadMessage } from '../../models/DataThread'
+import { ThreadMessage } from '../../types/DataThread'
 
 interface MessageProps {
   message: ThreadMessage

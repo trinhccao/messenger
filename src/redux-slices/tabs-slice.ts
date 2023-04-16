@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../redux/store'
-import { Tabs } from '../features/home/TabBar'
+import { Tabs } from '../types/EnumTabs'
 
 const initialState: Tabs = Tabs.Chat
 

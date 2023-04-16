@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react'
 import SearchItem from './SearchItem'
-import { DataUser } from '../../models/DataUser'
+import { DataUser } from '../../types/DataUser'
 import { useAppSelector } from '../../redux/hooks'
 import { selectUsers } from '../../redux-slices/users-slice'
 

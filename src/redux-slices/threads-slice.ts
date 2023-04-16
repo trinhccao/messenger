@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../redux/store'
-import { DataThread, ThreadMessage } from '../models/DataThread'
+import { DataThread, ThreadMessage } from '../types/DataThread'
 
 const initialState: DataThread[] = []
 

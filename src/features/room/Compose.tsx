@@ -5,7 +5,7 @@ import {
   ChangeEvent,
 } from 'react'
 import iconSend from '../../assets/icons/icon-send.png'
-import { DataThread } from '../../models/DataThread'
+import { DataThread } from '../../types/DataThread'
 import api from '../../api/api'
 import { useAppDispatch } from '../../redux/hooks'
 import { addMessage } from '../../redux-slices/threads-slice'
