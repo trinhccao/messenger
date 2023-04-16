@@ -39,14 +39,6 @@ const App: FunctionComponent = () => {
     api.users
       .findAll(controller)
       .then((users) => dispatch(saveUsers(users)))
-    return () => controller.abort()
-  }, [auth, dispatch])
-
-  useEffect(() => {
-    if (!auth) {
-      return
-    }
-    const controller = new AbortController()
     api.threads
       .findAll(controller)
       .then((threads) => dispatch(saveThreads(threads)))
