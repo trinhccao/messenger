@@ -24,17 +24,17 @@ const SocketProvider: FunctionComponent<SocketProviderProps> = (props) => {
   const auth = useAppSelector(selectAuth)
   const dispatch = useAppDispatch()
   const token = auth?.token
-  const userId = auth?.user._id
 
   useEffect(() => {
-    if (!token || !userId) {
+    if (!token) {
       return
     }
 
     const host = process.env.REACT_APP_WS_HOST as string
-    const socket = io(host, { auth: { token, userId } })
+    const socket = io(host, { auth: { token } })
     socket.on('connect', () => dispatch(setConnected(true)))
     socket.on('disconnect', () => dispatch(setConnected(false)))
+    socket.on('clients', (ids: string[]) => dispatch(setClientIds(ids)))
     setSocket(socket)
 
     return () => {
@@ -44,7 +44,7 @@ const SocketProvider: FunctionComponent<SocketProviderProps> = (props) => {
       socket.close()
       setSocket(null)
     }
-  }, [token, userId, dispatch])
+  }, [token, dispatch])
 
   return (
     <SocketContext.Provider value={{ socket }}>
