@@ -40,12 +40,13 @@ const SocketProvider: FunctionComponent<SocketProviderProps> = (props) => {
     socket.on('disconnect', () => dispatch(setConnected(false)))
     socket.on('clients', (ids: string[]) => dispatch(setClientIds(ids)))
     socket.on('message', async (message: ThreadMessage) => {
-      let thread = threads.find((item) => item._id === message.threadId)
-      if (!thread) {
-        thread = await api.threads.findById(message._id)
+      const localThread = threads.find((item) => item._id === message.threadId)
+      if (localThread) {
+        dispatch(addMessage(message))
+        return
       }
+      const thread = await api.threads.findById(message.threadId)
       dispatch(addThread(thread))
-      dispatch(addMessage(message))
     })
     setSocket(socket)
 
