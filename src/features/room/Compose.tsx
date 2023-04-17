@@ -3,12 +3,14 @@ import {
   useState,
   FormEvent,
   ChangeEvent,
+  useContext,
 } from 'react'
 import iconSend from '../../assets/icons/icon-send.png'
 import { DataThread } from '../../types/DataThread'
 import api from '../../api/api'
 import { useAppDispatch } from '../../redux/hooks'
 import { addMessage } from '../../redux-slices/threads-slice'
+import { SocketContext } from '../../contexts/SocketContext'
 
 interface ComposeProps {
   thread: DataThread
@@ -18,6 +20,7 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
   const [content, setContent] = useState('')
   const [disabled, setDisabled] = useState(true)
   const dispatch = useAppDispatch()
+  const { socket } = useContext(SocketContext)
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -29,7 +32,10 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
     e.preventDefault()
     api.threads
       .addMessage(thread._id, content)
-      .then((message) => dispatch(addMessage(message)))
+      .then((message) => {
+        socket?.emit('message', message)
+        dispatch(addMessage(message))
+      })
     setDisabled(true)
     setContent('')
   }

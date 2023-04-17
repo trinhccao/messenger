@@ -22,12 +22,8 @@ const Room: FunctionComponent = () => {
     api.chat
       .findThreadId(slug, controller)
       .then((data) => {
-        if (typeof data === 'string') {
-          setThreadId(data)
-        } else {
-          dispatch(addThread(data))
-          setThreadId(data._id)
-        }
+        dispatch(addThread(data))
+        setThreadId(data._id)
       })
     return () => controller.abort()
   }, [dispatch, slug])

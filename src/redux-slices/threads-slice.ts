@@ -13,8 +13,12 @@ export const threadsSlice = createSlice({
       return state
     },
     addThread: (state, action: PayloadAction<DataThread>) => {
-      state.unshift(action.payload)
-      return state
+      const payload = action.payload
+      const exists = state.find((thread) => thread._id === payload._id)
+      if (!exists) {
+        state.unshift(action.payload)
+        return state
+      }
     },
     addMessage: (state, action: PayloadAction<ThreadMessage>) => {
       const message = action.payload

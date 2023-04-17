@@ -34,10 +34,11 @@ const api = {
       const res = await axios.post<ThreadMessage>(url, { message })
       return res.data
     },
-    findById: async (threadId: string, controller: AbortController) => {
+    findById: async (threadId: string, controller?: AbortController) => {
       const url = `/threads/${threadId}`
-      const { signal } = controller
-      const res = await axios.get<DataThread>(url, { signal })
+      const res = await axios.get<DataThread>(url, {
+        signal: controller?.signal
+      })
       return res.data
     }
   },
@@ -52,7 +53,7 @@ const api = {
     findThreadId: async (slug: string, controller: AbortController) => {
       const url = `/chat/${slug}`
       const { signal } = controller
-      const res = await axios.get<string | DataThread>(url, { signal })
+      const res = await axios.get<DataThread>(url, { signal })
       return res.data
     }
   }

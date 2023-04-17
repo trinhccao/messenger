@@ -9,6 +9,9 @@ import { Socket, io } from 'socket.io-client'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import { selectAuth } from '../redux-slices/auth-slice'
 import { setClientIds, setConnected } from '../redux-slices/socket-slice'
+import { ThreadMessage } from '../types/DataThread'
+import { addMessage, addThread, selectThreads } from '../redux-slices/threads-slice'
+import api from '../api/api'
 
 interface SocketProviderProps {
   children: ReactNode
@@ -22,6 +25,7 @@ const SocketContext = createContext<SocketContextState>({ socket: null })
 const SocketProvider: FunctionComponent<SocketProviderProps> = (props) => {
   const [socket, setSocket] = useState<Socket | null>(null)
   const auth = useAppSelector(selectAuth)
+  const threads = useAppSelector(selectThreads)
   const dispatch = useAppDispatch()
   const token = auth?.token
 
@@ -35,6 +39,14 @@ const SocketProvider: FunctionComponent<SocketProviderProps> = (props) => {
     socket.on('connect', () => dispatch(setConnected(true)))
     socket.on('disconnect', () => dispatch(setConnected(false)))
     socket.on('clients', (ids: string[]) => dispatch(setClientIds(ids)))
+    socket.on('message', async (message: ThreadMessage) => {
+      let thread = threads.find((item) => item._id === message.threadId)
+      if (!thread) {
+        thread = await api.threads.findById(message._id)
+      }
+      dispatch(addThread(thread))
+      dispatch(addMessage(message))
+    })
     setSocket(socket)
 
     return () => {
@@ -44,7 +56,7 @@ const SocketProvider: FunctionComponent<SocketProviderProps> = (props) => {
       socket.close()
       setSocket(null)
     }
-  }, [token, dispatch])
+  }, [token, dispatch, threads])
 
   return (
     <SocketContext.Provider value={{ socket }}>
