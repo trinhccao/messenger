@@ -11,7 +11,8 @@ export const authSlice = createSlice({
   initialState: initialState as AuthSliceState,
   reducers: {
     saveAuth: (state, action: PayloadAction<DataAuth>) => {
-      return { ...action.payload }
+      state = action.payload
+      return state
     }
   }
 })

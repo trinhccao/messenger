@@ -10,29 +10,29 @@ import authLogic from './logic/auth-logic'
 import api from './api/api'
 import { saveUsers } from './redux-slices/users-slice'
 import { saveThreads } from './redux-slices/threads-slice'
+import { SocketProvider } from './contexts/SocketContext'
 
 const App: FunctionComponent = () => {
   const [loading, setLoading] = useState(true)
   const auth = useAppSelector(selectAuth)
+  const userId = auth?.user._id
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    setLoading(false)
-    if (auth) {
-      authLogic.saveAuthToStorage(auth)
-      return
-    }
+  if (auth) {
+    authLogic.saveAuthToStorage(auth)
+  } else {
     const savedAuth = authLogic.getSavedToken()
-    if (savedAuth) {
-      dispatch(saveAuth(savedAuth))
-      return
-    }
-    navigate('/login')
-  }, [auth, dispatch, navigate])
+    savedAuth && dispatch(saveAuth(savedAuth))
+  }
 
   useEffect(() => {
-    if (!auth) {
+    !userId && navigate('/login')
+    setLoading(false)
+  }, [userId, navigate])
+
+  useEffect(() => {
+    if (!userId) {
       return
     }
     const controller = new AbortController()
@@ -43,7 +43,7 @@ const App: FunctionComponent = () => {
       .findAll(controller)
       .then((threads) => dispatch(saveThreads(threads)))
     return () => controller.abort()
-  }, [auth, dispatch])
+  }, [userId, dispatch])
 
   if (loading) {
     return null
@@ -51,11 +51,13 @@ const App: FunctionComponent = () => {
 
   return (
     <div className="app">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/chat/:id" element={<Room />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <SocketProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/chat/:id" element={<Room />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </SocketProvider>
     </div>
   )
 }
