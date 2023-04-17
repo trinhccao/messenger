@@ -2,6 +2,8 @@ import { FunctionComponent, MouseEvent } from 'react'
 import AvatarLarge from './AvatarLarge'
 import { useNavigate } from 'react-router-dom'
 import { DataUser } from '../../types/DataUser'
+import { useAppSelector } from '../../redux/hooks'
+import { selectSocket } from '../../redux-slices/socket-slice'
 
 interface OnlineBarLinkProps {
   user: DataUser
@@ -10,6 +12,8 @@ interface OnlineBarLinkProps {
 const OnlineBarLink: FunctionComponent<OnlineBarLinkProps> = ({ user }) => {
   const navigate = useNavigate()
   const path = `/chat/${user._id}`
+  const socket = useAppSelector(selectSocket)
+  const isOnline = socket.clientIds.some((id) => id === user._id)
 
   const onClick = (e: MouseEvent) => {
     e.preventDefault()
@@ -18,7 +22,7 @@ const OnlineBarLink: FunctionComponent<OnlineBarLinkProps> = ({ user }) => {
 
   return (
     <a className="online-bar__link" href={path} onClick={onClick}>
-      <AvatarLarge image={user.avatar || ''} isOnline={true} />
+      <AvatarLarge image={user.avatar || ''} isOnline={isOnline} />
       <span className="online-bar__name">{user.firstName} {user.lastName}</span>
     </a>
   )
