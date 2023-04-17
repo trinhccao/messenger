@@ -33,6 +33,12 @@ const api = {
       const url = `/threads/${threadId}`
       const res = await axios.post<ThreadMessage>(url, { message })
       return res.data
+    },
+    findById: async (threadId: string, controller: AbortController) => {
+      const url = `/threads/${threadId}`
+      const { signal } = controller
+      const res = await axios.get<DataThread>(url, { signal })
+      return res.data
     }
   },
   auth: {
