@@ -20,7 +20,7 @@ import {
   selectThreads,
 } from '../redux-slices/threads-slice'
 import api from '../api/api'
-import { addUser, selectUsers } from '../redux-slices/users-slice'
+import { addUser, selectUsers, sortOnline } from '../redux-slices/users-slice'
 
 interface SocketProviderProps {
   children: ReactNode
@@ -70,7 +70,10 @@ const SocketProvider: FunctionComponent<SocketProviderProps> = (props) => {
         dispatch(addThread(thread))
       }
     })
-    socket?.on('clients', (ids: string[]) => dispatch(setClientIds(ids)))
+    socket?.on('clients', (ids: string[]) => {
+      dispatch(sortOnline(ids))
+      dispatch(setClientIds(ids))
+    })
   }, [dispatch, socket, threads])
 
   useEffect(() => {
