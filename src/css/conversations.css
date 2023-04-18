@@ -20,6 +20,33 @@
 }
 
 .conversations__item-message {
+  display: flex;
   margin-top: 3px;
+}
+
+.conversation__last-msg {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   color: var(--gray);
+}
+
+.conversation__last-time {
+  display: inline-flex;
+  position: relative;
+  padding-left: 12px;
+  color: var(--gray);
+}
+
+.conversation__last-time::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 4px;
+  width: 3px;
+  height: 3px;
+  background-color: var(--gray);
+  border-radius: 50%;
 }

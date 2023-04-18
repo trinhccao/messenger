@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { DataThread, ThreadTypes } from '../../types/DataThread'
 import { useAppSelector } from '../../redux/hooks'
 import { selectSocket } from '../../redux-slices/socket-slice'
+import moment from 'moment'
 import defaultGroupAvatar from '../../assets/icons/icon-group-chat.png'
 import defaultUserAvatar from '../../assets/icons/null-profile.png'
 
@@ -19,6 +20,9 @@ const ConversationsItem: FunctionComponent<ConversationsItemProps> = (props) => 
   const navigate = useNavigate()
   const path = `/chat/${thread.slug}`
   const socket = useAppSelector(selectSocket)
+  const lastMessage = thread.messages.slice(-1)[0]
+  const time = new Date(lastMessage.createdAt)
+
   const avatar = thread.avatar
     ? thread.avatar
     : thread.type === ThreadTypes.Direct
@@ -42,7 +46,12 @@ const ConversationsItem: FunctionComponent<ConversationsItemProps> = (props) => 
         <div className="conversations__item-content">
           <h3 className="heading-lv3">{thread.name}</h3>
           <p className="conversations__item-message">
-            {thread.messages.slice(-1)[0]?.content}
+            <span className="conversation__last-msg">
+              {lastMessage.content}
+            </span>
+            <span className="conversation__last-time">
+              {moment(time).format('HH:mm')}
+            </span>
           </p>
         </div>
       </a>
