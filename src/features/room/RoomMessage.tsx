@@ -5,6 +5,7 @@ import { selectAuth } from '../../redux-slices/auth-slice'
 import { selectUsers } from '../../redux-slices/users-slice'
 import Message from './Message'
 import AvatarMessage from './AvatarMessage'
+import defaultAvatar from '../../assets/icons/null-profile.png'
 
 interface RoomMessageProps {
   message: ThreadMessage
@@ -19,7 +20,7 @@ const RoomMessage: FunctionComponent<RoomMessageProps> = (props) => {
 
   return (
     <Message message={message} own={own} key={message._id}>
-      {!own && <AvatarMessage src={user?.avatar || ''} />}
+      {!own && <AvatarMessage src={user?.avatar || defaultAvatar} />}
     </Message>
   )
 }

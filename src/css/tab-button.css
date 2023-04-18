@@ -8,5 +8,6 @@
   color: var(--metallic-silver);
   border: none;
   background: none;
+  cursor: pointer;
   font-family: var(--font-primary);
 }

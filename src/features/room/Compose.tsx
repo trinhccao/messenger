@@ -42,20 +42,27 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
 
   return (
     <div className="tab">
-      <form className="compose" action="#" onSubmit={onSubmit}>
+      <form
+        className="compose"
+        action="#"
+        onSubmit={onSubmit}
+        autoComplete="off"
+      >
         <input
           className="compose__input"
           type="text"
           placeholder="Aa"
           value={content}
           onChange={onChange}
+          autoFocus
         />
         <button
           className="button-send button-send--compose"
           type="submit"
           disabled={disabled}
         >
-          <IconSend className="button-send__icon" width={25} height={25}/>
+          <span className="sr-only">Send</span>
+          <IconSend className="button-send__icon" width={25} height={25} />
         </button>
       </form>
     </div>

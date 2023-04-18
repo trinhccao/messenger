@@ -6,5 +6,6 @@
   background: var(--ultramarine-blue);
   border-radius: 5px;
   border: none;
+  cursor: pointer;
   font-family: var(--font-primary);
 }
