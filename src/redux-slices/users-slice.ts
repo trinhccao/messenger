@@ -10,10 +10,14 @@ export const usersSlice = createSlice({
   reducers: {
     saveUsers: (state, action: PayloadAction<DataUser[]>) => {
       return [...action.payload]
+    },
+    addUser: (state, action: PayloadAction<DataUser>) => {
+      state.push(action.payload)
+      return state
     }
   }
 })
 
-export const { saveUsers } = usersSlice.actions
+export const { saveUsers, addUser } = usersSlice.actions
 export const selectUsers = (state: RootState) => state.users
 export default usersSlice.reducer

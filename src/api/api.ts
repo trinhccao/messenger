@@ -20,6 +20,12 @@ const api = {
       const { signal } = controller
       const res = await axios.get<DataUser[]>(url, { signal })
       return res.data
+    },
+    findById: async (id: string, controller?: AbortController) => {
+      const url = `/users/${id}`
+      const signal = controller?.signal
+      const res = await axios.get<DataUser>(url, { signal })
+      return res.data
     }
   },
   threads: {
