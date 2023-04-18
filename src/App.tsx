@@ -8,7 +8,6 @@ import authLogic from './logic/auth-logic'
 import api from './api/api'
 import { saveUsers } from './redux-slices/users-slice'
 import { saveThreads } from './redux-slices/threads-slice'
-import { SocketProvider } from './contexts/SocketContext'
 
 const App: FunctionComponent = () => {
   const [loading, setLoading] = useState(true)
@@ -49,12 +48,10 @@ const App: FunctionComponent = () => {
 
   return (
     <div className="app">
-      <SocketProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/chat/:id" element={<Room />} />
-        </Routes>
-      </SocketProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/chat/:id" element={<Room />} />
+      </Routes>
     </div>
   )
 }

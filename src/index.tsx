@@ -8,6 +8,7 @@ import store from './redux/store'
 import Register from './features/register/Register'
 import Login from './features/login/Login'
 import './configs/axios'
+import { SocketProvider } from './contexts/SocketContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
@@ -16,7 +17,11 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/*" element={<App />} />
+          <Route path="/*" element={
+            <SocketProvider>
+              <App />
+            </SocketProvider>
+          } />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Routes>
