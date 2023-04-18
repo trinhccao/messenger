@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react'
-import nullProfile from '../../assets/icons/null-profile.png'
 
 interface AvatarLargeProps {
-  image?: string
+  image: string
   isOnline: boolean
 }
 
@@ -13,7 +12,7 @@ const AvatarLarge: FunctionComponent<AvatarLargeProps> = (props) => {
     <div className="avatar avatar--lg">
       <img
         className="avatar__img"
-        src={image || nullProfile}
+        src={image}
         width="60"
         height="60"
         alt=""
