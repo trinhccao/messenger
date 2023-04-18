@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import Register from './features/register/Register'
 import Login from './features/login/Login'
+import './configs/axios'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 

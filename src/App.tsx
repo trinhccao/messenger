@@ -1,6 +1,5 @@
 import { FunctionComponent, useEffect, useState } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import './configs/axios'
 import Home from './features/home/Home'
 import Room from './features/room/Room'
 import { useAppDispatch, useAppSelector } from './redux/hooks'
