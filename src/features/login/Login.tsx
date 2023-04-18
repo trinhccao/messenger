@@ -54,12 +54,12 @@ const Login: FunctionComponent = () => {
                 placeholder="Password"
                 required
               />
-              <span className="account-suggestion">
-                Don't have account?
-                <a href="/register" className="account-suggestion__link">
+              <div className="account-suggestion">
+                Don't have account?{' '}
+                <a className="account-suggestion__link" href="/register">
                   Create one
                 </a>
-              </span>
+              </div>
               <button
                 className={getSubmitClassNames()}
                 type="submit"

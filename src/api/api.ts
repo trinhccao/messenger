@@ -13,6 +13,13 @@ export interface LoginBody {
   password: string
 }
 
+export interface RegisterBody {
+  username: string
+  firstName: string
+  lastName: string
+  password: string
+}
+
 const api = {
   users: {
     findAll: async (controller: AbortController) => {
@@ -52,6 +59,11 @@ const api = {
     login: async (body: LoginBody) => {
       const url = '/login'
       const res = await axios.post<DataAuth>(url, body)
+      return res.data
+    },
+    register: async (body: RegisterBody) => {
+      const url = '/register'
+      const res = await axios.post(url, body)
       return res.data
     }
   },

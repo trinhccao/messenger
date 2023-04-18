@@ -32,12 +32,20 @@
   font-family: var(--font-primary);
 }
 
+.login__input:not(:first-child) {
+  margin-top: 5px;
+}
+
+.login__alert {
+  margin: 5px 0 10px;
+  color: red;
+}
+
 .login__input--first {
   border-radius: 10px 10px 0 0;
 }
 
 .login__input--last {
-  margin-top: 5px;
   border-radius: 0 0 10px 10px;
 }
 

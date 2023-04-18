@@ -86,3 +86,17 @@ body {
 [hidden] {
   display: none;
 }
+
+.account-suggestion {
+  margin-top: 15px;
+  font-size: .9rem;
+}
+
+.account-suggestion__link {
+  color: var(--ultramarine-blue);
+}
+
+.noscroll {
+  overflow: hidden;
+  height: 100%;
+}

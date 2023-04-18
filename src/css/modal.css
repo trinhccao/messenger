@@ -1,0 +1,37 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+
+.modal__content {
+  margin: 15px;
+  padding: 30px;
+  background-color: var(--white);
+  border-radius: 15px;
+}
+
+.modal__title {
+  text-align: center;
+}
+
+.modal__description {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.modal__action {
+  display: block;
+  margin-top: 25px;
+  padding: 17px;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--white);
+  background-color: var(--ultramarine-blue);
+  text-decoration: none;
+  border-radius: 10px;
+}
