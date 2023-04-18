@@ -9,23 +9,12 @@ const Login: FunctionComponent = () => {
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const emptyReg = /^\s*$/
-  const disabled = emptyReg.test(username) || emptyReg.test(password)
-
-  const getSubmitClassNames = () => {
-    const block = 'login__submit'
-    const modifier = 'login__submit--disabled'
-    return disabled ? `${block} ${modifier}` : block
-  }
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    api.auth
-      .login({ username, password })
-      .then((auth) => {
-        dispatch(saveAuth(auth))
-        navigate('/')
-      })
+    const auth = await api.auth.login({ username, password })
+    dispatch(saveAuth(auth))
+    navigate('/')
   }
 
   return (
@@ -60,13 +49,7 @@ const Login: FunctionComponent = () => {
                   Create one
                 </a>
               </div>
-              <button
-                className={getSubmitClassNames()}
-                type="submit"
-                disabled={disabled}
-              >
-                Login
-              </button>
+              <button className="login__submit" type="submit">Login</button>
             </form>
           </div>
         </div>
