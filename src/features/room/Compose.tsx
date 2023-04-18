@@ -5,12 +5,12 @@ import {
   ChangeEvent,
   useContext,
 } from 'react'
-import iconSend from '../../assets/icons/icon-send.png'
 import { DataThread } from '../../types/DataThread'
 import api from '../../api/api'
 import { useAppDispatch } from '../../redux/hooks'
 import { addMessage } from '../../redux-slices/threads-slice'
 import { SocketContext } from '../../contexts/SocketContext'
+import { ReactComponent as IconSend } from '../../assets/icons/icon-send.svg'
 
 interface ComposeProps {
   thread: DataThread
@@ -55,13 +55,7 @@ const Compose: FunctionComponent<ComposeProps> = ({ thread }) => {
           type="submit"
           disabled={disabled}
         >
-          <img
-            className="button-send__icon"
-            src={iconSend}
-            width="22"
-            height="22"
-            alt="Send"
-          />
+          <IconSend className="button-send__icon" width={25} height={25}/>
         </button>
       </form>
     </div>
