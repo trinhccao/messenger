@@ -13,10 +13,15 @@ export const authSlice = createSlice({
     saveAuth: (state, action: PayloadAction<DataAuth>) => {
       state = action.payload
       return state
+    },
+    logout: (state) => {
+      localStorage.removeItem('authInfo')
+      state = null
+      return state
     }
   }
 })
 
-export const { saveAuth } = authSlice.actions
+export const { saveAuth, logout } = authSlice.actions
 export const selectAuth = (state: RootState) => state.auth
 export default authSlice.reducer
