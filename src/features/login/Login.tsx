@@ -9,12 +9,12 @@ const Login: FunctionComponent = () => {
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const emptyReg = /^\s*$/
+  const disabled = emptyReg.test(username) || emptyReg.test(password)
 
   const getSubmitClassNames = () => {
     const block = 'login__submit'
     const modifier = 'login__submit--disabled'
-    const emptyReg = /^\s*$/
-    const disabled = emptyReg.test(username) || emptyReg.test(password)
     return disabled ? `${block} ${modifier}` : block
   }
 
@@ -29,37 +29,46 @@ const Login: FunctionComponent = () => {
   }
 
   return (
-    <div className="login">
-      <div className="container">
-        <div className="login__content">
-          <span className="logo"></span>
-          <h2 className="login__title">Login to use the app</h2>
-          <form className="login__form" action="#" onSubmit={onSubmit}>
-            <input
-              className="login__input login__input--first"
-              name="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
-              required
-            />
-            <input
-              className="login__input login__input--last"
-              name="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              required
-            />
-            <button
-              className={getSubmitClassNames()}
-              type="submit"
-            >
-              Login
-            </button>
-          </form>
+    <div className="app">
+      <div className="login">
+        <div className="container">
+          <div className="login__content">
+            <span className="logo"></span>
+            <h2 className="login__title">Login to use the app</h2>
+            <form className="login__form" action="#" onSubmit={onSubmit}>
+              <input
+                className="login__input login__input--first"
+                name="username"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+                required
+              />
+              <input
+                className="login__input login__input--last"
+                name="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                required
+              />
+              <span className="account-suggestion">
+                Don't have account?
+                <a href="/register" className="account-suggestion__link">
+                  Create one
+                </a>
+              </span>
+              <button
+                className={getSubmitClassNames()}
+                type="submit"
+                disabled={disabled}
+              >
+                Login
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
