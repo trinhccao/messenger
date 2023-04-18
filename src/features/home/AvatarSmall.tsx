@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react'
+import nullProfile from '../../assets/icons/null-profile.png'
 
 interface AvatarSmallProps {
   image?: string
@@ -10,7 +11,14 @@ const AvatarSmall: FunctionComponent<AvatarSmallProps> = (props) => {
 
   return (
     <div className="avatar avatar--sm">
-      <img className="avatar__img" src={image} width="40" height="40" alt="" loading="lazy" />
+      <img
+        className="avatar__img"
+        src={image || nullProfile}
+        width="40"
+        height="40"
+        alt=""
+        loading="lazy"
+      />
       <span className="online-dot online-dot--sm" hidden={!isOnline}>
         <span className="sr-only">Online now</span>
       </span>
